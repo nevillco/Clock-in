@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27F9FD9D3AFEAD37B3934E63 /* Pods_Clock_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */; };
 		2D3BC8F31D0894CF00EC0425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F21D0894CF00EC0425 /* AppDelegate.swift */; };
 		2D3BC8F51D0894CF00EC0425 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F41D0894CF00EC0425 /* Assets.xcassets */; };
 		2D3BC8F81D0894CF00EC0425 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F61D0894CF00EC0425 /* LaunchScreen.storyboard */; };
+		2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */; };
+		2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */; };
+		2D3BC9091D08B3B300EC0425 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9081D08B3B300EC0425 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +22,12 @@
 		2D3BC8F41D0894CF00EC0425 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D3BC8F71D0894CF00EC0425 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D3BC8F91D0894CF00EC0425 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIHomeView.swift; sourceTree = "<group>"; };
+		2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIHomeViewController.swift; sourceTree = "<group>"; };
+		2D3BC9081D08B3B300EC0425 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.release.xcconfig"; sourceTree = "<group>"; };
+		83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock_in.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F90BDD7487C1AF5647EA3BB2 /* Pods-Clock in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27F9FD9D3AFEAD37B3934E63 /* Pods_Clock_in.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,6 +47,9 @@
 			children = (
 				2D3BC8F11D0894CF00EC0425 /* Clock in */,
 				2D3BC8F01D0894CF00EC0425 /* Products */,
+				33EC4504560C5603F6FB46BB /* Pods */,
+				F6F10D47EE7C46E6ABBCF4C1 /* Frameworks */,
+				2D3BC9081D08B3B300EC0425 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,12 +64,71 @@
 		2D3BC8F11D0894CF00EC0425 /* Clock in */ = {
 			isa = PBXGroup;
 			children = (
-				2D3BC8F21D0894CF00EC0425 /* AppDelegate.swift */,
+				2D3BC8FF1D08959300EC0425 /* App */,
+				2D3BC9011D0895C900EC0425 /* Model */,
+				2D3BC9021D0895D700EC0425 /* View */,
+				2D3BC9031D0895E600EC0425 /* Controller */,
+				2D3BC9001D0895A400EC0425 /* Resources */,
 				2D3BC8F41D0894CF00EC0425 /* Assets.xcassets */,
 				2D3BC8F61D0894CF00EC0425 /* LaunchScreen.storyboard */,
 				2D3BC8F91D0894CF00EC0425 /* Info.plist */,
 			);
 			path = "Clock in";
+			sourceTree = "<group>";
+		};
+		2D3BC8FF1D08959300EC0425 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2D3BC8F21D0894CF00EC0425 /* AppDelegate.swift */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		2D3BC9001D0895A400EC0425 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2D3BC9011D0895C900EC0425 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2D3BC9021D0895D700EC0425 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2D3BC9031D0895E600EC0425 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		33EC4504560C5603F6FB46BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F90BDD7487C1AF5647EA3BB2 /* Pods-Clock in.debug.xcconfig */,
+				5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F6F10D47EE7C46E6ABBCF4C1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,9 +138,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D3BC8FC1D0894CF00EC0425 /* Build configuration list for PBXNativeTarget "Clock in" */;
 			buildPhases = (
+				C8A6C6340D5920BF53370AB5 /* [CP] Check Pods Manifest.lock */,
 				2D3BC8EB1D0894CF00EC0425 /* Sources */,
 				2D3BC8EC1D0894CF00EC0425 /* Frameworks */,
 				2D3BC8ED1D0894CF00EC0425 /* Resources */,
+				9FF18C87DCD26CAF1D776069 /* [CP] Embed Pods Frameworks */,
+				BB4F611EECCDC992287F77DF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,12 +199,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9FF18C87DCD26CAF1D776069 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Clock in/Pods-Clock in-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB4F611EECCDC992287F77DF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Clock in/Pods-Clock in-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8A6C6340D5920BF53370AB5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2D3BC8EB1D0894CF00EC0425 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2D3BC8F31D0894CF00EC0425 /* AppDelegate.swift in Sources */,
+				2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */,
+				2D3BC9091D08B3B300EC0425 /* README.md in Sources */,
+				2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,8 +358,10 @@
 		};
 		2D3BC8FD1D0894CF00EC0425 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F90BDD7487C1AF5647EA3BB2 /* Pods-Clock in.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Clock in/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "info.connorneville.Clock-in";
@@ -242,8 +371,10 @@
 		};
 		2D3BC8FE1D0894CF00EC0425 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Clock in/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "info.connorneville.Clock-in";
@@ -270,6 +401,7 @@
 				2D3BC8FE1D0894CF00EC0425 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

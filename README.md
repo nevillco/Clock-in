@@ -1,0 +1,2 @@
+#Clock:in
+Clock:in is an iOS application that makes it easier to stick to any work, task, hobby, sport or interest by providing you with extensive statistics about your time clocked in; all provided with minimal input from the user.
