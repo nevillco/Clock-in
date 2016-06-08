@@ -9,22 +9,39 @@
 //
 
 import UIKit
+import SnapKit
 
 class CIHomeView: UIView {
+    
+    let titleLabel = UILabel()
+    
     init() {
         super.init(frame: CGRectZero)
-        styleSubviews()
+        setupSubviews()
+        constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init (coder) not implemented")
+        fatalError(String.initCoderError())
     }
     
-    func styleSubviews() {
-        
+    func setupSubviews() {
+        titleLabel.font = UIFont.CIHomeTitleLightFont()
+        let titleText = "Clock:in"
+        let definedText = "in"
+        let attributedText = NSMutableAttributedString(string: titleText.localized)
+        attributedText.addAttributes(
+            [NSForegroundColorAttributeName: UIColor.CIBlue(),
+                NSFontAttributeName: UIFont.CIHomeTitleBoldFont()], range: (titleText as NSString).rangeOfString(definedText))
+        titleLabel.attributedText = attributedText
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(titleLabel)
     }
     
-    override func updateConstraints() {
-        
+    func constrainSubviews() {
+        titleLabel.snp_makeConstraints { (make)->Void in
+            make.centerX.equalTo(self)
+            make.topMargin.equalTo(self).offset(30)
+        }
     }
 }

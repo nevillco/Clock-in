@@ -13,7 +13,17 @@
 		2D3BC8F81D0894CF00EC0425 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F61D0894CF00EC0425 /* LaunchScreen.storyboard */; };
 		2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */; };
 		2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */; };
-		2D3BC9091D08B3B300EC0425 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9081D08B3B300EC0425 /* README.md */; };
+		2D3BC9121D08B56200EC0425 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC90A1D08B56200EC0425 /* Oswald-Regular.ttf */; };
+		2D3BC9131D08B56200EC0425 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC90B1D08B56200EC0425 /* Oswald-Light.ttf */; };
+		2D3BC9141D08B56200EC0425 /* Oswald-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC90C1D08B56200EC0425 /* Oswald-Bold.ttf */; };
+		2D3BC9151D08B56200EC0425 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC90D1D08B56200EC0425 /* Lato-Regular.ttf */; };
+		2D3BC9161D08B56200EC0425 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC90E1D08B56200EC0425 /* Lato-Light.ttf */; };
+		2D3BC9171D08B56200EC0425 /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC90F1D08B56200EC0425 /* Lato-Hairline.ttf */; };
+		2D3BC9181D08B56200EC0425 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC9101D08B56200EC0425 /* Lato-Bold.ttf */; };
+		2D3BC9191D08B56200EC0425 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC9111D08B56200EC0425 /* Lato-Black.ttf */; };
+		2D3BC91C1D08BA4A00EC0425 /* CIFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91B1D08BA4A00EC0425 /* CIFonts.swift */; };
+		2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */; };
+		2D3BC9201D08C0F600EC0425 /* CIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91F1D08C0F600EC0425 /* CIColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +35,17 @@
 		2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIHomeView.swift; sourceTree = "<group>"; };
 		2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIHomeViewController.swift; sourceTree = "<group>"; };
 		2D3BC9081D08B3B300EC0425 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2D3BC90A1D08B56200EC0425 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Regular.ttf"; sourceTree = "<group>"; };
+		2D3BC90B1D08B56200EC0425 /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
+		2D3BC90C1D08B56200EC0425 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Bold.ttf"; sourceTree = "<group>"; };
+		2D3BC90D1D08B56200EC0425 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		2D3BC90E1D08B56200EC0425 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		2D3BC90F1D08B56200EC0425 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		2D3BC9101D08B56200EC0425 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		2D3BC9111D08B56200EC0425 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		2D3BC91B1D08BA4A00EC0425 /* CIFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIFonts.swift; sourceTree = "<group>"; };
+		2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStrings.swift; sourceTree = "<group>"; };
+		2D3BC91F1D08C0F600EC0425 /* CIColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColors.swift; sourceTree = "<group>"; };
 		5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.release.xcconfig"; sourceTree = "<group>"; };
 		83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock_in.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90BDD7487C1AF5647EA3BB2 /* Pods-Clock in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,6 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				2D3BC8F21D0894CF00EC0425 /* AppDelegate.swift */,
+				2D3BC91B1D08BA4A00EC0425 /* CIFonts.swift */,
+				2D3BC91F1D08C0F600EC0425 /* CIColors.swift */,
+				2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -87,6 +111,14 @@
 		2D3BC9001D0895A400EC0425 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2D3BC90A1D08B56200EC0425 /* Oswald-Regular.ttf */,
+				2D3BC90B1D08B56200EC0425 /* Oswald-Light.ttf */,
+				2D3BC90C1D08B56200EC0425 /* Oswald-Bold.ttf */,
+				2D3BC90D1D08B56200EC0425 /* Lato-Regular.ttf */,
+				2D3BC90E1D08B56200EC0425 /* Lato-Light.ttf */,
+				2D3BC90F1D08B56200EC0425 /* Lato-Hairline.ttf */,
+				2D3BC9101D08B56200EC0425 /* Lato-Bold.ttf */,
+				2D3BC9111D08B56200EC0425 /* Lato-Black.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -101,6 +133,7 @@
 		2D3BC9021D0895D700EC0425 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2D3BC9211D08C1C200EC0425 /* Controls */,
 				2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */,
 			);
 			name = View;
@@ -112,6 +145,13 @@
 				2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		2D3BC9211D08C1C200EC0425 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controls;
 			sourceTree = "<group>";
 		};
 		33EC4504560C5603F6FB46BB /* Pods */ = {
@@ -166,6 +206,7 @@
 				TargetAttributes = {
 					2D3BC8EE1D0894CF00EC0425 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PKTCFGJH9K;
 					};
 				};
 			};
@@ -193,7 +234,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D3BC8F51D0894CF00EC0425 /* Assets.xcassets in Resources */,
+				2D3BC9151D08B56200EC0425 /* Lato-Regular.ttf in Resources */,
+				2D3BC9141D08B56200EC0425 /* Oswald-Bold.ttf in Resources */,
+				2D3BC9121D08B56200EC0425 /* Oswald-Regular.ttf in Resources */,
 				2D3BC8F81D0894CF00EC0425 /* LaunchScreen.storyboard in Resources */,
+				2D3BC9131D08B56200EC0425 /* Oswald-Light.ttf in Resources */,
+				2D3BC9171D08B56200EC0425 /* Lato-Hairline.ttf in Resources */,
+				2D3BC9181D08B56200EC0425 /* Lato-Bold.ttf in Resources */,
+				2D3BC9191D08B56200EC0425 /* Lato-Black.ttf in Resources */,
+				2D3BC9161D08B56200EC0425 /* Lato-Light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,9 +302,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D3BC8F31D0894CF00EC0425 /* AppDelegate.swift in Sources */,
+				2D3BC9201D08C0F600EC0425 /* CIColors.swift in Sources */,
 				2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */,
-				2D3BC9091D08B3B300EC0425 /* README.md in Sources */,
 				2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */,
+				2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */,
+				2D3BC91C1D08BA4A00EC0425 /* CIFonts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
