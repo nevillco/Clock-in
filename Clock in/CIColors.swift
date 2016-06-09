@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
     static func CIStatsColors() -> [UIColor] {
         return [
-            CIBlue(),                                                           //blue
+            CIBlue,                                                             //blue
             UIColor(red: 219/255, green: 84/255, blue: 68/255, alpha: 1),       //red
             UIColor(red: 229/255, green: 229/255, blue: 80/255, alpha: 1),      //yellow
             UIColor(red: 160/255, green: 34/255, blue: 240/255, alpha:1),       //purple
@@ -24,13 +24,7 @@ extension UIColor {
             UIColor(red: 255/255, green: 255/255, blue: 255, alpha:1),          //white
             UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha:1),]           //black
     }
-    static func CIBlue() -> UIColor {
-        return UIColor(red: 0, green: 118/255, blue: 1, alpha: 1)
-    }
-    static func CIGray() -> UIColor {
-        return UIColor(red: 157/255, green:157/255, blue: 152/255, alpha:1)
-    }
-    static func CIGreen() -> UIColor {
-        return UIColor(red: 68/255, green: 219/255, blue: 84/255, alpha: 1)
-    }
+    @nonobjc static let CIBlue: UIColor = UIColor(red: 0, green: 118/255, blue: 1, alpha: 1)
+    @nonobjc static let CIGreen: UIColor = UIColor(red: 68/255, green: 219/255, blue: 84/255, alpha: 1)
+    @nonobjc static let CIGray: UIColor = UIColor(red: 157/255, green:157/255, blue: 152/255, alpha:1)
 }

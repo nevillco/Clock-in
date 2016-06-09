@@ -15,35 +15,39 @@ class CIHomeView: CIView {
     
     let titleLabel = UILabel()
     
-    let addItemButton = CIButton(primaryColor: UIColor.CIBlue(), title: "add item".localized)
-    let globalStatsButton = CIButton(primaryColor: UIColor.CIGreen(), title: "global stats".localized)
-    let globalSettingsButton = CIButton(primaryColor: UIColor.CIGray(), title: "options".localized)
+    let addItemButton = CIButton(primaryColor: UIColor.CIBlue, title: "add item".localized)
+    let globalStatsButton = CIButton(primaryColor: UIColor.CIGreen, title: "global stats".localized)
+    let globalSettingsButton = CIButton(primaryColor: UIColor.CIGray, title: "settings".localized)
+    
+    let table = UITableView()
     
     init() {
         super.init(frame: CGRectZero)
-        backgroundColor = UIColor.whiteColor()
         setupSubviews()
         constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError(String.initCoderError())
+        fatalError(CIErrorStrings.CoderInitUnimplemented)
     }
     
     func setupSubviews() {
-        titleLabel.font = UIFont.CIHomeTitleLightFont()
+        titleLabel.font = UIFont.CIHomeTitleLightFont
         let titleText = "Clock:in"
         let definedText = "in"
         let attributedText = NSMutableAttributedString(string: titleText.localized)
         attributedText.addAttributes(
-            [NSForegroundColorAttributeName: UIColor.CIBlue(),
-                NSFontAttributeName: UIFont.CIHomeTitleBoldFont()], range: (titleText as NSString).rangeOfString(definedText))
+            [NSForegroundColorAttributeName: UIColor.CIBlue,
+                NSFontAttributeName: UIFont.CIHomeTitleRegularFont], range: (titleText as NSString).rangeOfString(definedText))
         titleLabel.attributedText = attributedText
         addSubview(titleLabel)
         
         addSubview(addItemButton)
         addSubview(globalStatsButton)
         addSubview(globalSettingsButton)
+        
+        table.separatorStyle = .None
+        addSubview(table)
     }
     
     func constrainSubviews() {
@@ -68,6 +72,13 @@ class CIHomeView: CIView {
             make.trailing.equalTo(globalStatsButton.snp_leading).offset(-CIConstants.horizontalItemSpacing)
             make.top.equalTo(globalStatsButton.snp_top)
             make.width.equalTo(CIConstants.buttonWidth)
+        }
+        
+        table.snp_makeConstraints { (make)->Void in
+            make.top.equalTo(globalStatsButton.snp_bottom).offset(CIConstants.verticalItemSpacing)
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.bottom.equalTo(self.snp_bottom)
         }
     }
 }

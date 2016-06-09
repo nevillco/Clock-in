@@ -15,6 +15,21 @@ class CIButton: UIButton {
     
     let primaryColor:UIColor
     
+    override var highlighted: Bool {
+        didSet {
+            if (highlighted) {
+                setTitleColor(highlightedTitleColor(), forState: .Highlighted)
+                backgroundColor = primaryColor
+                titleLabel!.font = UIFont.CIButtonBoldFont
+            }
+            else {
+                setTitleColor(primaryColor, forState: .Highlighted)
+                backgroundColor = UIColor.clearColor()
+                titleLabel!.font = UIFont.CIButtonRegularFont
+            }
+        }
+    }
+    
     required init(primaryColor: UIColor, title:String) {
         self.primaryColor = primaryColor
         super.init(frame: CGRectZero)
@@ -23,30 +38,22 @@ class CIButton: UIButton {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(CIErrorStrings.CoderInitUnimplemented)
     }
     
     func setDefaultStyle() {
         setTitleColor(primaryColor, forState: .Normal)
-        titleLabel!.font = UIFont.CIButtonRegularFont()
+        titleLabel!.font = UIFont.CIButtonRegularFont
         layer.borderColor = primaryColor.CGColor
         layer.borderWidth = 2.0
         layer.cornerRadius = 4.0
         translatesAutoresizingMaskIntoConstraints = false
         titleEdgeInsets = CIButton.buttonInsets
-        addObserver(self, forKeyPath: "highlighted", options: [], context: nil)
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if(highlighted) {
-            setTitleColor(superview!.backgroundColor, forState: .Highlighted)
-            backgroundColor = primaryColor
-            titleLabel!.font = UIFont.CIButtonBoldFont()
-        }
-        else {
-            setTitleColor(primaryColor, forState: .Highlighted)
-            backgroundColor = UIColor.clearColor()
-            titleLabel!.font = UIFont.CIButtonRegularFont()
-        }
+    func highlightedTitleColor() -> UIColor? {
+        if(self.superview == nil) { return nil }
+        if(self.superview!.backgroundColor == nil) { return UIColor.whiteColor() }
+        return self.superview!.backgroundColor
     }
 }

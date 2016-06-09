@@ -1,0 +1,6 @@
+framework module Pods_Clock_in {
+  umbrella header "Pods-Clock in-umbrella.h"
+
+  export *
+  module * { export * }
+}

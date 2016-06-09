@@ -10,6 +10,4 @@ import Foundation
 
 extension String {
     var localized: String { return NSLocalizedString(self, comment: "") }
-    
-    static func initCoderError() -> String { return "Error: init (coder) called but not implemented." }
 }
