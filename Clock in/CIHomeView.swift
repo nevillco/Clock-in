@@ -15,9 +15,9 @@ class CIHomeView: CIView {
     
     let titleLabel = UILabel()
     
-    let addItemButton = CIButton(primaryColor: UIColor.CIBlue, title: "add item".localized)
-    let globalStatsButton = CIButton(primaryColor: UIColor.CIGreen, title: "global stats".localized)
-    let globalSettingsButton = CIButton(primaryColor: UIColor.CIGray, title: "settings".localized)
+    let addItemButton = CIButton(primaryColor: .CIBlue, title: "add item".localized)
+    let globalStatsButton = CIButton(primaryColor: .CIGreen, title: "global stats".localized)
+    let globalSettingsButton = CIButton(primaryColor: .CIGray, title: "settings".localized)
     
     let table = UITableView()
     

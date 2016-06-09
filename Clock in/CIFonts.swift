@@ -9,6 +9,10 @@
 import UIKit
 
 extension UIFont {
+    @nonobjc static let CIDefaultTitleFont = UIFont(name: "Lato-Hairline", size: 40.0)!
+    @nonobjc static let CIDefaultBodyFont = UIFont(name: "Lato-Regular", size: 14.0)!
+    @nonobjc static let CIBackButtonFont = UIFont(name: "Lato-Regular", size: 13.0)!
+    
     @nonobjc static let CIHomeTitleLightFont = UIFont(name: "Lato-Light", size: 40.0)!
     @nonobjc static let CIHomeTitleRegularFont = UIFont(name: "Lato-Regular", size: 40.0)!
     

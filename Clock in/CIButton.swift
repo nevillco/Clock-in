@@ -24,7 +24,7 @@ class CIButton: UIButton {
             }
             else {
                 setTitleColor(primaryColor, forState: .Highlighted)
-                backgroundColor = UIColor.clearColor()
+                backgroundColor = .clearColor()
                 titleLabel!.font = UIFont.CIButtonRegularFont
             }
         }
@@ -53,7 +53,7 @@ class CIButton: UIButton {
     
     func highlightedTitleColor() -> UIColor? {
         if(self.superview == nil) { return nil }
-        if(self.superview!.backgroundColor == nil) { return UIColor.whiteColor() }
+        if(self.superview!.backgroundColor == nil) { return .whiteColor() }
         return self.superview!.backgroundColor
     }
 }

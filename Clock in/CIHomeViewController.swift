@@ -12,11 +12,39 @@ import DZNEmptyDataSet
 class CIHomeViewController: UIViewController {
     override func viewDidLoad() {
         let view = CIHomeView()
+        addDelegates(view)
+        addTargets(view)
+        self.view = view
+    }
+}
+
+private extension CIHomeViewController {
+    func addDelegates(view: CIHomeView) {
         view.table.emptyDataSetSource = self
         view.table.emptyDataSetDelegate = self
         view.table.delegate = self
         view.table.dataSource = self
-        self.view = view
+    }
+    
+    func addTargets(view: CIHomeView) {
+        view.addItemButton.addTarget(self, action: #selector(addItemPressed(_:)), forControlEvents: .TouchUpInside)
+        view.globalStatsButton.addTarget(self, action: #selector(globalStatsButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        view.globalSettingsButton.addTarget(self, action: #selector(globalSettingsButtonPressed(_:)), forControlEvents: .TouchUpInside)
+    }
+}
+
+typealias CIHomeViewControllerTargets = CIHomeViewController
+extension CIHomeViewControllerTargets {
+    func addItemPressed(sender: UIButton) {
+        presentViewController(CIAddItemViewController(), animated: true, completion: nil)
+    }
+    
+    func globalStatsButtonPressed(sender: UIButton) {
+        
+    }
+    
+    func globalSettingsButtonPressed(sender: UIButton) {
+        
     }
 }
 
