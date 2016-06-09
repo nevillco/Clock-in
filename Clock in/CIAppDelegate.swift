@@ -15,12 +15,33 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        //Commont/uncomment to reset Realm
+        //purgeRealm()
+        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        // Override point for customization after application launch.
         self.window!.backgroundColor = .whiteColor()
         self.window!.rootViewController = CIHomeViewController()
         self.window!.makeKeyAndVisible()
         return true
+    }
+    
+    func purgeRealm() {
+        let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
+        let realmURLs = [
+            realmURL,
+            realmURL.URLByAppendingPathExtension("lock"),
+            realmURL.URLByAppendingPathExtension("log_a"),
+            realmURL.URLByAppendingPathExtension("log_b"),
+            realmURL.URLByAppendingPathExtension("note")
+        ]
+        let manager = NSFileManager.defaultManager()
+        for URL in realmURLs {
+            do {
+                try manager.removeItemAtURL(URL)
+            } catch {
+                // handle error
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

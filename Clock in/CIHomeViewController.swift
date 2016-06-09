@@ -8,13 +8,18 @@
 
 import UIKit
 import DZNEmptyDataSet
+import RealmSwift
 
 class CIHomeViewController: CIViewController {
+    var modelItems:Results<CIModelItem>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = CIHomeView()
         addDelegates(view)
         addTargets(view)
+        loadModelItems()
+        view.table.reloadData()
         self.view = view
     }
 }
@@ -31,6 +36,14 @@ private extension CIHomeViewController {
         view.addItemButton.addTarget(self, action: #selector(addItemPressed(_:)), forControlEvents: .TouchUpInside)
         view.globalStatsButton.addTarget(self, action: #selector(globalStatsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         view.globalSettingsButton.addTarget(self, action: #selector(globalSettingsButtonPressed(_:)), forControlEvents: .TouchUpInside)
+    }
+}
+
+typealias CIHomeViewControllerRealm = CIHomeViewController
+extension CIHomeViewControllerRealm {
+    func loadModelItems() {
+        let realm = try! Realm()
+        self.modelItems = realm.objects(CIModelItem.self)
     }
 }
 
@@ -59,7 +72,7 @@ extension CIHomeViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let bodyText = "Click the \"add item\" button above to start adding things to track!"
+        let bodyText = "Click the \"add item\" button above to start adding things to track!".localized
         let textRange = NSRange(location: 0, length: bodyText.characters.count)
         let attributedText = NSMutableAttributedString(string: bodyText.localized)
         attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIEmptyDataSetBodyFont, range: textRange)
@@ -72,7 +85,7 @@ extension CIHomeViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
 extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return modelItems!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

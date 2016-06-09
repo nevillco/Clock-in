@@ -36,7 +36,10 @@ typealias CIAddItemViewControllerTargets = CIAddItemViewController
 extension CIAddItemViewControllerTargets {
     func backButtonPressed(sender: UIButton) {
         view.endEditing(true)
-        dismissViewControllerAnimated(true, completion: nil)
+        let presenterView = presentingViewController!.view as! CIHomeView
+        dismissViewControllerAnimated(true, completion: {
+            presenterView.table.reloadData()
+        })
     }
     
     func goButtonPressed(sender: UIButton) throws {

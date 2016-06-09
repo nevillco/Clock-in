@@ -34,6 +34,7 @@
 		2DB752C01D09E4BE00D55196 /* CIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752BF1D09E4BE00D55196 /* CIViewController.swift */; };
 		2DB752C21D09F69400D55196 /* CIModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C11D09F69400D55196 /* CIModelItem.swift */; };
 		2DB752C41D09F72700D55196 /* CIModelEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C31D09F72700D55196 /* CIModelEntry.swift */; };
+		2DB752C61D0A00F700D55196 /* CIHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		2DB752BF1D09E4BE00D55196 /* CIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIViewController.swift; sourceTree = "<group>"; };
 		2DB752C11D09F69400D55196 /* CIModelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelItem.swift; sourceTree = "<group>"; };
 		2DB752C31D09F72700D55196 /* CIModelEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelEntry.swift; sourceTree = "<group>"; };
+		2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIHomeViewCell.swift; sourceTree = "<group>"; };
 		5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.release.xcconfig"; sourceTree = "<group>"; };
 		83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock_in.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90BDD7487C1AF5647EA3BB2 /* Pods-Clock in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				2D3BC9241D08C3AD00EC0425 /* CIView.swift */,
 				2D3BC9211D08C1C200EC0425 /* Controls */,
 				2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */,
+				2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */,
 				2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */,
 			);
 			name = View;
@@ -335,6 +338,7 @@
 				2D3BC9201D08C0F600EC0425 /* CIColor.swift in Sources */,
 				2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */,
 				2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */,
+				2DB752C61D0A00F700D55196 /* CIHomeViewCell.swift in Sources */,
 				2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */,
 				2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */,
 				2DB752C21D09F69400D55196 /* CIModelItem.swift in Sources */,
