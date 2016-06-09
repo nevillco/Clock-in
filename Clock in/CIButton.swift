@@ -44,6 +44,7 @@ class CIButton: UIButton {
             titleLabel!.font = UIFont.CIButtonBoldFont()
         }
         else {
+            setTitleColor(primaryColor, forState: .Highlighted)
             backgroundColor = UIColor.clearColor()
             titleLabel!.font = UIFont.CIButtonRegularFont()
         }

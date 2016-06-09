@@ -21,6 +21,7 @@ class CIHomeView: CIView {
     
     init() {
         super.init(frame: CGRectZero)
+        backgroundColor = UIColor.whiteColor()
         setupSubviews()
         constrainSubviews()
     }
