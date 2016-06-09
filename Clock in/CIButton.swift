@@ -38,7 +38,7 @@ class CIButton: UIButton {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError(CIErrorStrings.CoderInitUnimplemented)
+        fatalError(CIError.CoderInitUnimplementedString)
     }
     
     func setDefaultStyle() {

@@ -6,19 +6,20 @@
 //  Copyright © 2016 Connor Neville. All rights reserved.
 //
 
-enum CIError: ErrorType {
-    case SomeError
+enum CIErrorType: ErrorType {
+    case StringNotFoundError
+    
 }
 
-extension CIError : CustomStringConvertible {
+extension CIErrorType : CustomStringConvertible {
     var description: String {
         switch self {
-            case .SomeError:
-                return "SomeError description"
+            case .StringNotFoundError:
+                return "A required string was nil."
         }
     }
 }
 
-class CIErrorStrings {
-    static var CoderInitUnimplemented = "Init(coder) called but not implemented."
+class CIError {
+    static var CoderInitUnimplementedString = "Init(coder) called but not implemented."
 }

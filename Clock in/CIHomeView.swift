@@ -28,7 +28,7 @@ class CIHomeView: CIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError(CIErrorStrings.CoderInitUnimplemented)
+        fatalError(CIError.CoderInitUnimplementedString)
     }
     
     func setupSubviews() {

@@ -9,7 +9,7 @@
 import UIKit
 import DZNEmptyDataSet
 
-class CIHomeViewController: UIViewController {
+class CIHomeViewController: CIViewController {
     override func viewDidLoad() {
         let view = CIHomeView()
         addDelegates(view)

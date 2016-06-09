@@ -23,13 +23,15 @@
 		2D3BC9191D08B56200EC0425 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC9111D08B56200EC0425 /* Lato-Black.ttf */; };
 		2D3BC91C1D08BA4A00EC0425 /* CIFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91B1D08BA4A00EC0425 /* CIFonts.swift */; };
 		2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */; };
-		2D3BC9201D08C0F600EC0425 /* CIColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91F1D08C0F600EC0425 /* CIColors.swift */; };
+		2D3BC9201D08C0F600EC0425 /* CIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91F1D08C0F600EC0425 /* CIColor.swift */; };
 		2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */; };
 		2D3BC9251D08C3AD00EC0425 /* CIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9241D08C3AD00EC0425 /* CIView.swift */; };
 		2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9261D08C5C900EC0425 /* CIButton.swift */; };
 		2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B41D09B20C00D55196 /* CIErrors.swift */; };
 		2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */; };
 		2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */; };
+		2DB752BE1D09DBC800D55196 /* CITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752BD1D09DBC800D55196 /* CITextField.swift */; };
+		2DB752C01D09E4BE00D55196 /* CIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752BF1D09E4BE00D55196 /* CIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,13 +53,15 @@
 		2D3BC9111D08B56200EC0425 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		2D3BC91B1D08BA4A00EC0425 /* CIFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIFonts.swift; sourceTree = "<group>"; };
 		2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStrings.swift; sourceTree = "<group>"; };
-		2D3BC91F1D08C0F600EC0425 /* CIColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColors.swift; sourceTree = "<group>"; };
+		2D3BC91F1D08C0F600EC0425 /* CIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColor.swift; sourceTree = "<group>"; };
 		2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIConstants.swift; sourceTree = "<group>"; };
 		2D3BC9241D08C3AD00EC0425 /* CIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIView.swift; sourceTree = "<group>"; };
 		2D3BC9261D08C5C900EC0425 /* CIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIButton.swift; sourceTree = "<group>"; };
 		2DB752B41D09B20C00D55196 /* CIErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIErrors.swift; sourceTree = "<group>"; };
 		2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAddItemView.swift; sourceTree = "<group>"; };
 		2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAddItemViewController.swift; sourceTree = "<group>"; };
+		2DB752BD1D09DBC800D55196 /* CITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CITextField.swift; sourceTree = "<group>"; };
+		2DB752BF1D09E4BE00D55196 /* CIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIViewController.swift; sourceTree = "<group>"; };
 		5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.release.xcconfig"; sourceTree = "<group>"; };
 		83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock_in.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90BDD7487C1AF5647EA3BB2 /* Pods-Clock in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.debug.xcconfig"; sourceTree = "<group>"; };
@@ -115,7 +119,7 @@
 				2D3BC8F21D0894CF00EC0425 /* CIAppDelegate.swift */,
 				2D3BC91B1D08BA4A00EC0425 /* CIFonts.swift */,
 				2DB752B41D09B20C00D55196 /* CIErrors.swift */,
-				2D3BC91F1D08C0F600EC0425 /* CIColors.swift */,
+				2D3BC91F1D08C0F600EC0425 /* CIColor.swift */,
 				2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */,
 				2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */,
 			);
@@ -160,6 +164,7 @@
 			children = (
 				2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */,
 				2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */,
+				2DB752BF1D09E4BE00D55196 /* CIViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				2D3BC9261D08C5C900EC0425 /* CIButton.swift */,
+				2DB752BD1D09DBC800D55196 /* CITextField.swift */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -320,12 +326,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D3BC8F31D0894CF00EC0425 /* CIAppDelegate.swift in Sources */,
-				2D3BC9201D08C0F600EC0425 /* CIColors.swift in Sources */,
+				2D3BC9201D08C0F600EC0425 /* CIColor.swift in Sources */,
 				2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */,
 				2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */,
 				2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */,
 				2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */,
+				2DB752BE1D09DBC800D55196 /* CITextField.swift in Sources */,
 				2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */,
+				2DB752C01D09E4BE00D55196 /* CIViewController.swift in Sources */,
 				2D3BC9251D08C3AD00EC0425 /* CIView.swift in Sources */,
 				2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */,
 				2D3BC91C1D08BA4A00EC0425 /* CIFonts.swift in Sources */,
