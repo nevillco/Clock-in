@@ -41,15 +41,24 @@ extension CIAddItemViewControllerTargets {
     
     func goButtonPressed(sender: UIButton) throws {
         let view = self.view as! CIAddItemView
-        let text = view.nameField.text!
-        if text.characters.count == 0 {
+        let name = view.nameField.text!
+        let chars = name.characters.count
+        if chars == 0 {
             errorAlert("Please enter an item name.".localized)
             return
         }
-        else if text.characters.count > 18 {
-            errorAlert("Item names can be at most 18 characters.".localized)
+        if chars > CIConstants.itemMaxChars {
+            errorAlert(String(format: "Item names can be at most %d characters.", CIConstants.itemMaxChars).localized)
             return
         }
+        if itemNameExists(name) {
+            errorAlert("You already have an item with this name. Please try another.".localized)
+            return
+        }
+        createItem(name)
+        view.nameField.text = ""
+        view.endEditing(true)
+        dialogAlert("Success", message: "Your new item has been created. Feel free to add another, or go back to the home page.")
     }
     
     func nameFieldChanged(sender: UITextField) {
@@ -58,6 +67,23 @@ extension CIAddItemViewControllerTargets {
         let view = self.view as! CIAddItemView
         view.updateCharsLabel(charsRemaining)
         view.checkNameFieldAlignment()
+    }
+}
+
+typealias CIAddItemViewControllerRealm = CIAddItemViewController
+extension CIAddItemViewControllerRealm {
+    func itemNameExists(name: String) -> Bool {
+        let realm = try! Realm()
+        let predicate = NSPredicate(format: "name == %@", name)
+        let itemsWithName = realm.objects(CIModelItem.self).filter(predicate)
+        return itemsWithName.count > 0
+    }
+    
+    func createItem(name:String) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.create(CIModelItem.self, value: ["name": name], update: false)
+        }
     }
 }
 

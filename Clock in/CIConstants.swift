@@ -12,7 +12,7 @@ class CIConstants {
     static let paddingFromTop:CGFloat = 30
     static let horizontalItemSpacing:CGFloat = 8
     static let verticalItemSpacing:CGFloat = 10
-    static let buttonWidth:CGFloat = 84
+    static let buttonWidth:CGFloat = 91
     
     static let itemMaxChars = 18
     static let charsRemainingForWarning = 5

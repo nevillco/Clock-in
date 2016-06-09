@@ -11,4 +11,12 @@ import RealmSwift
 class CIModelItem: Object {
     dynamic var name = ""
     let entries = List<CIModelEntry>()
+    
+    override static func indexedProperties() -> [String] {
+        return ["name"]
+    }
+    
+    override static func primaryKey() -> String? {
+        return "name"
+    }
 }

@@ -44,6 +44,8 @@ class CIButton: UIButton {
     func setDefaultStyle() {
         setTitleColor(primaryColor, forState: .Normal)
         titleLabel!.font = UIFont.CIButtonRegularFont
+        titleLabel!.adjustsFontSizeToFitWidth = true
+        titleLabel!.minimumScaleFactor = 0.8
         layer.borderColor = primaryColor.CGColor
         layer.borderWidth = 2.0
         layer.cornerRadius = 4.0

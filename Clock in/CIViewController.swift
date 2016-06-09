@@ -15,9 +15,14 @@ class CIViewController: UIViewController {
     }
     
     func errorAlert(message:String) {
-        let controller = UIAlertController(title: "Error".localized, message: message, preferredStyle: .Alert)
+        dialogAlert("Error", message: message)
+    }
+    
+    func dialogAlert(title:String, message:String) {
+        let controller = UIAlertController(title: title.localized, message: message.localized, preferredStyle: .Alert)
         let action = UIAlertAction(title: "Okay".localized, style: .Default, handler: nil)
         controller.addAction(action)
         presentViewController(controller, animated: true, completion: nil)
+        
     }
 }
