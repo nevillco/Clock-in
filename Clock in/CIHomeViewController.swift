@@ -11,6 +11,7 @@ import DZNEmptyDataSet
 
 class CIHomeViewController: CIViewController {
     override func viewDidLoad() {
+        super.viewDidLoad()
         let view = CIHomeView()
         addDelegates(view)
         addTargets(view)

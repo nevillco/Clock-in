@@ -9,6 +9,11 @@
 import UIKit
 
 class CIViewController: UIViewController {
+    override func viewDidLoad() {
+        let view = CIView()
+        self.view = view
+    }
+    
     func errorAlert(message:String) {
         let controller = UIAlertController(title: "Error".localized, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "Okay".localized, style: .Default, handler: nil)

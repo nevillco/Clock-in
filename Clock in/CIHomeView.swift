@@ -21,8 +21,8 @@ class CIHomeView: CIView {
     
     let table = UITableView()
     
-    init() {
-        super.init(frame: CGRectZero)
+    override init() {
+        super.init()
         setupSubviews()
         constrainSubviews()
     }

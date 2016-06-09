@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import SnapKit
 
 class CIAddItemView: CIView {
@@ -22,8 +23,8 @@ class CIAddItemView: CIView {
     
     let table = UITableView()
     
-    init() {
-        super.init(frame: CGRectZero)
+    override init() {
+        super.init()
         backgroundColor = .CIBlue
         setupSubviews()
         constrainSubviews()
@@ -64,6 +65,7 @@ class CIAddItemView: CIView {
         goButton.titleLabel!.font = .CITextFieldFont
         goButton.setTitleColor(.whiteColor(), forState: .Normal)
         goButton.setTitleColor(.CIGray, forState: .Highlighted)
+        goButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
         addSubview(goButton)
     }
     
@@ -114,6 +116,18 @@ class CIAddItemView: CIView {
         else {
             charsLabel.textColor = UIColor.whiteColor()
         }
-        print(charsLabel.frame.width)
+    }
+    
+    func checkNameFieldAlignment() {
+        let text = NSString(string: nameField.text!)
+        let attributes = [NSFontAttributeName: UIFont.CITextFieldFont]
+        let textWidth = text.sizeWithAttributes(attributes).width
+        let maxWidth = nameField.editingRectForBounds(nameField.bounds).width
+        if(textWidth >= maxWidth) {
+            nameField.textAlignment = .Right
+        }
+        else {
+            nameField.textAlignment = .Left
+        }
     }
 }

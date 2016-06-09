@@ -11,6 +11,7 @@ import RealmSwift
 
 class CIAddItemViewController: CIViewController {
     override func viewDidLoad() {
+        super.viewDidLoad()
         let view = CIAddItemView()
         addTargets(view)
         addDelegates(view)
@@ -40,18 +41,15 @@ extension CIAddItemViewControllerTargets {
     
     func goButtonPressed(sender: UIButton) throws {
         let view = self.view as! CIAddItemView
-        guard let text = view.nameField.text else {
-            throw CIErrorType.StringNotFoundError
-        }
+        let text = view.nameField.text!
         if text.characters.count == 0 {
             errorAlert("Please enter an item name.".localized)
             return
         }
-        else if text.characters.count > CIConstants.itemMaxChars {
-            errorAlert(String(format: "Item names can be at most %d characters.", CIConstants.itemMaxChars).localized)
+        else if text.characters.count > 18 {
+            errorAlert("Item names can be at most 18 characters.".localized)
             return
         }
-        print(text)
     }
     
     func nameFieldChanged(sender: UITextField) {
@@ -59,14 +57,19 @@ extension CIAddItemViewControllerTargets {
         let charsRemaining = CIConstants.itemMaxChars - chars
         let view = self.view as! CIAddItemView
         view.updateCharsLabel(charsRemaining)
+        view.checkNameFieldAlignment()
     }
 }
 
 extension CIAddItemViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         let view = self.view as! CIAddItemView
-        view.endEditing(true)
-        try! goButtonPressed(view.goButton)
+        do {
+            try self.goButtonPressed(view.goButton)
+        }
+        catch let error {
+            print(error)
+        }
         return true
     }
 }
