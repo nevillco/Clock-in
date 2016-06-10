@@ -14,7 +14,7 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var shouldResetRealm = false
+    var shouldResetRealm = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if(shouldResetRealm) { purgeRealm() }

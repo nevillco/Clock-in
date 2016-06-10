@@ -13,6 +13,7 @@ class CIAddItemViewController: CIViewController {
     let cellReuseIdentifier = "ColorChoice"
     var availableColors = UIColor.CIAvailableColors()
     var selectedColor = UIColor.clearColor()
+    var itemsAdded = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +72,12 @@ typealias CIAddItemViewControllerTargets = CIAddItemViewController
 extension CIAddItemViewControllerTargets {
     func backButtonPressed(sender: UIButton) {
         view.endEditing(true)
-        let presenterView = presentingViewController!.view as! CIHomeView
+        let presenter = presentingViewController as! CIHomeViewController
+        let presenterView = presenter.view as! CIHomeView
         dismissViewControllerAnimated(true, completion: {
-            presenterView.table.reloadData()
+            presenter.loadModelItems()
+            presenterView.table.insertRowsAtIndexPaths(self.indexPathsToReloadOnDismiss(), withRowAnimation: .Middle)
+            presenterView.table.reloadEmptyDataSet()
         })
     }
     
@@ -102,7 +106,9 @@ extension CIAddItemViewControllerTargets {
             let presenterView = presentingViewController!.view as! CIHomeView
             dismissViewControllerAnimated(true, completion: {
                 presenter.dialogAlert("Success".localized, message: "Your new item has been created. You're now at the maximum number of items.".localized)
-                presenterView.table.reloadData()
+                presenter.loadModelItems()
+                presenterView.table.insertRowsAtIndexPaths(self.indexPathsToReloadOnDismiss(), withRowAnimation: .Middle)
+                presenterView.table.reloadEmptyDataSet()
             })
         }
         else {
@@ -135,10 +141,21 @@ extension CIAddItemViewControllerRealm {
         let item = CIModelItem()
         item.name = name
         item.createDate = NSDate()
-        item.colorData = NSKeyedArchiver.archivedDataWithRootObject(color)
+        item.colorIndex = UIColor.CIColorPalette.indexOf(color)!
         try! realm.write {
             realm.add(item, update: false)
         }
+        itemsAdded += 1
+    }
+    
+    func indexPathsToReloadOnDismiss() -> [NSIndexPath] {
+        let realm = try! Realm()
+        let numItems = realm.objects(CIModelItem.self).count
+        var indexPaths = [NSIndexPath]()
+        for i in 0..<itemsAdded {
+            indexPaths.append(NSIndexPath(forRow: numItems - (i + 1), inSection: 0))
+        }
+        return indexPaths
     }
 }
 

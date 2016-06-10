@@ -39,9 +39,10 @@ extension UIColor {
         let realm = try! Realm()
         let modelItems = realm.objects(CIModelItem.self)
         var colors = CIColorPalette
-        for modelItem in modelItems {
-            let color = NSKeyedUnarchiver.unarchiveObjectWithData(modelItem.colorData) as! UIColor
-            colors.removeAtIndex(colors.indexOf(color)!)
+        var takenIndices:[Int] = modelItems.map({ $0.colorIndex })
+        takenIndices.sortInPlace({ $1 < $0 })
+        for index in takenIndices {
+            colors.removeAtIndex(index)
         }
         return colors
     }

@@ -44,17 +44,22 @@ class CIHomeViewCell: CITableViewCell {
         addSubview(nameLabel)
         
         controlContainer.backgroundColor = primaryColor
+        controlContainer.layer.cornerRadius = 4
         addSubview(controlContainer)
         
         statsButton.setTitle("stats".localized, forState: .Normal)
         statsButton.setTitleColor(.whiteColor(), forState: .Normal)
+        statsButton.setTitleColor(.CIGray, forState: .Highlighted)
         statsButton.titleLabel!.font = UIFont.CITextButtonFont
         controlContainer.addSubview(statsButton)
         
         settingsButton.setTitle("settings".localized, forState: .Normal)
         settingsButton.setTitleColor(.whiteColor(), forState: .Normal)
+        settingsButton.setTitleColor(.CIGray, forState: .Highlighted)
         settingsButton.titleLabel!.font = UIFont.CITextButtonFont
         controlContainer.addSubview(settingsButton)
+        
+        sendSubviewToBack(controlContainer)
     }
     
     func constrainSubviews() {
@@ -67,7 +72,7 @@ class CIHomeViewCell: CITableViewCell {
         
         nameLabel.snp_makeConstraints{(make)->Void in
             make.leading.equalTo(clockButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
-            make.topMargin.equalTo(self.snp_topMargin)
+            make.bottom.equalTo(controlContainer.snp_top).offset(-CIConstants.verticalItemSpacing)
         }
         
         statsButton.snp_makeConstraints{(make)->Void in
@@ -81,7 +86,7 @@ class CIHomeViewCell: CITableViewCell {
         }
         
         controlContainer.snp_makeConstraints{(make)->Void in
-            make.leading.equalTo(clockButton.snp_trailing)
+            make.leading.equalTo(clockButton.snp_centerX)
             make.trailing.equalTo(self.snp_trailing)
             make.bottom.equalTo(clockButton.snp_bottom)
             make.height.equalTo(statsButton.snp_height)
@@ -101,10 +106,12 @@ class CIHomeViewCell: CITableViewCell {
         override var highlighted: Bool {
             didSet {
                 if (highlighted) {
+                    imageView!.tintColor = primaryColor
                     setTitleColor(primaryColor, forState: .Highlighted)
                     backgroundColor = .whiteColor()
                 }
                 else {
+                    imageView!.tintColor = .whiteColor()
                     setTitleColor(.whiteColor(), forState: .Highlighted)
                     backgroundColor = primaryColor
                 }
@@ -123,11 +130,13 @@ class CIHomeViewCell: CITableViewCell {
         
         func setDefaultStyle() {
             backgroundColor = primaryColor
-            setTitle("in".localized, forState: .Normal)
-            setTitleColor(.whiteColor(), forState: .Normal)
+            let image = UIImage(named: "clockIcon50")?.imageWithRenderingMode(.AlwaysTemplate)
+            setImage(image, forState: .Normal)
+            imageView!.tintColor = .whiteColor()
             titleLabel!.font = UIFont.CIHomeCellClockButtonFont
             layer.borderColor = primaryColor.CGColor
-            layer.borderWidth = 1
+            layer.borderWidth = 2
+            layer.cornerRadius = 4
         }
         
         func highlightedTitleColor() -> UIColor? {

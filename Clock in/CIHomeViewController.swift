@@ -85,6 +85,14 @@ extension CIHomeViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
         attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.CIBlue, range: coloredRange)
         return attributedText
     }
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "clockIcon50")?.imageWithRenderingMode(.AlwaysTemplate)
+    }
+    
+    func imageTintColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return .CIBlue
+    }
 }
 
 extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
@@ -95,7 +103,7 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(CIHomeViewCell.customReuseIdentifier) as! CIHomeViewCell
         let item = modelItems![indexPath.row]
-        let color = NSKeyedUnarchiver.unarchiveObjectWithData(item.colorData) as! UIColor
+        let color = UIColor.CIColorPalette[item.colorIndex]
         
         cell.primaryColor = color
         cell.nameLabel.text = item.name
