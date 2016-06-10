@@ -10,6 +10,7 @@ import RealmSwift
 
 class CIModelItem: Object {
     dynamic var name = ""
+    dynamic var createDate = NSDate()
     let entries = List<CIModelEntry>()
     
     override static func indexedProperties() -> [String] {

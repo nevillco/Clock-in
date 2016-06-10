@@ -25,7 +25,7 @@
 		2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */; };
 		2D3BC9201D08C0F600EC0425 /* CIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC91F1D08C0F600EC0425 /* CIColor.swift */; };
 		2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */; };
-		2D3BC9251D08C3AD00EC0425 /* CIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9241D08C3AD00EC0425 /* CIView.swift */; };
+		2D3BC9251D08C3AD00EC0425 /* CIBaseClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9241D08C3AD00EC0425 /* CIBaseClasses.swift */; };
 		2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9261D08C5C900EC0425 /* CIButton.swift */; };
 		2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B41D09B20C00D55196 /* CIErrors.swift */; };
 		2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */; };
@@ -58,7 +58,7 @@
 		2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStrings.swift; sourceTree = "<group>"; };
 		2D3BC91F1D08C0F600EC0425 /* CIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIColor.swift; sourceTree = "<group>"; };
 		2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIConstants.swift; sourceTree = "<group>"; };
-		2D3BC9241D08C3AD00EC0425 /* CIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIView.swift; sourceTree = "<group>"; };
+		2D3BC9241D08C3AD00EC0425 /* CIBaseClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIBaseClasses.swift; sourceTree = "<group>"; };
 		2D3BC9261D08C5C900EC0425 /* CIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIButton.swift; sourceTree = "<group>"; };
 		2DB752B41D09B20C00D55196 /* CIErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIErrors.swift; sourceTree = "<group>"; };
 		2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAddItemView.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		2D3BC9021D0895D700EC0425 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2D3BC9241D08C3AD00EC0425 /* CIView.swift */,
+				2D3BC9241D08C3AD00EC0425 /* CIBaseClasses.swift */,
 				2D3BC9211D08C1C200EC0425 /* Controls */,
 				2D3BC9041D089DCD00EC0425 /* CIHomeView.swift */,
 				2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */,
@@ -345,7 +345,7 @@
 				2DB752BE1D09DBC800D55196 /* CITextField.swift in Sources */,
 				2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */,
 				2DB752C01D09E4BE00D55196 /* CIViewController.swift in Sources */,
-				2D3BC9251D08C3AD00EC0425 /* CIView.swift in Sources */,
+				2D3BC9251D08C3AD00EC0425 /* CIBaseClasses.swift in Sources */,
 				2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */,
 				2DB752C41D09F72700D55196 /* CIModelEntry.swift in Sources */,
 				2D3BC91C1D08BA4A00EC0425 /* CIFonts.swift in Sources */,

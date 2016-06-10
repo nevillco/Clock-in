@@ -85,7 +85,7 @@ extension CIAddItemViewControllerRealm {
     func createItem(name:String) {
         let realm = try! Realm()
         try! realm.write {
-            realm.create(CIModelItem.self, value: ["name": name], update: false)
+            realm.create(CIModelItem.self, value: ["name": name, "createDate": NSDate()], update: false)
         }
     }
 }

@@ -16,7 +16,7 @@ class CIHomeView: CIView {
     let titleLabel = UILabel()
     
     let addItemButton = CIButton(primaryColor: .CIBlue, title: "add item".localized)
-    let globalStatsButton = CIButton(primaryColor: .CIGreen, title: "global stats".localized)
+    let globalStatsButton = CIButton(primaryColor: .CIGreen, title: "all stats".localized)
     let globalSettingsButton = CIButton(primaryColor: .CIGray, title: "settings".localized)
     
     let table = UITableView()
@@ -75,7 +75,7 @@ class CIHomeView: CIView {
         }
         
         table.snp_makeConstraints { (make)->Void in
-            make.top.equalTo(globalStatsButton.snp_bottom).offset(CIConstants.verticalItemSpacing)
+            make.top.equalTo(globalStatsButton.snp_bottom).offset(2 * CIConstants.verticalItemSpacing)
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.bottom.equalTo(self.snp_bottom)

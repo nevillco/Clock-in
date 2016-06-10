@@ -11,8 +11,10 @@ import CoreGraphics
 class CIConstants {
     static let paddingFromTop:CGFloat = 30
     static let horizontalItemSpacing:CGFloat = 8
-    static let verticalItemSpacing:CGFloat = 10
+    static let verticalItemSpacing:CGFloat = 7
     static let buttonWidth:CGFloat = 91
+    
+    static let homeCellRowHeight:CGFloat = 67
     
     static let itemMaxChars = 18
     static let charsRemainingForWarning = 5

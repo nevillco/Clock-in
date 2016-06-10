@@ -16,10 +16,9 @@ class CIHomeViewController: CIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = CIHomeView()
+        loadModelItems()
         addDelegates(view)
         addTargets(view)
-        loadModelItems()
-        view.table.reloadData()
         self.view = view
     }
 }
@@ -30,6 +29,7 @@ private extension CIHomeViewController {
         view.table.emptyDataSetDelegate = self
         view.table.delegate = self
         view.table.dataSource = self
+        view.table.registerClass(CIHomeViewCell.self, forCellReuseIdentifier: CIHomeViewCell.customReuseIdentifier)
     }
     
     func addTargets(view: CIHomeView) {
@@ -89,6 +89,12 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier(CIHomeViewCell.customReuseIdentifier) as! CIHomeViewCell
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CIConstants.homeCellRowHeight
     }
 }

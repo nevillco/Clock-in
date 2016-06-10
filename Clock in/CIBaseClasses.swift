@@ -45,3 +45,38 @@ class CIView: UIView {
         endEditing(true)
     }
 }
+
+class CITableViewCell: UITableViewCell {
+    let dismisser = UIButton()
+    
+    override func addSubview(view: UIView) {
+        if view.translatesAutoresizingMaskIntoConstraints {
+            view.translatesAutoresizingMaskIntoConstraints = false
+        }
+        super.addSubview(view)
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupDismisser()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError(CIError.CoderInitUnimplementedString)
+    }
+    
+    func setupDismisser() {
+        dismisser.setTitle("", forState: .Normal)
+        dismisser.backgroundColor = .clearColor()
+        addSubview(dismisser)
+        sendSubviewToBack(dismisser)
+        dismisser.snp_makeConstraints { (make)->Void in
+            make.edges.equalTo(self)
+        }
+        dismisser.addTarget(self, action: #selector(dismisserPressed(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+    func dismisserPressed(sender:UIButton) {
+        endEditing(true)
+    }
+}

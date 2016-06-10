@@ -17,6 +17,8 @@ extension UIFont {
     
     @nonobjc static let CIHomeTitleLightFont = UIFont(name: "Lato-Light", size: 40.0)!
     @nonobjc static let CIHomeTitleRegularFont = UIFont(name: "Lato-Regular", size: 40.0)!
+    @nonobjc static let CIHomeCellClockButtonFont = UIFont(name: "Lato-Black", size: 32.0)!
+    @nonobjc static let CIHomeCellTextFont = UIFont(name: "Lato-Light", size: 13.0)!
     
     @nonobjc static let CIButtonRegularFont = UIFont(name: "Lato-Regular", size: 16.0)!
     @nonobjc static let CIButtonBoldFont = UIFont(name: "Lato-Bold", size: 16.0)!
