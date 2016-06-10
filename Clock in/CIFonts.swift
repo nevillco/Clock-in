@@ -11,14 +11,13 @@ import UIKit
 extension UIFont {
     @nonobjc static let CIDefaultTitleFont = UIFont(name: "Lato-Hairline", size: 40.0)!
     @nonobjc static let CIDefaultBodyFont = UIFont(name: "Lato-Regular", size: 14.0)!
-    @nonobjc static let CIBackButtonFont = UIFont(name: "Lato-Regular", size: 18.0)!
-    @nonobjc static let CISubmitButtonFont = UIFont(name: "Lato-Regular", size: 18.0)!
+    @nonobjc static let CITextButtonFont = UIFont(name: "Lato-Regular", size: 18.0)!
     @nonobjc static let CITextFieldFont = UIFont(name: "Lato-Regular", size: 22.0)!
     
     @nonobjc static let CIHomeTitleLightFont = UIFont(name: "Lato-Light", size: 40.0)!
     @nonobjc static let CIHomeTitleRegularFont = UIFont(name: "Lato-Regular", size: 40.0)!
     @nonobjc static let CIHomeCellClockButtonFont = UIFont(name: "Lato-Black", size: 32.0)!
-    @nonobjc static let CIHomeCellTextFont = UIFont(name: "Lato-Light", size: 13.0)!
+    @nonobjc static let CIHomeCellTextFont = UIFont(name: "Lato-Light", size: 15.0)!
     
     @nonobjc static let CIButtonRegularFont = UIFont(name: "Lato-Regular", size: 16.0)!
     @nonobjc static let CIButtonBoldFont = UIFont(name: "Lato-Bold", size: 16.0)!

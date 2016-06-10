@@ -47,6 +47,7 @@ class CIHomeView: CIView {
         addSubview(globalSettingsButton)
         
         table.separatorStyle = .None
+        table.allowsSelection = false
         addSubview(table)
     }
     

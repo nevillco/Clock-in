@@ -45,6 +45,10 @@ internal class AnimationSequence: NSObject, UIDynamicAnimatorDelegate {
         }
     }
     
+    func removeAllSteps() {
+        steps.removeAll()
+    }
+    
     private func excuteFirstStepIfExist() {
         
         if self.view == nil {
@@ -145,7 +149,7 @@ internal class AnimationSequence: NSObject, UIDynamicAnimatorDelegate {
             let to = a
             let render = {(f: CGFloat) in
                 if let view = self.view {
-                    view.center.x = f
+                    view.alpha = f
                 }
             }
             behavior = basicBehavior(step, from: from, to: to, render: render)
@@ -450,7 +454,7 @@ internal class AnimationSequence: NSObject, UIDynamicAnimatorDelegate {
             let to = alpha
             let render = {(f: CGFloat) in
                 if let view = self.view {
-                    view.center.x = f
+                    view.alpha = f
                 }
             }
             behavior = snapBehavior(damping, from: from, to: to, render: render)
@@ -767,7 +771,7 @@ internal class AnimationSequence: NSObject, UIDynamicAnimatorDelegate {
             let to = alpha
             let render = {(f: CGFloat) in
                 if let view = self.view {
-                    view.center.x = f
+                    view.alpha = f
                 }
             }
             behavior = attachmentBehavior(damping, frequency: frequency, from: from, to: to, render: render)
@@ -1081,7 +1085,7 @@ internal class AnimationSequence: NSObject, UIDynamicAnimatorDelegate {
             let to = alpha
             let render = {(f: CGFloat) in
                 if let view = self.view {
-                    view.center.x = f
+                    view.alpha = f
                 }
             }
             behavior = gravityBehavior(magnitude, from: from, to: to, render: render)

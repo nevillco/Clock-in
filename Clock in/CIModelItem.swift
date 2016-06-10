@@ -12,6 +12,7 @@ class CIModelItem: Object {
     dynamic var name = ""
     dynamic var createDate = NSDate()
     let entries = List<CIModelEntry>()
+    dynamic var colorData = NSData()
     
     override static func indexedProperties() -> [String] {
         return ["name"]

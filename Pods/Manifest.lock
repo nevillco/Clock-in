@@ -12,7 +12,7 @@ PODS:
   - RealmSwift (0.103.2):
     - Realm (= 0.103.2)
   - SnapKit (0.21.0)
-  - Stellar (0.54)
+  - Stellar (0.56)
 
 DEPENDENCIES:
   - Charts
@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   Realm: 448f0416079fe5b0ed947e7d86f3c4e1c75826cb
   RealmSwift: 8a45cc8f02dfac093b72a3b5a01d567e27e15891
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
-  Stellar: 32eccd51dcb1547d2018d97da64e9f6158f2ef65
+  Stellar: 123ca3abac7dc1c21c21e6dba079c6c3fa65151d
 
 PODFILE CHECKSUM: cd41666992113162a69cdd854f32e88ccebf4dc1
 

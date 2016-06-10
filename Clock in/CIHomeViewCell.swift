@@ -14,9 +14,16 @@ class CIHomeViewCell: CITableViewCell {
     
     let clockButton = CIHomeCellButton(primaryColor: .CIBlue)
     let nameLabel = UILabel()
-    let statsButton = CIButton(primaryColor: .CIGreen, title: "stats".localized)
-    let settingsButton = CIButton(primaryColor: .CIGray, title: "settings".localized)
-    let bottomLine = UIView()
+    let statsButton = UIButton()
+    let settingsButton = UIButton()
+    let controlContainer = CIView()
+    
+    var primaryColor = UIColor.clearColor() {
+        didSet {
+            clockButton.primaryColor = primaryColor
+            controlContainer.backgroundColor = primaryColor
+        }
+    }
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,15 +39,22 @@ class CIHomeViewCell: CITableViewCell {
         addSubview(clockButton)
         
         nameLabel.text = "Item name"
-        nameLabel.font = UIFont.CIDefaultBodyFont
+        nameLabel.font = UIFont.CIHomeCellTextFont
         nameLabel.numberOfLines = 1
         addSubview(nameLabel)
         
-        addSubview(statsButton)
-        addSubview(settingsButton)
+        controlContainer.backgroundColor = primaryColor
+        addSubview(controlContainer)
         
-        bottomLine.backgroundColor = .CIBlue
-        addSubview(bottomLine)
+        statsButton.setTitle("stats".localized, forState: .Normal)
+        statsButton.setTitleColor(.whiteColor(), forState: .Normal)
+        statsButton.titleLabel!.font = UIFont.CITextButtonFont
+        controlContainer.addSubview(statsButton)
+        
+        settingsButton.setTitle("settings".localized, forState: .Normal)
+        settingsButton.setTitleColor(.whiteColor(), forState: .Normal)
+        settingsButton.titleLabel!.font = UIFont.CITextButtonFont
+        controlContainer.addSubview(settingsButton)
     }
     
     func constrainSubviews() {
@@ -57,29 +71,32 @@ class CIHomeViewCell: CITableViewCell {
         }
         
         statsButton.snp_makeConstraints{(make)->Void in
-            make.centerX.equalTo(self.snp_centerX)
-            make.bottom.equalTo(bottomLine.snp_top).offset(-CIConstants.verticalItemSpacing)
-            make.width.equalTo(CIConstants.buttonWidth)
+            make.trailing.equalTo(settingsButton.snp_leading).offset(-CIConstants.horizontalItemSpacing)
+            make.centerY.equalTo(controlContainer.snp_centerY)
         }
         
         settingsButton.snp_makeConstraints{(make)->Void in
-            make.leading.equalTo(statsButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
-            make.bottom.equalTo(bottomLine.snp_top).offset(-CIConstants.verticalItemSpacing)
-            make.width.equalTo(CIConstants.buttonWidth)
+            make.trailing.equalTo(controlContainer.snp_trailingMargin)
+            make.centerY.equalTo(controlContainer.snp_centerY)
         }
         
-        bottomLine.snp_makeConstraints{(make)->Void in
+        controlContainer.snp_makeConstraints{(make)->Void in
             make.leading.equalTo(clockButton.snp_trailing)
             make.trailing.equalTo(self.snp_trailing)
             make.bottom.equalTo(clockButton.snp_bottom)
-            make.height.equalTo(1)
+            make.height.equalTo(statsButton.snp_height)
         }
     }
     
     class CIHomeCellButton: UIButton {
         static let buttonInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         
-        let primaryColor:UIColor
+        var primaryColor:UIColor {
+            didSet {
+                layer.borderColor = primaryColor.CGColor
+                backgroundColor = primaryColor
+            }
+        }
         
         override var highlighted: Bool {
             didSet {

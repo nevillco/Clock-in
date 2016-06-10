@@ -20,8 +20,8 @@ class CIAddItemView: CIView {
     let charsLabel = UILabel()
     let nameField = CITextField(placeholder: "item name")
     let goButton = UIButton()
-    
-    let table = UITableView()
+    let colorLabel = UILabel()
+    let colorCollection = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     
     override init() {
         super.init()
@@ -36,7 +36,7 @@ class CIAddItemView: CIView {
     
     func setupSubviews() {
         backButton.setTitle("‹go back".localized, forState: .Normal)
-        backButton.titleLabel!.font = UIFont.CIBackButtonFont
+        backButton.titleLabel!.font = UIFont.CITextButtonFont
         backButton.setTitleColor(.whiteColor(), forState: .Normal)
         backButton.setTitleColor(.CIGray, forState: .Highlighted)
         addSubview(backButton)
@@ -67,6 +67,15 @@ class CIAddItemView: CIView {
         goButton.setTitleColor(.CIGray, forState: .Highlighted)
         goButton.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Horizontal)
         addSubview(goButton)
+        
+        colorLabel.text = "Select one of the colors below. This color will be associated with your item when you view its stats.".localized
+        colorLabel.font = UIFont.CIDefaultBodyFont
+        colorLabel.textColor = .whiteColor()
+        colorLabel.numberOfLines = 0
+        addSubview(colorLabel)
+        
+        colorCollection.backgroundColor = UIColor.clearColor()
+        addSubview(colorCollection)
     }
     
     func constrainSubviews() {
@@ -102,6 +111,19 @@ class CIAddItemView: CIView {
         goButton.snp_makeConstraints { (make)->Void in
             make.centerY.equalTo(nameField.snp_centerY)
             make.trailing.equalTo(self.snp_trailingMargin)
+        }
+        
+        colorLabel.snp_makeConstraints { (make)->Void in
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.top.equalTo(nameField.snp_bottom).offset(CIConstants.verticalItemSpacing * 2)
+        }
+        
+        colorCollection.snp_makeConstraints { (make)->Void in
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.top.equalTo(colorLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
+            make.bottom.equalTo(self.snp_bottomMargin)
         }
     }
     

@@ -43,13 +43,17 @@ typealias CIHomeViewControllerRealm = CIHomeViewController
 extension CIHomeViewControllerRealm {
     func loadModelItems() {
         let realm = try! Realm()
-        self.modelItems = realm.objects(CIModelItem.self)
+        modelItems = realm.objects(CIModelItem.self)
     }
 }
 
 typealias CIHomeViewControllerTargets = CIHomeViewController
 extension CIHomeViewControllerTargets {
     func addItemPressed(sender: UIButton) {
+        if(modelItems!.count >= CIConstants.maxItems) {
+            errorAlert("You've reached the maximum number of items. Delete an item (under Settings) to make some space for a new one.")
+            return
+        }
         presentViewController(CIAddItemViewController(), animated: true, completion: nil)
     }
     
@@ -90,6 +94,11 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(CIHomeViewCell.customReuseIdentifier) as! CIHomeViewCell
+        let item = modelItems![indexPath.row]
+        let color = NSKeyedUnarchiver.unarchiveObjectWithData(item.colorData) as! UIColor
+        
+        cell.primaryColor = color
+        cell.nameLabel.text = item.name
         
         return cell
     }

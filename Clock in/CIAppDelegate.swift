@@ -13,10 +13,11 @@ import RealmSwift
 class CIAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var shouldResetRealm = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        //Commont/uncomment to reset Realm
-        //purgeRealm()
+        if(shouldResetRealm) { purgeRealm() }
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.backgroundColor = .whiteColor()

@@ -53,7 +53,7 @@ internal class AnimationContext: NSObject, UIDynamicAnimatorDelegate, AnimationS
         step.easing = e
     }
     
-    func changeMainType(type: ViewAnimationType) {
+    func changeMainType(type: AnimationStyle) {
         let step = lastStep()
         let lastAnimationType = step.types.last
         guard let _ = lastAnimationType else {
@@ -84,6 +84,13 @@ internal class AnimationContext: NSObject, UIDynamicAnimatorDelegate, AnimationS
         }
         //make a temple sequence for next step
         makeNextSequence()
+    }
+    
+    func removeAllRemaining() {
+        for sequence in mutipleSequences {
+            sequence.removeAllSteps()
+        }
+        mutipleSequences.removeAll()
     }
     
     

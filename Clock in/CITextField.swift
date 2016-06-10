@@ -31,7 +31,7 @@ class CITextField: UITextField {
         
         let textRange = NSRange(location: 0, length: placeholder.characters.count)
         let attributedText = NSMutableAttributedString(string: placeholder.localized)
-        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: textRange)
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor().colorWithAlphaComponent(0.4), range: textRange)
         attributedPlaceholder = attributedText
     }
     

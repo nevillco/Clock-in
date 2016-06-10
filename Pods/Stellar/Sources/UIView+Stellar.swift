@@ -8,14 +8,14 @@
 
 import UIKit
 
-public enum ViewAnimationType {
+public enum AnimationStyle {
     case Basic
     case Snap(CGFloat)
     case Attachment(CGFloat,CGFloat)
     case Gravity(Double)
 }
 
-extension UIView: BasicConfigurable, SnapConfigurable, AttachmentConfigurable, GravityConfigurable {
+extension UIView: BasicConfigurable, SnapConfigurable, AttachmentConfigurable, GravityConfigurable, StepControllable {
     
     //MARK: animation methods
     public func moveX(increment: CGFloat) -> UIView {
@@ -241,6 +241,12 @@ extension UIView: BasicConfigurable, SnapConfigurable, AttachmentConfigurable, G
     //commit to excute
     public func animate() -> Void {
         context.commit()
+    }
+    
+    //MARK: StepControllable methods
+    
+    public func cancelAllRemaining() {
+        context.removeAllRemaining()
     }
 
     

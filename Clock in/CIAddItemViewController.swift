@@ -10,13 +10,17 @@ import UIKit
 import RealmSwift
 
 class CIAddItemViewController: CIViewController {
+    let cellReuseIdentifier = "ColorChoice"
+    var availableColors = UIColor.CIAvailableColors()
+    var selectedColor = UIColor.clearColor()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = CIAddItemView()
         addTargets(view)
         addDelegates(view)
-        view.nameField.becomeFirstResponder()
         self.view = view
+        collectionView(view.colorCollection, didSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
     }
 }
 
@@ -29,6 +33,37 @@ private extension CIAddItemViewController {
     
     func addDelegates(view: CIAddItemView) {
         view.nameField.delegate = self
+        view.colorCollection.delegate = self
+        view.colorCollection.dataSource = self
+        view.colorCollection.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+    }
+}
+
+extension CIAddItemViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return availableColors.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath)
+        
+        let row:Int = indexPath.item
+        cell.backgroundColor = availableColors[row]
+        cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.layer.borderWidth = 4.0
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSizeMake(50, 50)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let row:Int = indexPath.item
+        let color = availableColors[row]
+        self.view.backgroundColor = color
+        selectedColor = color
     }
 }
 
@@ -58,10 +93,23 @@ extension CIAddItemViewControllerTargets {
             errorAlert("You already have an item with this name. Please try another.".localized)
             return
         }
-        createItem(name)
+        createItem(name, color: selectedColor)
         view.nameField.text = ""
         view.endEditing(true)
-        dialogAlert("Success", message: "Your new item has been created. Feel free to add another, or go back to the home page.")
+        availableColors.removeAtIndex(availableColors.indexOf(selectedColor)!)
+        if availableColors.count == 0 {
+            let presenter = presentingViewController as! CIHomeViewController
+            let presenterView = presentingViewController!.view as! CIHomeView
+            dismissViewControllerAnimated(true, completion: {
+                presenter.dialogAlert("Success".localized, message: "Your new item has been created. You're now at the maximum number of items.".localized)
+                presenterView.table.reloadData()
+            })
+        }
+        else {
+            view.colorCollection.reloadData()
+            collectionView(view.colorCollection, didSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+            dialogAlert("Success".localized, message: "Your new item has been created. Feel free to add another, or go back to the home page.".localized)
+        }
     }
     
     func nameFieldChanged(sender: UITextField) {
@@ -82,10 +130,14 @@ extension CIAddItemViewControllerRealm {
         return itemsWithName.count > 0
     }
     
-    func createItem(name:String) {
+    func createItem(name:String, color:UIColor) {
         let realm = try! Realm()
+        let item = CIModelItem()
+        item.name = name
+        item.createDate = NSDate()
+        item.colorData = NSKeyedArchiver.archivedDataWithRootObject(color)
         try! realm.write {
-            realm.create(CIModelItem.self, value: ["name": name, "createDate": NSDate()], update: false)
+            realm.add(item, update: false)
         }
     }
 }

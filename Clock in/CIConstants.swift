@@ -6,7 +6,7 @@
 //  Copyright © 2016 Connor Neville. All rights reserved.
 //
 
-import CoreGraphics
+import UIKit
 
 class CIConstants {
     static let paddingFromTop:CGFloat = 30
@@ -14,8 +14,9 @@ class CIConstants {
     static let verticalItemSpacing:CGFloat = 7
     static let buttonWidth:CGFloat = 91
     
-    static let homeCellRowHeight:CGFloat = 67
+    static let homeCellRowHeight:CGFloat = 81
     
     static let itemMaxChars = 18
     static let charsRemainingForWarning = 5
+    static let maxItems = UIColor.CIColorPalette.count
 }
