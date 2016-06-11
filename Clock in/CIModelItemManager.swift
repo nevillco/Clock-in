@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class CIModelItemManager {
     let item: CIModelItem
@@ -15,5 +16,18 @@ class CIModelItemManager {
     
     init(item: CIModelItem) {
         self.item = item
+    }
+    
+    func clockOut() {
+        let interval = NSDate().timeIntervalSinceDate(lastClockIn!)
+        let newEntry = CIModelEntry()
+        newEntry.startDate = lastClockIn!
+        newEntry.time = interval
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(newEntry)
+            item.entries.append(newEntry)
+        }
     }
 }

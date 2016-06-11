@@ -153,15 +153,22 @@ class CIHomeViewCell: CITableViewCell {
             }
             UIView.animateWithDuration(0.5, animations: {
                 self.clockDurationLabel.alpha = 0
-                }, completion: nil)
+                }, completion: {_ in
+                    self.clockDurationLabel.text = "00:00:00"
+            })
             UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
                 self.layoutIfNeeded()
                 }, completion: nil)
         }
     }
     
-    func displayTimer(startTime:NSDate) {
+    func startTimer(startTime:NSDate) {
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(updateDurationLabel), userInfo: startTime, repeats: true)
+    }
+    
+    func resetTimer() {
+        timer!.invalidate()
+        timer = nil
     }
     
     func updateDurationLabel() {
