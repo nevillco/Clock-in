@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 
+
 class CIHomeViewCell: CITableViewCell {
     static let customReuseIdentifier = "Home"
     
@@ -90,6 +91,32 @@ class CIHomeViewCell: CITableViewCell {
             make.trailing.equalTo(self.snp_trailing)
             make.bottom.equalTo(clockButton.snp_bottom)
             make.height.equalTo(statsButton.snp_height)
+        }
+    }
+    
+    func applyClockedStyle(clockedIn: Bool) {
+        if(clockedIn) {
+            statsButton.snp_remakeConstraints{(make)->Void in
+                make.leading.equalTo(self.snp_trailing).offset(5 * CIConstants.horizontalItemSpacing)
+                make.centerY.equalTo(controlContainer.snp_centerY)
+            }
+            settingsButton.snp_remakeConstraints{(make)->Void in
+                make.leading.equalTo(statsButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
+                make.centerY.equalTo(controlContainer.snp_centerY)
+            }
+        }
+        else {
+            statsButton.snp_remakeConstraints{(make)->Void in
+                make.trailing.equalTo(settingsButton.snp_leading).offset(-CIConstants.horizontalItemSpacing)
+                make.centerY.equalTo(controlContainer.snp_centerY)
+            }
+            settingsButton.snp_remakeConstraints{(make)->Void in
+                make.trailing.equalTo(controlContainer.snp_trailingMargin)
+                make.centerY.equalTo(controlContainer.snp_centerY)
+            }
+        }
+        UIView.animateWithDuration(0.5) {
+            self.layoutIfNeeded()
         }
     }
     

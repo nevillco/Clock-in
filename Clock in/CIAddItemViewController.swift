@@ -75,7 +75,7 @@ extension CIAddItemViewControllerTargets {
         let presenter = presentingViewController as! CIHomeViewController
         let presenterView = presenter.view as! CIHomeView
         dismissViewControllerAnimated(true, completion: {
-            presenter.loadModelItems()
+            presenter.reloadManagers()
             presenterView.table.insertRowsAtIndexPaths(self.indexPathsToReloadOnDismiss(), withRowAnimation: .Middle)
             presenterView.table.reloadEmptyDataSet()
         })
@@ -99,6 +99,7 @@ extension CIAddItemViewControllerTargets {
         }
         createItem(name, color: selectedColor)
         view.nameField.text = ""
+        nameFieldChanged(view.nameField)
         view.endEditing(true)
         availableColors.removeAtIndex(availableColors.indexOf(selectedColor)!)
         if availableColors.count == 0 {
@@ -106,7 +107,7 @@ extension CIAddItemViewControllerTargets {
             let presenterView = presentingViewController!.view as! CIHomeView
             dismissViewControllerAnimated(true, completion: {
                 presenter.dialogAlert("Success".localized, message: "Your new item has been created. You're now at the maximum number of items.".localized)
-                presenter.loadModelItems()
+                presenter.reloadManagers()
                 presenterView.table.insertRowsAtIndexPaths(self.indexPathsToReloadOnDismiss(), withRowAnimation: .Middle)
                 presenterView.table.reloadEmptyDataSet()
             })

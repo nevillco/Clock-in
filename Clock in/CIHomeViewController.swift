@@ -11,15 +11,24 @@ import DZNEmptyDataSet
 import RealmSwift
 
 class CIHomeViewController: CIViewController {
-    var modelItems:Results<CIModelItem>?
+    var itemManagers:[CIModelItemManager] = CIHomeViewController.loadManagers()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = CIHomeView()
-        loadModelItems()
         addDelegates(view)
         addTargets(view)
         self.view = view
+    }
+    
+    func reloadManagers() {
+        self.itemManagers = CIHomeViewController.loadManagers()
+    }
+    
+    static func loadManagers() -> [CIModelItemManager] {
+        let realm = try! Realm()
+        let modelItems = realm.objects(CIModelItem.self)
+        return modelItems.map({ CIModelItemManager(item: $0) })
     }
 }
 
@@ -39,18 +48,10 @@ private extension CIHomeViewController {
     }
 }
 
-typealias CIHomeViewControllerRealm = CIHomeViewController
-extension CIHomeViewControllerRealm {
-    func loadModelItems() {
-        let realm = try! Realm()
-        modelItems = realm.objects(CIModelItem.self)
-    }
-}
-
 typealias CIHomeViewControllerTargets = CIHomeViewController
 extension CIHomeViewControllerTargets {
     func addItemPressed(sender: UIButton) {
-        if(modelItems!.count >= CIConstants.maxItems) {
+        if(itemManagers.count >= CIConstants.maxItems) {
             errorAlert("You've reached the maximum number of items. Delete an item (under Settings) to make some space for a new one.")
             return
         }
@@ -63,6 +64,15 @@ extension CIHomeViewControllerTargets {
     
     func globalSettingsButtonPressed(sender: UIButton) {
         
+    }
+    
+    func clockButtonPressed(sender: UIButton) {
+        let cell = sender.superview as! CIHomeViewCell
+        let manager = itemManagers[cell.tag]
+        let newVal = !manager.clockedIn
+        manager.clockedIn = newVal
+        
+        cell.applyClockedStyle(newVal)
     }
 }
 
@@ -97,16 +107,19 @@ extension CIHomeViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
 extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return modelItems!.count
+        return itemManagers.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(CIHomeViewCell.customReuseIdentifier) as! CIHomeViewCell
-        let item = modelItems![indexPath.row]
+        let item = itemManagers[indexPath.row].item
         let color = UIColor.CIColorPalette[item.colorIndex]
         
         cell.primaryColor = color
         cell.nameLabel.text = item.name
+        cell.tag = indexPath.row
+        
+        cell.clockButton.addTarget(self, action: #selector(clockButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         return cell
     }
