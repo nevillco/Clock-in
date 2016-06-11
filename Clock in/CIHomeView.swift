@@ -36,8 +36,10 @@ class CIHomeView: CIView {
         let titleText = "Clock:in"
         let definedText = "in"
         let attributedText = NSMutableAttributedString(string: titleText.localized)
+        let colors = UIColor.CIColorPalette
+        let randomIndex = Int(arc4random_uniform(UInt32(colors.count)))
         attributedText.addAttributes(
-            [NSForegroundColorAttributeName: UIColor.CIBlue,
+            [NSForegroundColorAttributeName: colors[randomIndex],
                 NSFontAttributeName: UIFont.CIHomeTitleRegularFont], range: (titleText as NSString).rangeOfString(definedText))
         titleLabel.attributedText = attributedText
         addSubview(titleLabel)

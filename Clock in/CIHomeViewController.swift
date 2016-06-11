@@ -71,8 +71,10 @@ extension CIHomeViewControllerTargets {
         let manager = itemManagers[cell.tag]
         let newVal = !manager.clockedIn
         manager.clockedIn = newVal
+        manager.lastClockIn = NSDate()
         
         cell.applyClockedStyle(newVal)
+        cell.displayTimer(manager.lastClockIn!)
     }
 }
 
