@@ -17,8 +17,10 @@ class CIHomeViewCell: CITableViewCell {
     let nameLabel = UILabel()
     let statsButton = UIButton()
     let settingsButton = UIButton()
-    let clockDurationLabel = UILabel()
     let controlContainer = CIView()
+    
+    let clockDurationLabel = UILabel()
+    let cancelButton = UIButton()
     
     var timer:NSTimer?
     
@@ -72,6 +74,13 @@ class CIHomeViewCell: CITableViewCell {
         clockDurationLabel.alpha = 0
         controlContainer.addSubview(clockDurationLabel)
         
+        cancelButton.setTitle("cancel".localized, forState: .Normal)
+        cancelButton.setTitleColor(.whiteColor(), forState: .Normal)
+        cancelButton.setTitleColor(.CIGray, forState: .Highlighted)
+        cancelButton.titleLabel!.font = UIFont.CITextButtonFont
+        cancelButton.alpha = 0
+        controlContainer.addSubview(cancelButton)
+        
         sendSubviewToBack(controlContainer)
     }
     
@@ -104,6 +113,11 @@ class CIHomeViewCell: CITableViewCell {
             make.centerY.equalTo(controlContainer.snp_centerY)
         }
         
+        cancelButton.snp_makeConstraints{(make)->Void in
+            make.leading.equalTo(clockButton.snp_trailing)
+            make.centerY.equalTo(controlContainer.snp_centerY)
+        }
+        
         controlContainer.snp_makeConstraints{(make)->Void in
             make.leading.equalTo(clockButton.snp_leading)
             make.trailing.equalTo(self.snp_trailing)
@@ -111,14 +125,38 @@ class CIHomeViewCell: CITableViewCell {
             make.height.equalTo(statsButton.snp_height)
         }
     }
-    
+}
+
+typealias CIHomeViewCellStyling = CIHomeViewCell
+extension CIHomeViewCellStyling {
     func applyClockedStyle(clockedIn: Bool) {
+        self.layoutIfNeeded()
+        makeButtonConstraints(clockedIn)
+        changeClockButton(clockedIn)
+        animateVisibleSubviews(clockedIn)
+    }
+    
+    private func changeClockButton(clockedIn:Bool) {
         if(clockedIn) {
-            UIView.transitionWithView(clockButton, duration: 0.5, options: .TransitionFlipFromRight, animations: {
+            UIView.performWithoutAnimation({
                 self.clockButton.setImage(nil, forState: .Normal)
                 self.clockButton.setTitle("in", forState: .Normal)
-                }, completion: nil)
-            self.layoutIfNeeded()
+                self.clockButton.layoutIfNeeded()
+            })
+        }
+        else {
+            let image = UIImage(named: "clockIcon50")?.imageWithRenderingMode(.AlwaysTemplate)
+            UIView.performWithoutAnimation({
+                self.clockButton.setImage(image, forState: .Normal)
+                self.clockButton.imageView!.tintColor = .whiteColor()
+                self.clockButton.setTitle("", forState: .Normal)
+                self.clockButton.layoutIfNeeded()
+            })
+        }
+    }
+    
+    private func makeButtonConstraints(clockedIn:Bool) {
+        if(clockedIn) {
             statsButton.snp_remakeConstraints{(make)->Void in
                 make.leading.equalTo(self.snp_trailing).offset(5 * CIConstants.horizontalItemSpacing)
                 make.centerY.equalTo(controlContainer.snp_centerY)
@@ -127,22 +165,8 @@ class CIHomeViewCell: CITableViewCell {
                 make.leading.equalTo(statsButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
                 make.centerY.equalTo(controlContainer.snp_centerY)
             }
-            UIView.animateWithDuration(0.5, animations: {
-                self.layoutIfNeeded()
-                }, completion: {_ in
-                    UIView.animateWithDuration(0.25) {
-                        self.clockDurationLabel.alpha = 1
-                    }
-            })
         }
         else {
-            let image = UIImage(named: "clockIcon50")?.imageWithRenderingMode(.AlwaysTemplate)
-            UIView.transitionWithView(clockButton, duration: 0.5, options: .TransitionFlipFromRight, animations: {
-                self.clockButton.setImage(image, forState: .Normal)
-                self.clockButton.imageView!.tintColor = .whiteColor()
-                self.clockButton.setTitle("", forState: .Normal)
-                }, completion: nil)
-            self.layoutIfNeeded()
             statsButton.snp_remakeConstraints{(make)->Void in
                 make.trailing.equalTo(settingsButton.snp_leading).offset(-CIConstants.horizontalItemSpacing)
                 make.centerY.equalTo(controlContainer.snp_centerY)
@@ -151,17 +175,34 @@ class CIHomeViewCell: CITableViewCell {
                 make.trailing.equalTo(controlContainer.snp_trailingMargin)
                 make.centerY.equalTo(controlContainer.snp_centerY)
             }
-            UIView.animateWithDuration(0.5, animations: {
-                self.clockDurationLabel.alpha = 0
-                }, completion: {_ in
-                    self.clockDurationLabel.text = "00:00:00"
-            })
-            UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
-                self.layoutIfNeeded()
-                }, completion: nil)
         }
     }
     
+    private func animateVisibleSubviews(clockedIn:Bool) {if(clockedIn) {
+        UIView.animateWithDuration(0.5, animations: {
+            self.layoutIfNeeded()
+            }, completion: nil)
+        UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
+            self.clockDurationLabel.alpha = 1
+            self.cancelButton.alpha = 1
+            }, completion: nil)
+        
+    }
+    else {
+        UIView.animateWithDuration(0.5, animations: {
+            self.clockDurationLabel.alpha = 0
+            self.cancelButton.alpha = 0
+            }, completion: {_ in
+                self.clockDurationLabel.text = "00:00:00" })
+        UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
+            self.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+}
+
+typealias CIHomeViewCellTimer = CIHomeViewCell
+extension CIHomeViewCellTimer {
     func startTimer(startTime:NSDate) {
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(updateDurationLabel), userInfo: startTime, repeats: true)
     }
@@ -184,60 +225,60 @@ class CIHomeViewCell: CITableViewCell {
         let hours = (interval / 3600)
         return (hours == 0) ? String(format: "%02d:%02d", minutes, seconds) : String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
+}
+
+class CIHomeCellButton: UIButton {
+    static let buttonInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
     
-    class CIHomeCellButton: UIButton {
-        static let buttonInsets:UIEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        
-        var primaryColor:UIColor {
-            didSet {
-                layer.borderColor = primaryColor.CGColor
+    var primaryColor:UIColor {
+        didSet {
+            layer.borderColor = primaryColor.CGColor
+            backgroundColor = primaryColor
+        }
+    }
+    
+    override var highlighted: Bool {
+        didSet {
+            if (highlighted) {
+                imageView!.tintColor = primaryColor
+                setTitleColor(primaryColor, forState: .Highlighted)
+                backgroundColor = .whiteColor()
+            }
+            else {
+                imageView!.tintColor = .whiteColor()
+                setTitleColor(.whiteColor(), forState: .Highlighted)
                 backgroundColor = primaryColor
             }
         }
-        
-        override var highlighted: Bool {
-            didSet {
-                if (highlighted) {
-                    imageView!.tintColor = primaryColor
-                    setTitleColor(primaryColor, forState: .Highlighted)
-                    backgroundColor = .whiteColor()
-                }
-                else {
-                    imageView!.tintColor = .whiteColor()
-                    setTitleColor(.whiteColor(), forState: .Highlighted)
-                    backgroundColor = primaryColor
-                }
-            }
-        }
-        
-        required init(primaryColor: UIColor) {
-            self.primaryColor = primaryColor
-            super.init(frame: CGRectZero)
-            setDefaultStyle()
-        }
-        
-        required init?(coder aDecoder: NSCoder) {
-            fatalError(CIError.CoderInitUnimplementedString)
-        }
-        
-        func setDefaultStyle() {
-            backgroundColor = primaryColor
-            let image = UIImage(named: "clockIcon50")?.imageWithRenderingMode(.AlwaysTemplate)
-            setImage(image, forState: .Normal)
-            imageView!.tintColor = .whiteColor()
-            setTitle("", forState: .Normal)
-            titleLabel!.font = UIFont.CIHomeCellClockButtonFont
-            setTitleColor(.whiteColor(), forState: .Normal)
-            setTitleColor(primaryColor, forState: .Highlighted)
-            layer.borderColor = primaryColor.CGColor
-            layer.borderWidth = 2
-            layer.cornerRadius = 4
-        }
-        
-        func highlightedTitleColor() -> UIColor? {
-            if(self.superview == nil) { return nil }
-            if(self.superview!.backgroundColor == nil) { return .whiteColor() }
-            return self.superview!.backgroundColor
-        }
+    }
+    
+    required init(primaryColor: UIColor) {
+        self.primaryColor = primaryColor
+        super.init(frame: CGRectZero)
+        setDefaultStyle()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError(CIError.CoderInitUnimplementedString)
+    }
+    
+    func setDefaultStyle() {
+        backgroundColor = primaryColor
+        let image = UIImage(named: "clockIcon50")?.imageWithRenderingMode(.AlwaysTemplate)
+        setImage(image, forState: .Normal)
+        imageView!.tintColor = .whiteColor()
+        setTitle("", forState: .Normal)
+        titleLabel!.font = UIFont.CIHomeCellClockButtonFont
+        setTitleColor(.whiteColor(), forState: .Normal)
+        setTitleColor(primaryColor, forState: .Highlighted)
+        layer.borderColor = primaryColor.CGColor
+        layer.borderWidth = 2
+        layer.cornerRadius = 4
+    }
+    
+    func highlightedTitleColor() -> UIColor? {
+        if(self.superview == nil) { return nil }
+        if(self.superview!.backgroundColor == nil) { return .whiteColor() }
+        return self.superview!.backgroundColor
     }
 }

@@ -52,7 +52,7 @@ typealias CIHomeViewControllerTargets = CIHomeViewController
 extension CIHomeViewControllerTargets {
     func addItemPressed(sender: UIButton) {
         if(itemManagers.count >= CIConstants.maxItems) {
-            errorAlert("You've reached the maximum number of items. Delete an item (under Settings) to make some space for a new one.")
+            errorAlert("You've reached the maximum number of items. Delete an item (under Settings) to make some space for a new one.".localized)
             return
         }
         presentViewController(CIAddItemViewController(), animated: true, completion: nil)
@@ -63,7 +63,7 @@ extension CIHomeViewControllerTargets {
     }
     
     func globalSettingsButtonPressed(sender: UIButton) {
-        
+        presentViewController(CIGlobalSettingsViewController(), animated: true, completion: nil)
     }
     
     func clockButtonPressed(sender: UIButton) {

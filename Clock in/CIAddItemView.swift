@@ -36,7 +36,7 @@ class CIAddItemView: CIView {
     
     func setupSubviews() {
         backButton.setTitle("‹go back".localized, forState: .Normal)
-        backButton.titleLabel!.font = UIFont.CITextButtonFont
+        backButton.titleLabel!.font = UIFont.CIBackButtonFont
         backButton.setTitleColor(.whiteColor(), forState: .Normal)
         backButton.setTitleColor(.CIGray, forState: .Highlighted)
         addSubview(backButton)
@@ -81,12 +81,12 @@ class CIAddItemView: CIView {
     func constrainSubviews() {
         backButton.snp_makeConstraints { (make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
-            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop)
+            make.baseline.equalTo(titleLabel.snp_baseline)
         }
         
         titleLabel.snp_makeConstraints { (make)->Void in
-            make.leading.equalTo(self.snp_leadingMargin)
-            make.topMargin.equalTo(backButton.snp_bottom)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop)
         }
         
         nameLabel.snp_makeConstraints { (make)->Void in
