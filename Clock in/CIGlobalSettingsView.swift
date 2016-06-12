@@ -33,7 +33,7 @@ class CIGlobalSettingsView: CIView {
     
     func setupSubviews() {
         backButton.setTitle("‹go back".localized, forState: .Normal)
-        backButton.titleLabel!.font = UIFont.CIBackButtonFont
+        backButton.titleLabel!.font = UIFont.CILargeTextButtonFont
         backButton.setTitleColor(.whiteColor(), forState: .Normal)
         backButton.setTitleColor(.CIGray, forState: .Highlighted)
         addSubview(backButton)

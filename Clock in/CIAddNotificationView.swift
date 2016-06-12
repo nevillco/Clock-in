@@ -14,7 +14,8 @@ class CIAddNotificationView: CIView {
     let backButton = UIButton()
     let titleLabel = UILabel()
     let infoLabel = UILabel()
-    let goButton = CIButton(primaryColor: .whiteColor(), title: "go".localized)
+    let picker = UIDatePicker()
+    let goButton = UIButton()
     
     override init() {
         super.init()
@@ -29,7 +30,7 @@ class CIAddNotificationView: CIView {
     
     func setupSubviews() {
         backButton.setTitle("‹go back".localized, forState: .Normal)
-        backButton.titleLabel!.font = UIFont.CIBackButtonFont
+        backButton.titleLabel!.font = UIFont.CILargeTextButtonFont
         backButton.setTitleColor(.whiteColor(), forState: .Normal)
         backButton.setTitleColor(.CIGray, forState: .Highlighted)
         addSubview(backButton)
@@ -44,6 +45,16 @@ class CIAddNotificationView: CIView {
         infoLabel.textColor = .whiteColor()
         infoLabel.numberOfLines = 0
         addSubview(infoLabel)
+        
+        picker.datePickerMode = .CountDownTimer
+        picker.setValue(UIColor.whiteColor(), forKey: "textColor")
+        addSubview(picker)
+        
+        goButton.setTitle("add notification time›".localized, forState: .Normal)
+        goButton.titleLabel!.font = UIFont.CILargeTextButtonFont
+        goButton.setTitleColor(.whiteColor(), forState: .Normal)
+        goButton.setTitleColor(.CIGray, forState: .Highlighted)
+        addSubview(goButton)
     }
     
     func constrainSubviews() {
@@ -61,6 +72,17 @@ class CIAddNotificationView: CIView {
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(titleLabel.snp_bottom)
+        }
+        
+        picker.snp_makeConstraints {(make)->Void in
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.top.equalTo(infoLabel.snp_bottom)
+        }
+        
+        goButton.snp_makeConstraints {(make)->Void in
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.top.equalTo(picker.snp_bottom).offset(CIConstants.verticalItemSpacing)
         }
     }
 }

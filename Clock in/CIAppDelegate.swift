@@ -15,7 +15,7 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var shouldResetRealm = false
-    var shouldResetNSUserDefaults = true
+    var shouldResetNSUserDefaults = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if(shouldResetRealm) { purgeRealm() }

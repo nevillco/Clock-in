@@ -22,6 +22,12 @@ class CIGlobalSettingsViewController: CIViewController {
         self.view = view
         updateNotificationsButton()
     }
+    
+    func loadDefaults() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        self.intervals = defaults.objectForKey(String.CIDefaultNotificationIntervals) as! [Int]
+        self.notificationsOn = defaults.boolForKey(String.CIDefaultNotificationsOn)
+    }
 }
 
 private extension CIGlobalSettingsViewController {
@@ -36,12 +42,6 @@ private extension CIGlobalSettingsViewController {
         view.table.delegate = self
         view.table.dataSource = self
         view.table.registerClass(CIGlobalSettingsViewCell.self, forCellReuseIdentifier: .CIGlobalSettingsCellReuseIdentifier)
-    }
-    
-    func loadDefaults() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        self.intervals = defaults.objectForKey(String.CIDefaultNotificationIntervals) as! [Int]
-        self.notificationsOn = defaults.boolForKey(String.CIDefaultNotificationsOn)
     }
     
     func saveDefaults() {
@@ -165,11 +165,11 @@ extension CIGlobalSettingsViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (!notificationsOn || intervals.count == 0) ? 0 : CIConstants.settingsHeaderHeight
+        return (!notificationsOn) ? 0 : CIConstants.settingsHeaderHeight
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if(!notificationsOn || intervals.count == 0) { return nil }
+        if(!notificationsOn) { return nil }
         
         let header = CIGlobalSettingsViewHeader()
         

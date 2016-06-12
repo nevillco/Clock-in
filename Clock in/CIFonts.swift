@@ -12,7 +12,7 @@ extension UIFont {
     @nonobjc static let CIDefaultTitleFont = UIFont(name: "Lato-Hairline", size: 40.0)!
     @nonobjc static let CIDefaultBodyFont = UIFont(name: "Lato-Regular", size: 14.0)!
     @nonobjc static let CIBoldBodyFont = UIFont(name: "Lato-Bold", size: 14.0)!
-    @nonobjc static let CIBackButtonFont = UIFont(name: "Lato-Regular", size: 24.0)!
+    @nonobjc static let CILargeTextButtonFont = UIFont(name: "Lato-Regular", size: 26.0)!
     @nonobjc static let CITextButtonFont = UIFont(name: "Lato-Regular", size: 18.0)!
     @nonobjc static let CITextFieldFont = UIFont(name: "Lato-Regular", size: 22.0)!
     

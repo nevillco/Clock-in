@@ -25,9 +25,9 @@ class CIConstants {
     static let maxItems = UIColor.CIColorPalette.count
     
     static let maxNotifications = 8
-    static let notificationIntervals:[Int] = [
+    static let notificationIntervals:[NSTimeInterval] = [
         60*15,
         60*30,
         60*60,
-        120*60]
+        60*120]
 }
