@@ -10,4 +10,10 @@ import Foundation
 
 extension String {
     var localized: String { return NSLocalizedString(self, comment: "") }
+    
+    static let CIDefaultNotificationsOn = "NotificationsOn"
+    static let CIDefaultNotificationIntervals = "NotificationIntervals"
+    static let CIDefaultAlertAddItemReceived = "AlertAddItem"
+    static let CIDefaultAlertClockInReceived = "AlertClockIn"
+    static let CIDefaultAlertStatsReceived = "AlertStats"
 }

@@ -18,6 +18,11 @@ class CIModelItemManager {
         self.item = item
     }
     
+    func clockIn() {
+        clockedIn = true
+        lastClockIn = NSDate()
+    }
+    
     func clockOut() {
         let interval = NSDate().timeIntervalSinceDate(lastClockIn!)
         let newEntry = CIModelEntry()
@@ -29,5 +34,13 @@ class CIModelItemManager {
             realm.add(newEntry)
             item.entries.append(newEntry)
         }
+        
+        lastClockIn = nil
+        clockedIn = false
+    }
+    
+    func cancelClockIn() {
+        lastClockIn = nil
+        clockedIn = false
     }
 }

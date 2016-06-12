@@ -53,6 +53,7 @@ class CIHomeViewCell: CITableViewCell {
         
         controlContainer.backgroundColor = primaryColor
         controlContainer.layer.cornerRadius = 4
+        controlContainer.userInteractionEnabled = true
         addSubview(controlContainer)
         
         statsButton.setTitle("stats".localized, forState: .Normal)
@@ -81,7 +82,7 @@ class CIHomeViewCell: CITableViewCell {
         cancelButton.alpha = 0
         controlContainer.addSubview(cancelButton)
         
-        sendSubviewToBack(controlContainer)
+        bringSubviewToFront(clockButton)
     }
     
     func constrainSubviews() {

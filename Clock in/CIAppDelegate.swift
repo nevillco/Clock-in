@@ -15,9 +15,13 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var shouldResetRealm = false
+    var shouldResetNSUserDefaults = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if(shouldResetRealm) { purgeRealm() }
+        if(shouldResetNSUserDefaults) { purgeNSUserDefaults() }
+        
+        initNSUserDefaultsIfNeeded()
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.backgroundColor = .whiteColor()
@@ -43,6 +47,24 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
                 // handle error
             }
         }
+    }
+    
+    func purgeNSUserDefaults() {
+        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+        
+    }
+    
+    func initNSUserDefaultsIfNeeded() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let hasWrittenDefaults = (defaults.objectForKey(String.CIDefaultNotificationIntervals) != nil)
+        if hasWrittenDefaults { return }
+        defaults.setBool(true, forKey: String.CIDefaultNotificationsOn)
+        defaults.setObject(CIConstants.notificationIntervals, forKey: String.CIDefaultNotificationIntervals)
+        defaults.setBool(false, forKey: String.CIDefaultAlertAddItemReceived)
+        defaults.setBool(false, forKey: String.CIDefaultAlertClockInReceived)
+        defaults.setBool(false, forKey: String.CIDefaultAlertStatsReceived)
     }
 
     func applicationWillResignActive(application: UIApplication) {
