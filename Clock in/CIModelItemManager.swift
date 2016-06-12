@@ -21,6 +21,7 @@ class CIModelItemManager {
     func clockIn() {
         clockedIn = true
         lastClockIn = NSDate()
+        scheduleNotifications()
     }
     
     func clockOut() {
@@ -37,10 +38,32 @@ class CIModelItemManager {
         
         lastClockIn = nil
         clockedIn = false
+        cancelNotifications()
     }
     
     func cancelClockIn() {
         lastClockIn = nil
         clockedIn = false
+        cancelNotifications()
+    }
+    
+    private func scheduleNotifications() {
+        item.notificationIntervals.forEach({doubleObj in
+            let notification = UILocalNotification()
+            let bodyText = String(format: "You've been clocked in to %@ for %@.", item.name, NSDate.longStringForInterval(Int(doubleObj.value)))
+            notification.alertBody = bodyText
+            notification.fireDate = NSDate().dateByAddingTimeInterval(doubleObj.value) // todo item due date (when notification will be fired)
+            notification.category = item.name
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        })
+    }
+    
+    private func cancelNotifications() {
+        let app = UIApplication.sharedApplication()
+        for notification in app.scheduledLocalNotifications! {
+            if notification.category! == item.name {
+                app.cancelLocalNotification(notification)
+            }
+        }
     }
 }

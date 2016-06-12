@@ -9,6 +9,7 @@
 import UIKit
 import DZNEmptyDataSet
 import Foundation
+import RealmSwift
 
 class CIGlobalSettingsViewController: CIViewController {
     var notificationsOn:Bool = false
@@ -106,8 +107,10 @@ extension CIGlobalSettingsViewControllerTargets {
         let confirmAction = UIAlertAction(title: "Confirm".localized, style: .Destructive, handler: {_ in
             let presenter = self.presentingViewController as! CIHomeViewController
             let presenterView = presenter.view as! CIHomeView
-            let delegate = UIApplication.sharedApplication().delegate as! CIAppDelegate
-            delegate.purgeRealm()
+            let realm = try! Realm()
+            try! realm.write{
+                realm.deleteAll()
+            }
             self.dismissViewControllerAnimated(true, completion: {_ in
                 presenter.reloadManagers()
                 presenterView.table.reloadData()

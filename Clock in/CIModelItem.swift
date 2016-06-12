@@ -7,11 +7,13 @@
 //
 
 import RealmSwift
+import Foundation
 
 class CIModelItem: Object {
     dynamic var name = ""
     dynamic var createDate = NSDate()
     let entries = List<CIModelEntry>()
+    let notificationIntervals = List<CIDoubleObject>()
     dynamic var colorIndex = 0
     
     override static func indexedProperties() -> [String] {
@@ -21,4 +23,8 @@ class CIModelItem: Object {
     override static func primaryKey() -> String? {
         return "name"
     }
+}
+
+class CIDoubleObject: Object {
+    dynamic var value:Double = 0.0
 }

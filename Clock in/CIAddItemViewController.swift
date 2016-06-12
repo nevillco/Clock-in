@@ -143,6 +143,15 @@ extension CIAddItemViewControllerRealm {
         item.name = name
         item.createDate = NSDate()
         item.colorIndex = UIColor.CIColorPalette.indexOf(color)!
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let intervals = defaults.objectForKey(.CIDefaultNotificationIntervals) as! [NSTimeInterval]
+        intervals.forEach{
+            let doubleObj = CIDoubleObject()
+            doubleObj.value = $0
+            item.notificationIntervals.append(doubleObj)
+        }
+        
         try! realm.write {
             realm.add(item, update: false)
         }

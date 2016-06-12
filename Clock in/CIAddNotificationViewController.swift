@@ -51,10 +51,9 @@ extension CIAddNotificationViewControllerTargets {
             defaults.setObject(newIntervals, forKey: .CIDefaultNotificationIntervals)
             dismissViewControllerAnimated(true, completion: {
                 presenter.dialogAlert("Success".localized, message: "This time is now included in your default notifications.")
-                
                 presenter.loadDefaults()
-                presenterView.table.insertRowsAtIndexPaths([NSIndexPath(forRow: newIntervals.indexOf(interval)!, inSection: 0)], withRowAnimation: .Middle)
                 presenterView.table.reloadEmptyDataSet()
+                presenterView.table.reloadData()
             })
         }
     }
