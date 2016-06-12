@@ -38,7 +38,7 @@ private extension CIHomeViewController {
         view.table.emptyDataSetDelegate = self
         view.table.delegate = self
         view.table.dataSource = self
-        view.table.registerClass(CIHomeViewCell.self, forCellReuseIdentifier: CIHomeViewCell.customReuseIdentifier)
+        view.table.registerClass(CIHomeViewCell.self, forCellReuseIdentifier: .CIHomeCellReuseIdentifier)
     }
     
     func addTargets(view: CIHomeView) {
@@ -126,7 +126,7 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CIHomeViewCell.customReuseIdentifier) as! CIHomeViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(.CIHomeCellReuseIdentifier) as! CIHomeViewCell
         let item = itemManagers[indexPath.row].item
         let color = UIColor.CIColorPalette[item.colorIndex]
         

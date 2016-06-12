@@ -16,6 +16,7 @@ class CIConstants {
     static let buttonWidthWide:CGFloat = 145
     
     static let homeCellRowHeight:CGFloat = 81
+    static let settingsCellRowHeight:CGFloat = 39
     
     static let itemMaxChars = 18
     static let charsRemainingForWarning = 5

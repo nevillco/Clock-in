@@ -30,6 +30,8 @@
 		2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */; };
 		2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */; };
 		2D8C6A211D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */; };
+		2D8C6A231D0DAD40008C8FA4 /* GlobalSettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A221D0DAD40008C8FA4 /* GlobalSettingsViewCell.swift */; };
+		2D8C6A251D0DB218008C8FA4 /* CIDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A241D0DB218008C8FA4 /* CIDate.swift */; };
 		2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B41D09B20C00D55196 /* CIErrors.swift */; };
 		2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */; };
 		2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */; };
@@ -65,6 +67,8 @@
 		2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelItemManager.swift; sourceTree = "<group>"; };
 		2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsViewController.swift; sourceTree = "<group>"; };
 		2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsView.swift; sourceTree = "<group>"; };
+		2D8C6A221D0DAD40008C8FA4 /* GlobalSettingsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalSettingsViewCell.swift; sourceTree = "<group>"; };
+		2D8C6A241D0DB218008C8FA4 /* CIDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIDate.swift; sourceTree = "<group>"; };
 		2DB752B41D09B20C00D55196 /* CIErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIErrors.swift; sourceTree = "<group>"; };
 		2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAddItemView.swift; sourceTree = "<group>"; };
 		2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAddItemViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 				2D3BC8F21D0894CF00EC0425 /* CIAppDelegate.swift */,
 				2D3BC91B1D08BA4A00EC0425 /* CIFonts.swift */,
 				2DB752B41D09B20C00D55196 /* CIErrors.swift */,
+				2D8C6A241D0DB218008C8FA4 /* CIDate.swift */,
 				2D3BC91F1D08C0F600EC0425 /* CIColor.swift */,
 				2D3BC91D1D08BACA00EC0425 /* CIStrings.swift */,
 				2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */,
@@ -170,6 +175,7 @@
 				2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */,
 				2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */,
 				2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */,
+				2D8C6A221D0DAD40008C8FA4 /* GlobalSettingsViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D8C6A231D0DAD40008C8FA4 /* GlobalSettingsViewCell.swift in Sources */,
 				2D3BC8F31D0894CF00EC0425 /* CIAppDelegate.swift in Sources */,
 				2D3BC9201D08C0F600EC0425 /* CIColor.swift in Sources */,
 				2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */,
@@ -356,6 +363,7 @@
 				2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */,
 				2DB752C41D09F72700D55196 /* CIModelEntry.swift in Sources */,
 				2D3BC91C1D08BA4A00EC0425 /* CIFonts.swift in Sources */,
+				2D8C6A251D0DB218008C8FA4 /* CIDate.swift in Sources */,
 				2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */,
 				2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */,
 				2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */,

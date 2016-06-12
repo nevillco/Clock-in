@@ -9,9 +9,7 @@
 import UIKit
 import SnapKit
 
-
 class CIHomeViewCell: CITableViewCell {
-    static let customReuseIdentifier = "Home"
     
     let clockButton = CIHomeCellButton(primaryColor: .CIBlue)
     let nameLabel = UILabel()

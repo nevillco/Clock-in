@@ -60,11 +60,11 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = NSUserDefaults.standardUserDefaults()
         let hasWrittenDefaults = (defaults.objectForKey(String.CIDefaultNotificationIntervals) != nil)
         if hasWrittenDefaults { return }
-        defaults.setBool(true, forKey: String.CIDefaultNotificationsOn)
-        defaults.setObject(CIConstants.notificationIntervals, forKey: String.CIDefaultNotificationIntervals)
-        defaults.setBool(false, forKey: String.CIDefaultAlertAddItemReceived)
-        defaults.setBool(false, forKey: String.CIDefaultAlertClockInReceived)
-        defaults.setBool(false, forKey: String.CIDefaultAlertStatsReceived)
+        defaults.setBool(true, forKey: .CIDefaultNotificationsOn)
+        defaults.setBool(false, forKey: .CIDefaultAlertAddItemReceived)
+        defaults.setBool(false, forKey: .CIDefaultAlertClockInReceived)
+        defaults.setObject(CIConstants.notificationIntervals, forKey: .CIDefaultNotificationIntervals)
+        defaults.setBool(false, forKey: .CIDefaultAlertStatsReceived)
     }
 
     func applicationWillResignActive(application: UIApplication) {
