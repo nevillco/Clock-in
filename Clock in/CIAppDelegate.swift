@@ -15,12 +15,13 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var shouldResetRealm = false
-    var shouldResetNSUserDefaults = false
+    var shouldResetNSUserDefaults = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if(shouldResetRealm) { purgeRealm() }
         if(shouldResetNSUserDefaults) { purgeNSUserDefaults() }
         
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge], categories: nil))
         initNSUserDefaultsIfNeeded()
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -56,11 +57,16 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    func notificationsEnabledInSettings() -> Bool {
+        let grantedSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
+        return grantedSettings!.types.contains(.Alert)
+    }
+    
     func initNSUserDefaultsIfNeeded() {
         let defaults = NSUserDefaults.standardUserDefaults()
         let hasWrittenDefaults = (defaults.objectForKey(String.CIDefaultNotificationIntervals) != nil)
         if hasWrittenDefaults { return }
-        defaults.setBool(true, forKey: .CIDefaultNotificationsOn)
+        defaults.setBool(notificationsEnabledInSettings(), forKey: .CIDefaultNotificationsOn)
         defaults.setBool(false, forKey: .CIDefaultAlertAddItemReceived)
         defaults.setBool(false, forKey: .CIDefaultAlertClockInReceived)
         defaults.setObject(CIConstants.notificationIntervals, forKey: .CIDefaultNotificationIntervals)

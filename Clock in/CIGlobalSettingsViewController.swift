@@ -85,6 +85,11 @@ extension CIGlobalSettingsViewControllerTargets {
     }
     
     func notificationsButtonPressed(sender: UIButton) {
+        let delegate = UIApplication.sharedApplication().delegate as! CIAppDelegate
+        if(!delegate.notificationsEnabledInSettings()) {
+            errorAlert("You have notifications disabled in your device's Settings. Please enable them to use this page.")
+            return
+        }
         notificationsOn = !notificationsOn
         saveDefaults()
         let view = self.view as! CIGlobalSettingsView
@@ -106,9 +111,17 @@ extension CIGlobalSettingsViewController: DZNEmptyDataSetSource, DZNEmptyDataSet
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let bodyText = notificationsOn ?
-        "Click the \"add\" button above to add a notification time!".localized :
-        "Tap the button at the top to turn on notifications.".localized
+        let delegate = UIApplication.sharedApplication().delegate as! CIAppDelegate
+        let bodyText:String
+        if(!delegate.notificationsEnabledInSettings()) {
+            bodyText = "Your device's settings do not give us permissions to send notifications.".localized
+        }
+        else if notificationsOn {
+            bodyText = "Click the \"add\" button above to add a notification time!".localized
+        }
+        else {
+            bodyText = "Tap the button at the top to turn on notifications.".localized
+        }
         let textRange = NSRange(location: 0, length: bodyText.characters.count)
         let attributedText = NSMutableAttributedString(string: bodyText.localized)
         attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIEmptyDataSetBodyFont, range: textRange)

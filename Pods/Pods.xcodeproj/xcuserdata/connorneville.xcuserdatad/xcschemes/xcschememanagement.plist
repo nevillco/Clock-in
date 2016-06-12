@@ -34,11 +34,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Stellar.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -57,12 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80ACB3DE47A4566E0E6613060F7DB9A3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8A205047EA1B39F45D70295195B32715</key>
+		<key>43A06EECD3BFA96B7C21F92B0F24C662</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9767888AEBCAAED2E9813D8F02CCB581</key>
+		<key>D62ED162B332E239E8CC30750E7E535A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
