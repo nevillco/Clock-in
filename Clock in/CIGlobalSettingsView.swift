@@ -17,7 +17,7 @@ class CIGlobalSettingsView: CIView {
     let notificationsLabel = UILabel()
     let table = UITableView()
     let deleteLabel = UILabel()
-    let deleteButton = CIButton(primaryColor: .CIRed, title: "delete all".localized)
+    let deleteButton = CIButton(primaryColor: .CIRed, title: "delete items".localized)
     
     override init() {
         super.init()

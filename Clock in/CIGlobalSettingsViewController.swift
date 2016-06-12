@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import Foundation
 
 class CIGlobalSettingsViewController: CIViewController {
     var notificationsOn:Bool?
@@ -122,5 +123,29 @@ extension CIGlobalSettingsViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return CIConstants.settingsCellRowHeight
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CIConstants.settingsHeaderHeight
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = CIGlobalSettingsViewHeader()
+        
+        let max = CIConstants.maxNotifications
+        let current = intervals!.count
+        
+        let text = String(format: "%d notifications allowed\n%d remaining", max, (max - current))
+        let attributedText = NSMutableAttributedString(string: text)
+        
+        let textRange = NSRange(location: 0, length: text.characters.count)
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: textRange)
+        let defaultFontRange = (text as NSString).rangeOfString(String(format: "%d notifications allowed", max))
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIDefaultBodyFont, range: defaultFontRange)
+        let boldFontRange = (text as NSString).rangeOfString(String(format: "%d remaining", (max - current)))
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIBoldBodyFont, range: boldFontRange)
+        
+        header.label.attributedText = attributedText
+        return header
     }
 }

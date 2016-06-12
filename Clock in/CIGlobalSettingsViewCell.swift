@@ -36,12 +36,13 @@ class CIGlobalSettingsViewCell: CITableViewCell {
     
     func constrainSubviews() {
         label.snp_makeConstraints{(make)->Void in
-            make.centerY.equalTo(self.snp_centerY)
+            make.centerY.equalTo(self.snp_centerY).offset(2)
             make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.lessThanOrEqualTo(deleteButton.snp_leading).offset(-CIConstants.horizontalItemSpacing)
         }
         
         deleteButton.snp_makeConstraints{(make)->Void in
-            make.centerY.equalTo(self.snp_centerY)
+            make.centerY.equalTo(self.snp_centerY).offset(2)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.width.equalTo(CIConstants.buttonWidth)
         }
