@@ -34,6 +34,7 @@ private extension CIGlobalSettingsViewController {
     func addTargets(view: CIGlobalSettingsView) {
         view.backButton.addTarget(self, action: #selector(backButtonPressed(_:)), forControlEvents: .TouchUpInside)
         view.notificationsButton.addTarget(self, action: #selector(notificationsButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        view.deleteButton.addTarget(self, action: #selector(deleteItemsButtonPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
     func addDelegates(view: CIGlobalSettingsView) {
@@ -97,6 +98,25 @@ extension CIGlobalSettingsViewControllerTargets {
         view.table.reloadEmptyDataSet()
         saveDefaults()
         updateNotificationsButton()
+    }
+    
+    func deleteItemsButtonPressed(sender: UIButton) {
+        let alertController = UIAlertController(title: "Are You Sure?".localized, message: "Clicking confirm will permanently remove all of your items, including their data.".localized, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .Cancel, handler: nil)
+        let confirmAction = UIAlertAction(title: "Confirm".localized, style: .Destructive, handler: {_ in
+            let presenter = self.presentingViewController as! CIHomeViewController
+            let presenterView = presenter.view as! CIHomeView
+            let delegate = UIApplication.sharedApplication().delegate as! CIAppDelegate
+            delegate.purgeRealm()
+            self.dismissViewControllerAnimated(true, completion: {_ in
+                presenter.reloadManagers()
+                presenterView.table.reloadData()
+                presenterView.table.reloadEmptyDataSet()
+            })
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

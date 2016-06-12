@@ -32,21 +32,9 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func purgeRealm() {
-        let realmURL = Realm.Configuration.defaultConfiguration.fileURL!
-        let realmURLs = [
-            realmURL,
-            realmURL.URLByAppendingPathExtension("lock"),
-            realmURL.URLByAppendingPathExtension("log_a"),
-            realmURL.URLByAppendingPathExtension("log_b"),
-            realmURL.URLByAppendingPathExtension("note")
-        ]
-        let manager = NSFileManager.defaultManager()
-        for URL in realmURLs {
-            do {
-                try manager.removeItemAtURL(URL)
-            } catch {
-                // handle error
-            }
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
         }
     }
     
