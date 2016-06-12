@@ -50,7 +50,7 @@ class CIHomeViewCell: CITableViewCell {
         addSubview(nameLabel)
         
         controlContainer.backgroundColor = primaryColor
-        controlContainer.layer.cornerRadius = 4
+        controlContainer.layer.cornerRadius = CIConstants.cornerRadius
         controlContainer.userInteractionEnabled = true
         addSubview(controlContainer)
         
@@ -272,7 +272,7 @@ class CIHomeCellButton: UIButton {
         setTitleColor(primaryColor, forState: .Highlighted)
         layer.borderColor = primaryColor.CGColor
         layer.borderWidth = 2
-        layer.cornerRadius = 4
+        layer.cornerRadius = CIConstants.cornerRadius
     }
     
     func highlightedTitleColor() -> UIColor? {

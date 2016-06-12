@@ -16,8 +16,9 @@ class CIGlobalSettingsView: CIView {
     let notificationsButton = CIButton(primaryColor: .whiteColor(), title: "notifications on".localized)
     let notificationsLabel = UILabel()
     let table = UITableView()
+    let deleteContainer = CIView()
     let deleteLabel = UILabel()
-    let deleteButton = CIButton(primaryColor: .CIRed, title: "delete items".localized)
+    let deleteButton = CIButton(primaryColor: .whiteColor(), title: "delete items".localized)
     
     override init() {
         super.init()
@@ -55,13 +56,16 @@ class CIGlobalSettingsView: CIView {
         table.backgroundColor = .clearColor()
         addSubview(table)
         
+        deleteContainer.backgroundColor = .CIRed
+        addSubview(deleteContainer)
+        
         deleteLabel.text = "Tap the button to the right to delete all of your items. Be careful, there is no undo.".localized
         deleteLabel.font = UIFont.CIDefaultBodyFont
         deleteLabel.textColor = .whiteColor()
         deleteLabel.numberOfLines = 0
-        addSubview(deleteLabel)
+        deleteContainer.addSubview(deleteLabel)
         
-        addSubview(deleteButton)
+        deleteContainer.addSubview(deleteButton)
     }
     
     func constrainSubviews() {
@@ -84,7 +88,7 @@ class CIGlobalSettingsView: CIView {
         notificationsLabel.snp_makeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
-            make.top.equalTo(notificationsButton.snp_bottom)
+            make.top.equalTo(notificationsButton.snp_bottom).offset(CIConstants.verticalItemSpacing)
         }
         
         table.snp_makeConstraints {(make)->Void in
@@ -94,17 +98,23 @@ class CIGlobalSettingsView: CIView {
             make.bottom.equalTo(deleteLabel.snp_top).offset(-CIConstants.verticalItemSpacing)
         }
         
+        deleteContainer.snp_makeConstraints{(make)->Void in
+            make.leading.equalTo(self.snp_leading)
+            make.trailing.equalTo(self.snp_trailing)
+            make.bottom.equalTo(self.snp_bottom)
+            make.top.equalTo(deleteLabel.snp_top).offset(-CIConstants.verticalItemSpacing)
+        }
+        
         deleteLabel.snp_makeConstraints{(make)->Void in
-            make.leading.equalTo(self.snp_leadingMargin)
+            make.leading.equalTo(deleteContainer.snp_leadingMargin)
             make.trailing.equalTo(deleteButton.snp_leading).offset(-CIConstants.horizontalItemSpacing)
-            make.bottom.equalTo(self.snp_bottomMargin).offset(-2 * CIConstants.verticalItemSpacing)
+            make.bottom.equalTo(deleteContainer.snp_bottomMargin).offset(-CIConstants.verticalItemSpacing)
         }
         
         deleteButton.snp_makeConstraints{(make)->Void in
-            make.trailing.equalTo(self.snp_trailingMargin)
-            make.bottom.equalTo(self.snp_bottomMargin).offset(-2 * CIConstants.verticalItemSpacing)
+            make.trailing.equalTo(deleteContainer.snp_trailingMargin)
+            make.bottom.equalTo(deleteContainer.snp_bottomMargin).offset(-CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)
-            
         }
     }
 }

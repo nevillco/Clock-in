@@ -13,12 +13,11 @@ class CIGlobalSettingsViewHeader: CIView {
     
     let label = UILabel()
     let addButton = CIButton(primaryColor: .whiteColor(), title: "add new")
-    let topLine = UIView()
-    let bottomLine = UIView()
     
     override init() {
         super.init()
-        self.backgroundColor = .CIGray
+        self.backgroundColor = .CIPurple
+        self.layer.cornerRadius = CIConstants.cornerRadius
         setupSubviews()
         constrainSubviews()
     }
@@ -29,44 +28,22 @@ class CIGlobalSettingsViewHeader: CIView {
     
     func setupSubviews() {
         label.text = "header"
-        label.textColor = .whiteColor()
-        label.font = UIFont.CIDefaultBodyFont
         label.numberOfLines = 2
         addSubview(label)
         
         addSubview(addButton)
-        
-        topLine.backgroundColor = .whiteColor()
-        addSubview(topLine)
-        
-        bottomLine.backgroundColor = .whiteColor()
-        addSubview(bottomLine)
     }
     
     func constrainSubviews() {
         label.snp_makeConstraints{(make)->Void in
             make.centerY.equalTo(self.snp_centerY)
-            make.leading.equalTo(self.snp_leading)
+            make.leading.equalTo(self.snp_leadingMargin)
         }
         
         addButton.snp_makeConstraints{(make)->Void in
             make.centerY.equalTo(self.snp_centerY)
-            make.trailing.equalTo(self.snp_trailing)
+            make.trailing.equalTo(self.snp_trailingMargin)
             make.width.equalTo(CIConstants.buttonWidth)
-        }
-        
-        topLine.snp_makeConstraints{(make)->Void in
-            make.top.equalTo(self.snp_top)
-            make.leading.equalTo(self.snp_leading)
-            make.trailing.equalTo(self.snp_trailing)
-            make.height.equalTo(1)
-        }
-        
-        bottomLine.snp_makeConstraints{(make)->Void in
-            make.bottom.equalTo(self.snp_bottom)
-            make.leading.equalTo(self.snp_leading)
-            make.trailing.equalTo(self.snp_trailing)
-            make.height.equalTo(1)
         }
     }
 }

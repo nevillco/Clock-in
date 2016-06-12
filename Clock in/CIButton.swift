@@ -48,7 +48,7 @@ class CIButton: UIButton {
         titleLabel!.minimumScaleFactor = 0.8
         layer.borderColor = primaryColor.CGColor
         layer.borderWidth = 2.0
-        layer.cornerRadius = 4.0
+        layer.cornerRadius = CIConstants.cornerRadius
         translatesAutoresizingMaskIntoConstraints = false
         titleEdgeInsets = CIButton.buttonInsets
     }

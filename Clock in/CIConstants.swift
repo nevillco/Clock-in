@@ -14,6 +14,7 @@ class CIConstants {
     static let verticalItemSpacing:CGFloat = 7
     static let buttonWidth:CGFloat = 91
     static let buttonWidthWide:CGFloat = 145
+    static let cornerRadius:CGFloat = 6
     
     static let homeCellRowHeight:CGFloat = 81
     static let settingsHeaderHeight:CGFloat = 49
