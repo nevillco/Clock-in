@@ -17,8 +17,9 @@ class CIItemSettingsView: CIView {
     let titleLabel = UILabel()
     let notificationsLabel = UILabel()
     let table = UITableView()
-    let renameButton = CIButton(primaryColor: .whiteColor(), title: "rename")
-    let deleteButton = CIButton(primaryColor: .CIRed, title: "delete".localized)
+    let bottomContainer = CIView()
+    let renameButton = CIButton(primaryColor: .whiteColor(), title: "rename".localized)
+    let deleteButton = CIButton(primaryColor: .whiteColor(), title: "delete".localized)
     
     required init(name:String) {
         self.itemName = name
@@ -57,8 +58,11 @@ class CIItemSettingsView: CIView {
         table.backgroundColor = .clearColor()
         addSubview(table)
         
-        addSubview(renameButton)
-        addSubview(deleteButton)
+        bottomContainer.backgroundColor = .CIRed
+        addSubview(bottomContainer)
+        
+        bottomContainer.addSubview(renameButton)
+        bottomContainer.addSubview(deleteButton)
     }
     
     func constrainSubviews() {
@@ -86,15 +90,22 @@ class CIItemSettingsView: CIView {
             make.bottom.equalTo(deleteButton.snp_top).offset(-CIConstants.verticalItemSpacing)
         }
         
+        bottomContainer.snp_makeConstraints{(make)->Void in
+            make.top.equalTo(renameButton.snp_top).offset(-2 * CIConstants.verticalItemSpacing)
+            make.leading.equalTo(self.snp_leading)
+            make.trailing.equalTo(self.snp_trailing)
+            make.bottom.equalTo(self.snp_bottom)
+        }
+        
         renameButton.snp_makeConstraints{(make)->Void in
-            make.trailing.equalTo(self.snp_centerX).offset(-0.5 * CIConstants.verticalItemSpacing)
-            make.bottom.equalTo(self.snp_bottomMargin).offset(-CIConstants.verticalItemSpacing)
+            make.trailing.equalTo(bottomContainer.snp_centerX).offset(-0.5 * CIConstants.verticalItemSpacing)
+            make.bottom.equalTo(bottomContainer.snp_bottom).offset(-2 * CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)
         }
         
         deleteButton.snp_makeConstraints{(make)->Void in
-            make.leading.equalTo(self.snp_centerX).offset(0.5 * CIConstants.verticalItemSpacing)
-            make.bottom.equalTo(self.snp_bottomMargin).offset(-CIConstants.verticalItemSpacing)
+            make.leading.equalTo(bottomContainer.snp_centerX).offset(0.5 * CIConstants.verticalItemSpacing)
+            make.bottom.equalTo(bottomContainer.snp_bottom).offset(-2 * CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)
         }
     }
