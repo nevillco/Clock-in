@@ -59,10 +59,6 @@ extension CIHomeViewControllerTargets {
     }
     
     func globalStatsButtonPressed(sender: UIButton) {
-        let delegates = [CILineGraphDelegate(),
-                         CILineGraphDelegate()]
-        let viewControllers = delegates.map({ CIGlobalStatsChartViewController(delegate: $0) })
-        presentViewController(CIStatsPageViewController(viewControllers:viewControllers), animated: true, completion: nil)
     }
     
     func globalSettingsButtonPressed(sender: UIButton) {
@@ -97,6 +93,14 @@ extension CIHomeViewControllerTargets {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let manager = itemManagers[cell.tag]
         presentViewController(CIItemSettingsViewController(item: manager.item), animated: true, completion: nil)
+    }
+    
+    func itemStatsButtonPressed(sender:UIButton) {
+        let cell = sender.superview!.superview as! CIHomeViewCell
+        let manager = itemManagers[cell.tag]
+        let delegates = [CILineGraphDelegate(item: manager.item)]
+        let viewControllers = delegates.map({ CIItemStatsChartViewController(delegate: $0) })
+        presentViewController(CIStatsPageViewController(viewControllers:viewControllers), animated: true, completion: nil)
     }
 }
 
@@ -146,6 +150,7 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.clockButton.addTarget(self, action: #selector(clockButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.settingsButton.addTarget(self, action: #selector(itemSettingsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        cell.statsButton.addTarget(self, action: #selector(itemStatsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         return cell
     }

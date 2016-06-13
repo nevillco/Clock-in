@@ -34,6 +34,7 @@ class CIStatsPageViewController: UIViewController {
         super.viewDidAppear(animated)
         self.edgesForExtendedLayout = .None
         setupPageViewController()
+        addTargets()
     }
     
     func setupPageViewController() {

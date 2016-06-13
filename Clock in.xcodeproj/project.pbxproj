@@ -46,9 +46,9 @@
 		2DB752C41D09F72700D55196 /* CIModelEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C31D09F72700D55196 /* CIModelEntry.swift */; };
 		2DB752C61D0A00F700D55196 /* CIHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */; };
 		2DFFF86D1D0F122F00DE8FF5 /* CIStatsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */; };
-		2DFFF86F1D0F1D6400DE8FF5 /* CIGlobalStatsChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF86E1D0F1D6400DE8FF5 /* CIGlobalStatsChartViewController.swift */; };
-		2DFFF8721D0F1D7A00DE8FF5 /* CIGlobalStatsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8711D0F1D7A00DE8FF5 /* CIGlobalStatsChartView.swift */; };
-		2DFFF8761D0F3AE400DE8FF5 /* CIStatsChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8751D0F3AE400DE8FF5 /* CIStatsChartDelegate.swift */; };
+		2DFFF86F1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */; };
+		2DFFF8721D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */; };
+		2DFFF8761D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */; };
 		2DFFF8781D0F3BE400DE8FF5 /* CIStatsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8771D0F3BE400DE8FF5 /* CIStatsViewCell.swift */; };
 		2DFFF87A1D0F3C7200DE8FF5 /* CILineGraphDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8791D0F3C7200DE8FF5 /* CILineGraphDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -95,9 +95,9 @@
 		2DB752C31D09F72700D55196 /* CIModelEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelEntry.swift; sourceTree = "<group>"; };
 		2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIHomeViewCell.swift; sourceTree = "<group>"; };
 		2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStatsPageViewController.swift; sourceTree = "<group>"; };
-		2DFFF86E1D0F1D6400DE8FF5 /* CIGlobalStatsChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsChartViewController.swift; sourceTree = "<group>"; };
-		2DFFF8711D0F1D7A00DE8FF5 /* CIGlobalStatsChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsChartView.swift; sourceTree = "<group>"; };
-		2DFFF8751D0F3AE400DE8FF5 /* CIStatsChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStatsChartDelegate.swift; sourceTree = "<group>"; };
+		2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsChartViewController.swift; sourceTree = "<group>"; };
+		2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsChartView.swift; sourceTree = "<group>"; };
+		2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsChartDelegate.swift; sourceTree = "<group>"; };
 		2DFFF8771D0F3BE400DE8FF5 /* CIStatsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStatsViewCell.swift; sourceTree = "<group>"; };
 		2DFFF8791D0F3C7200DE8FF5 /* CILineGraphDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CILineGraphDelegate.swift; sourceTree = "<group>"; };
 		5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.release.xcconfig"; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */,
 				2DA2F06F1D0E28480064D196 /* CIItemSettingsView.swift */,
 				2D8C6A291D0DBF50008C8FA4 /* CIAddNotificationView.swift */,
-				2DFFF8711D0F1D7A00DE8FF5 /* CIGlobalStatsChartView.swift */,
+				2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -210,15 +210,12 @@
 		2D3BC9031D0895E600EC0425 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2DD9A4981D0F513300303C6C /* Charts */,
 				2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */,
 				2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */,
 				2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */,
 				2DA2F0711D0E285B0064D196 /* CIItemSettingsViewController.swift */,
 				2D8C6A2B1D0DBFF8008C8FA4 /* CIAddNotificationViewController.swift */,
-				2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */,
-				2DFFF86E1D0F1D6400DE8FF5 /* CIGlobalStatsChartViewController.swift */,
-				2DFFF8751D0F3AE400DE8FF5 /* CIStatsChartDelegate.swift */,
-				2DFFF8791D0F3C7200DE8FF5 /* CILineGraphDelegate.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -241,6 +238,17 @@
 				2DFFF8771D0F3BE400DE8FF5 /* CIStatsViewCell.swift */,
 			);
 			name = Tables;
+			sourceTree = "<group>";
+		};
+		2DD9A4981D0F513300303C6C /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */,
+				2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */,
+				2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */,
+				2DFFF8791D0F3C7200DE8FF5 /* CILineGraphDelegate.swift */,
+			);
+			name = Charts;
 			sourceTree = "<group>";
 		};
 		33EC4504560C5603F6FB46BB /* Pods */ = {
@@ -402,9 +410,9 @@
 				2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */,
 				2D8C6A211D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift in Sources */,
 				2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */,
-				2DFFF8721D0F1D7A00DE8FF5 /* CIGlobalStatsChartView.swift in Sources */,
+				2DFFF8721D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift in Sources */,
 				2DA2F0701D0E28480064D196 /* CIItemSettingsView.swift in Sources */,
-				2DFFF86F1D0F1D6400DE8FF5 /* CIGlobalStatsChartViewController.swift in Sources */,
+				2DFFF86F1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift in Sources */,
 				2DFFF87A1D0F3C7200DE8FF5 /* CILineGraphDelegate.swift in Sources */,
 				2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */,
 				2DA2F0741D0E33E10064D196 /* CIModelItemCreator.swift in Sources */,
@@ -422,7 +430,7 @@
 				2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */,
 				2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */,
 				2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */,
-				2DFFF8761D0F3AE400DE8FF5 /* CIStatsChartDelegate.swift in Sources */,
+				2DFFF8761D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

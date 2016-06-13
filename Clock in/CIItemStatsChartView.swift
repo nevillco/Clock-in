@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Charts
 
-class CIGlobalStatsChartView: CIView {
+class CIItemStatsChartView: CIView {
     let topLine = UIView()
     var buttons:[CIButton]
     var chart:ChartViewBase
