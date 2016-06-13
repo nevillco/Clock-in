@@ -7,9 +7,13 @@
 //
 
 import Foundation
+import Charts
 
 class CILineGraphDelegate: CIStatsChartDelegate {
     func controlNames() -> [String] {
         return ["default".localized, "cumulative".localized]
+    }
+    func chartType() -> ChartViewBase.Type {
+        return LineChartView.self
     }
 }

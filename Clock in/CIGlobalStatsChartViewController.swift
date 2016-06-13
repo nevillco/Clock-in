@@ -22,7 +22,7 @@ class CIGlobalStatsChartViewController: CIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = CIGlobalStatsChartView(buttonNames: delegate.controlNames())
+        let view = CIGlobalStatsChartView(buttonNames: delegate.controlNames(), chartType: delegate.chartType().self)
         addTargets(view)
         addDelegates(view)
         self.view = view

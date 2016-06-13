@@ -13,11 +13,12 @@ import Charts
 class CIGlobalStatsChartView: CIView {
     let topLine = UIView()
     var buttons:[CIButton]
-    let chart = ChartViewBase()
+    var chart:ChartViewBase
     let botLine = UIView()
     
-    required init(buttonNames:[String]) {
+    required init(buttonNames:[String], chartType:ChartViewBase.Type) {
         buttons = buttonNames.map({ CIButton(primaryColor: .whiteColor(), title: $0) })
+        chart = chartType.self.init()
         super.init()
         backgroundColor = .CIGreen
         setupSubviews(buttonNames)
@@ -36,6 +37,7 @@ class CIGlobalStatsChartView: CIView {
         for button in buttons {
             addSubview(button)
         }
+        addSubview(chart)
     }
     
     func constrainSubviews() {
@@ -83,6 +85,13 @@ class CIGlobalStatsChartView: CIView {
             make.leading.equalTo(self.snp_leading)
             make.trailing.equalTo(self.snp_trailing)
             make.height.equalTo(1)
+        }
+        chart.snp_makeConstraints{(make)->Void in
+            let topGuide = (buttons.count > 0) ? buttons[0] : topLine
+            make.top.equalTo(topGuide.snp_bottom).offset(CIConstants.verticalItemSpacing)
+            make.leading.equalTo(self.snp_leading)
+            make.trailing.equalTo(self.snp_trailing)
+            make.bottom.equalTo(botLine.snp_top)
         }
     }
 }

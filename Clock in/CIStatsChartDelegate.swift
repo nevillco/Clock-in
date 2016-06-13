@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import Charts
 
 protocol CIStatsChartDelegate {
     func controlNames() -> [String]
+    func chartType() -> ChartViewBase.Type
 }
