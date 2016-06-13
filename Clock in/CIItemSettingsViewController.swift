@@ -14,6 +14,7 @@ import RealmSwift
 class CIItemSettingsViewController: CIViewController {
     var notificationsOn = false
     let item:CIModelItem
+    var renameField = UITextField()
     
     required init(item:CIModelItem) {
         self.item = item
@@ -37,6 +38,7 @@ class CIItemSettingsViewController: CIViewController {
 private extension CIItemSettingsViewController {
     func addTargets(view: CIItemSettingsView) {
         view.backButton.addTarget(self, action: #selector(backButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        view.renameButton.addTarget(self, action: #selector(renameButtonPressed(_:)), forControlEvents: .TouchUpInside)
         view.deleteButton.addTarget(self, action: #selector(deleteItemButtonPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
@@ -65,7 +67,14 @@ typealias CIItemSettingsViewControllerTargets = CIItemSettingsViewController
 extension CIItemSettingsViewControllerTargets {
     func backButtonPressed(sender: UIButton) {
         view.endEditing(true)
-        dismissViewControllerAnimated(true, completion: nil)
+        let presenter = presentingViewController as! CIHomeViewController
+        let presenterView = presenter.view as! CIHomeView
+        
+        dismissViewControllerAnimated(true, completion: {
+            presenter.reloadManagers()
+            presenterView.table.reloadData()
+            presenterView.table.reloadEmptyDataSet()
+        })
     }
     
     func deleteButtonPressed(sender: UIButton) {
@@ -89,7 +98,46 @@ extension CIItemSettingsViewControllerTargets {
         let alertController = UIAlertController(title: "Are You Sure?".localized, message: "Clicking confirm will permanently remove this item, including its data.".localized, preferredStyle: .Alert)
         let cancelAction = UIAlertAction(title: "Cancel".localized, style: .Cancel, handler: nil)
         let confirmAction = UIAlertAction(title: "Confirm".localized, style: .Destructive, handler: {_ in
-            //to write
+            let presenter = self.presentingViewController as! CIHomeViewController
+            let presenterView = presenter.view as! CIHomeView
+            let realm = try! Realm()
+            try! realm.write{
+                realm.delete(self.item)
+            }
+            self.dismissViewControllerAnimated(true, completion: {_ in
+                presenter.reloadManagers()
+                presenterView.table.reloadData()
+                presenterView.table.reloadEmptyDataSet()
+            })
+
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func renameButtonPressed(sender:UIButton) {
+        let alertController = UIAlertController(title: "Rename".localized, message: String(format:"Enter a new name for your item. It must be between 1-%d characters and cannot be in use.", CIConstants.itemMaxChars).localized, preferredStyle: .Alert)
+        alertController.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.placeholder = "new name"
+            textField.autocapitalizationType = .Words
+            self.renameField = textField
+        })
+        let cancelAction = UIAlertAction(title: "Cancel".localized, style: .Cancel, handler: nil)
+        let confirmAction = UIAlertAction(title: "Confirm".localized, style: .Default, handler: {_ in
+            let name = self.renameField.text!
+            if let error = CIModelItemCreator.validate(name) {
+                self.errorAlert(error, handler: {_ in
+                    let view = self.view as! CIItemSettingsView
+                    self.renameButtonPressed(view.renameButton)
+                })
+            }
+            else {
+                CIModelItemCreator.rename(self.item, toName: name)
+                self.dialogAlert("Success".localized, message: "Your item has been renamed.".localized)
+                let view = self.view as! CIItemSettingsView
+                view.titleLabel.text = name
+            }
         })
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)

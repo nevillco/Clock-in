@@ -99,11 +99,21 @@ class CIViewController: UIViewController {
         dialogAlert("Error", message: message)
     }
     
+    func errorAlert(message:String, handler:((handler:UIAlertAction)->Void)) {
+        dialogAlert("Error", message: message, handler: handler)
+    }
+    
     func dialogAlert(title:String, message:String) {
         let controller = UIAlertController(title: title.localized, message: message.localized, preferredStyle: .Alert)
         let action = UIAlertAction(title: "Okay".localized, style: .Default, handler: nil)
         controller.addAction(action)
         presentViewController(controller, animated: true, completion: nil)
-        
+    }
+    
+    func dialogAlert(title:String, message:String, handler:((handler:UIAlertAction)->Void)) {
+        let controller = UIAlertController(title: title.localized, message: message.localized, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "Okay".localized, style: .Default, handler: handler)
+        controller.addAction(action)
+        presentViewController(controller, animated: true, completion: nil)
     }
 }

@@ -38,6 +38,16 @@ private extension CIAddItemViewController {
         view.colorCollection.dataSource = self
         view.colorCollection.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
     }
+    
+    func indexPathsToReloadOnDismiss() -> [NSIndexPath] {
+        let realm = try! Realm()
+        let numItems = realm.objects(CIModelItem.self).count
+        var indexPaths = [NSIndexPath]()
+        for i in 0..<itemsAdded {
+            indexPaths.append(NSIndexPath(forRow: numItems - (i + 1), inSection: 0))
+        }
+        return indexPaths
+    }
 }
 
 extension CIAddItemViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -84,20 +94,13 @@ extension CIAddItemViewControllerTargets {
     func goButtonPressed(sender: UIButton) throws {
         let view = self.view as! CIAddItemView
         let name = view.nameField.text!
-        let chars = name.characters.count
-        if chars == 0 {
-            errorAlert("Please enter an item name.".localized)
-            return
+        if let error = CIModelItemCreator.validate(name) {
+            errorAlert(error)
         }
-        if chars > CIConstants.itemMaxChars {
-            errorAlert(String(format: "Item names can be at most %d characters.", CIConstants.itemMaxChars).localized)
-            return
+        else {
+            CIModelItemCreator.createItem(name, color: selectedColor)
         }
-        if itemNameExists(name) {
-            errorAlert("You already have an item with this name. Please try another.".localized)
-            return
-        }
-        createItem(name, color: selectedColor)
+        itemsAdded += 1
         view.nameField.text = ""
         nameFieldChanged(view.nameField)
         view.endEditing(true)
@@ -125,47 +128,6 @@ extension CIAddItemViewControllerTargets {
         let view = self.view as! CIAddItemView
         view.updateCharsLabel(charsRemaining)
         view.checkNameFieldAlignment()
-    }
-}
-
-typealias CIAddItemViewControllerRealm = CIAddItemViewController
-extension CIAddItemViewControllerRealm {
-    func itemNameExists(name: String) -> Bool {
-        let realm = try! Realm()
-        let predicate = NSPredicate(format: "name == %@", name)
-        let itemsWithName = realm.objects(CIModelItem.self).filter(predicate)
-        return itemsWithName.count > 0
-    }
-    
-    func createItem(name:String, color:UIColor) {
-        let realm = try! Realm()
-        let item = CIModelItem()
-        item.name = name
-        item.createDate = NSDate()
-        item.colorIndex = UIColor.CIColorPalette.indexOf(color)!
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let intervals = defaults.objectForKey(.CIDefaultNotificationIntervals) as! [NSTimeInterval]
-        intervals.forEach{
-            let doubleObj = CIDoubleObject()
-            doubleObj.value = $0
-            item.notificationIntervals.append(doubleObj)
-        }
-        
-        try! realm.write {
-            realm.add(item, update: false)
-        }
-        itemsAdded += 1
-    }
-    
-    func indexPathsToReloadOnDismiss() -> [NSIndexPath] {
-        let realm = try! Realm()
-        let numItems = realm.objects(CIModelItem.self).count
-        var indexPaths = [NSIndexPath]()
-        for i in 0..<itemsAdded {
-            indexPaths.append(NSIndexPath(forRow: numItems - (i + 1), inSection: 0))
-        }
-        return indexPaths
     }
 }
 
