@@ -10,7 +10,6 @@ import UIKit
 import RealmSwift
 
 class CIAddItemViewController: CIViewController {
-    let cellReuseIdentifier = "ColorChoice"
     var availableColors = UIColor.CIAvailableColors()
     var selectedColor = UIColor.clearColor()
     var itemsAdded = 0
@@ -36,7 +35,7 @@ private extension CIAddItemViewController {
         view.nameField.delegate = self
         view.colorCollection.delegate = self
         view.colorCollection.dataSource = self
-        view.colorCollection.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        view.colorCollection.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: .CIAddItemCellReuseIdentifier)
     }
     
     func indexPathsToReloadOnDismiss() -> [NSIndexPath] {
@@ -56,7 +55,7 @@ extension CIAddItemViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(.CIAddItemCellReuseIdentifier, forIndexPath: indexPath)
         
         let row:Int = indexPath.item
         cell.backgroundColor = availableColors[row]

@@ -59,7 +59,10 @@ extension CIHomeViewControllerTargets {
     }
     
     func globalStatsButtonPressed(sender: UIButton) {
-        
+        let delegates = [CILineGraphDelegate(),
+                         CILineGraphDelegate()]
+        let viewControllers = delegates.map({ CIGlobalStatsChartViewController(delegate: $0) })
+        presentViewController(CIStatsPageViewController(viewControllers:viewControllers), animated: true, completion: nil)
     }
     
     func globalSettingsButtonPressed(sender: UIButton) {
