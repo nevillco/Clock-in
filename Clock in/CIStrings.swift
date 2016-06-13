@@ -18,5 +18,5 @@ extension String {
     static let CIDefaultAlertStatsReceived = "AlertStats"
     
     static let CIHomeCellReuseIdentifier = "HomeCell"
-    static let CIGlobalSettingsCellReuseIdentifier = "GlobalSettingsCell"
+    static let CISettingsCellReuseIdentifier = "SettingsCell"
 }

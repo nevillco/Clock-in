@@ -82,6 +82,14 @@ class CITableViewCell: UITableViewCell {
 }
 
 class CIViewController: UIViewController {
+    init() {
+        super.init(nibName: nil, bundle:nil)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        fatalError(CIError.CoderInitUnimplementedString)
+    }
+    
     override func viewDidLoad() {
         let view = CIView()
         self.view = view

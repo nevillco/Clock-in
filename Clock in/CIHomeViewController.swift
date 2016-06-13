@@ -89,6 +89,12 @@ extension CIHomeViewControllerTargets {
         cell.resetTimer()
         cell.applyClockedStyle(manager.clockedIn)
     }
+    
+    func itemSettingsButtonPressed(sender:UIButton) {
+        let cell = sender.superview!.superview as! CIHomeViewCell
+        let manager = itemManagers[cell.tag]
+        presentViewController(CIItemSettingsViewController(item: manager.item), animated: true, completion: nil)
+    }
 }
 
 extension CIHomeViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
@@ -135,6 +141,7 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.tag = indexPath.row
         
         cell.clockButton.addTarget(self, action: #selector(clockButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        cell.settingsButton.addTarget(self, action: #selector(itemSettingsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         return cell

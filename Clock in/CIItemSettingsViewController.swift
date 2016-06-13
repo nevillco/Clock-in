@@ -1,8 +1,8 @@
 //
-//  CIGlobalSettingsViewController.swift
+//  CIItemSettingsViewController.swift
 //  Clock in
 //
-//  Created by Connor Neville on 6/11/16.
+//  Created by Connor Neville on 6/12/16.
 //  Copyright © 2016 Connor Neville. All rights reserved.
 //
 
@@ -11,34 +11,36 @@ import DZNEmptyDataSet
 import Foundation
 import RealmSwift
 
-class CIGlobalSettingsViewController: CIViewController {
-    var notificationsOn:Bool = false
-    var intervals:[Int] = []
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let view = CIGlobalSettingsView()
-        addTargets(view)
-        addDelegates(view)
-        loadDefaults()
-        self.view = view
-        updateNotificationsButton()
+class CIItemSettingsViewController: CIViewController {
+    var notificationsOn = false
+    let item:CIModelItem
+    
+    required init(item:CIModelItem) {
+        self.item = item
+        super.init()
     }
     
-    func loadDefaults() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        self.intervals = defaults.objectForKey(String.CIDefaultNotificationIntervals) as! [Int]
-        self.notificationsOn = defaults.boolForKey(String.CIDefaultNotificationsOn)
+    required init(coder aDecoder: NSCoder) {
+        fatalError(CIError.CoderInitUnimplementedString)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let view = CIItemSettingsView(name: item.name)
+        loadDefaults()
+        addTargets(view)
+        addDelegates(view)
+        self.view = view
     }
 }
 
-private extension CIGlobalSettingsViewController {
-    func addTargets(view: CIGlobalSettingsView) {
+private extension CIItemSettingsViewController {
+    func addTargets(view: CIItemSettingsView) {
         view.backButton.addTarget(self, action: #selector(backButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        view.notificationsButton.addTarget(self, action: #selector(notificationsButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        view.deleteButton.addTarget(self, action: #selector(deleteItemsButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        view.deleteButton.addTarget(self, action: #selector(deleteItemButtonPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
-    func addDelegates(view: CIGlobalSettingsView) {
+    func addDelegates(view: CIItemSettingsView) {
         view.table.emptyDataSetSource = self
         view.table.emptyDataSetDelegate = self
         view.table.delegate = self
@@ -46,25 +48,21 @@ private extension CIGlobalSettingsViewController {
         view.table.registerClass(CISettingsViewCell.self, forCellReuseIdentifier: .CISettingsCellReuseIdentifier)
     }
     
-    func saveDefaults() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(intervals, forKey: String.CIDefaultNotificationIntervals)
-        defaults.setBool(notificationsOn, forKey: String.CIDefaultNotificationsOn)
+    func saveRealm() {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(item, update: true)
+        }
     }
     
-    func updateNotificationsButton() {
-        let view = self.view as! CIGlobalSettingsView
-        if(notificationsOn) {
-            view.notificationsButton.setTitle("notifications on".localized, forState: .Normal)
-        }
-        else {
-            view.notificationsButton.setTitle("notifications off".localized, forState: .Normal)
-        }
+    func loadDefaults() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        notificationsOn = defaults.boolForKey(.CIDefaultNotificationsOn)
     }
 }
 
-typealias CIGlobalSettingsViewControllerTargets = CIGlobalSettingsViewController
-extension CIGlobalSettingsViewControllerTargets {
+typealias CIItemSettingsViewControllerTargets = CIItemSettingsViewController
+extension CIItemSettingsViewControllerTargets {
     func backButtonPressed(sender: UIButton) {
         view.endEditing(true)
         dismissViewControllerAnimated(true, completion: nil)
@@ -72,50 +70,26 @@ extension CIGlobalSettingsViewControllerTargets {
     
     func deleteButtonPressed(sender: UIButton) {
         let cell = sender.superview as! CISettingsViewCell
-        intervals.removeAtIndex(cell.tag)
+        let realm = try! Realm()
+        try! realm.write {
+            item.notificationIntervals.removeAtIndex(cell.tag)
+        }
         
-        let view = self.view as! CIGlobalSettingsView
+        let view = self.view as! CIItemSettingsView
         view.table.deleteRowsAtIndexPaths([NSIndexPath(forRow: cell.tag, inSection: 0)], withRowAnimation: .Middle)
         view.table.reloadEmptyDataSet()
         view.table.reloadData()
-        
-        saveDefaults()
     }
     
     func addButtonPressed(sender: UIButton) {
         presentViewController(CIAddNotificationViewController(), animated: true, completion: nil)
     }
     
-    func notificationsButtonPressed(sender: UIButton) {
-        let delegate = UIApplication.sharedApplication().delegate as! CIAppDelegate
-        if(!delegate.notificationsEnabledInSettings()) {
-            errorAlert("You have notifications disabled in your device's Settings. Please enable them to use this page.")
-            return
-        }
-        notificationsOn = !notificationsOn
-        saveDefaults()
-        let view = self.view as! CIGlobalSettingsView
-        view.table.reloadData()
-        view.table.reloadEmptyDataSet()
-        saveDefaults()
-        updateNotificationsButton()
-    }
-    
-    func deleteItemsButtonPressed(sender: UIButton) {
-        let alertController = UIAlertController(title: "Are You Sure?".localized, message: "Clicking confirm will permanently remove all of your items, including their data.".localized, preferredStyle: .Alert)
+    func deleteItemButtonPressed(sender: UIButton) {
+        let alertController = UIAlertController(title: "Are You Sure?".localized, message: "Clicking confirm will permanently remove this item, including its data.".localized, preferredStyle: .Alert)
         let cancelAction = UIAlertAction(title: "Cancel".localized, style: .Cancel, handler: nil)
         let confirmAction = UIAlertAction(title: "Confirm".localized, style: .Destructive, handler: {_ in
-            let presenter = self.presentingViewController as! CIHomeViewController
-            let presenterView = presenter.view as! CIHomeView
-            let realm = try! Realm()
-            try! realm.write{
-                realm.deleteAll()
-            }
-            self.dismissViewControllerAnimated(true, completion: {_ in
-                presenter.reloadManagers()
-                presenterView.table.reloadData()
-                presenterView.table.reloadEmptyDataSet()
-            })
+            //to write
         })
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)
@@ -123,7 +97,7 @@ extension CIGlobalSettingsViewControllerTargets {
     }
 }
 
-extension CIGlobalSettingsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+extension CIItemSettingsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let titleText = notificationsOn ? "nothing yet".localized : "turned off".localized
         let textRange = NSRange(location: 0, length: titleText.characters.count)
@@ -166,16 +140,16 @@ extension CIGlobalSettingsViewController: DZNEmptyDataSetSource, DZNEmptyDataSet
     }
 }
 
-extension CIGlobalSettingsViewController: UITableViewDataSource, UITableViewDelegate {
+extension CIItemSettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notificationsOn ? intervals.count : 0
+        return notificationsOn ? item.notificationIntervals.count : 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(.CISettingsCellReuseIdentifier) as! CISettingsViewCell
-        let item = intervals[indexPath.row]
+        let interval = item.notificationIntervals[indexPath.row]
         
-        cell.label.text = NSDate.longStringForInterval(item)
+        cell.label.text = NSDate.longStringForInterval(Int(interval.value))
         cell.tag = indexPath.row
         
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonPressed(_:)), forControlEvents: .TouchUpInside)
@@ -197,7 +171,7 @@ extension CIGlobalSettingsViewController: UITableViewDataSource, UITableViewDele
         let header = CISettingsViewHeader()
         
         let max = CIConstants.maxNotifications
-        let current = intervals.count
+        let current = item.notificationIntervals.count
         
         let text = String(format: "%d notifications allowed\n%d remaining", max, (max - current))
         let attributedText = NSMutableAttributedString(string: text)

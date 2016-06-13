@@ -1,5 +1,5 @@
 //
-//  CIGlobalSettingsViewHeader.swift
+//  CISettingsViewHeader.swift
 //  Clock in
 //
 //  Created by Connor Neville on 6/12/16.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class CIGlobalSettingsViewHeader: CIView {
+class CISettingsViewHeader: CIView {
     
     let label = UILabel()
     let addButton = CIButton(primaryColor: .whiteColor(), title: "add new")

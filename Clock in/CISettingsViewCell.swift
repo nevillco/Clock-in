@@ -1,5 +1,5 @@
 //
-//  GlobalSettingsViewCell.swift
+//  GlobalViewCell.swift
 //  Clock in
 //
 //  Created by Connor Neville on 6/12/16.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class CIGlobalSettingsViewCell: CITableViewCell {
+class CISettingsViewCell: CITableViewCell {
     
     let label = UILabel()
     let deleteButton = CIButton(primaryColor: .whiteColor(), title: "delete")
