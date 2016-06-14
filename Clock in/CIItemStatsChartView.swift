@@ -91,7 +91,7 @@ class CIItemStatsChartView: CIView {
             make.top.equalTo(topGuide.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.leading.equalTo(self.snp_leading)
             make.trailing.equalTo(self.snp_trailing)
-            make.bottom.equalTo(botLine.snp_top)
+            make.bottom.equalTo(botLine.snp_top).offset(-CIConstants.verticalItemSpacing)
         }
     }
 }

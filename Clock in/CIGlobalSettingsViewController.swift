@@ -60,6 +60,8 @@ private extension CIGlobalSettingsViewController {
         else {
             view.notificationsButton.setTitle("notifications off".localized, forState: .Normal)
         }
+        
+        view.notificationsButton.permanentHighlight = notificationsOn
     }
 }
 

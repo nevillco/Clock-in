@@ -47,7 +47,7 @@ class CIItemSettingsView: CIView {
         titleLabel.minimumScaleFactor = 0.6
         addSubview(titleLabel)
         
-        notificationsLabel.text = "If you want, you can have an item send notifications after certain amounts of time. You can also change notifications on specific items by going to their settings.".localized
+        notificationsLabel.text = "If you want, you can have an item send notifications after certain amounts of time. You can set those times for your item here.".localized
         notificationsLabel.font = UIFont.CIDefaultBodyFont
         notificationsLabel.textColor = .whiteColor()
         notificationsLabel.numberOfLines = 0

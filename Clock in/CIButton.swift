@@ -17,21 +17,20 @@ class CIButton: UIButton {
     
     override var highlighted: Bool {
         didSet {
-            if (highlighted) {
-                setTitleColor(highlightedTitleColor(), forState: .Highlighted)
-                backgroundColor = primaryColor
-                titleLabel!.font = UIFont.CIButtonBoldFont
-            }
-            else {
-                setTitleColor(primaryColor, forState: .Highlighted)
-                backgroundColor = .clearColor()
-                titleLabel!.font = UIFont.CIButtonRegularFont
-            }
+            //if permanentHighlight, apply opposite style
+            setStyle(permanentHighlight ? !highlighted : highlighted)
+        }
+    }
+    
+    var permanentHighlight: Bool {
+        didSet {
+            setStyle(permanentHighlight)
         }
     }
     
     required init(primaryColor: UIColor, title:String) {
         self.primaryColor = primaryColor
+        self.permanentHighlight = false
         super.init(frame: CGRectZero)
         setTitle(title, forState: .Normal)
         setDefaultStyle()
@@ -51,6 +50,19 @@ class CIButton: UIButton {
         layer.cornerRadius = CIConstants.cornerRadius
         translatesAutoresizingMaskIntoConstraints = false
         titleEdgeInsets = CIButton.buttonInsets
+    }
+    
+    func setStyle(highlighted: Bool) {
+        if (highlighted) {
+            setTitleColor(highlightedTitleColor(), forState: .Normal)
+            backgroundColor = primaryColor
+            titleLabel!.font = UIFont.CIButtonBoldFont
+        }
+        else {
+            setTitleColor(primaryColor, forState: .Normal)
+            backgroundColor = .clearColor()
+            titleLabel!.font = UIFont.CIButtonRegularFont
+        }
     }
     
     func highlightedTitleColor() -> UIColor? {

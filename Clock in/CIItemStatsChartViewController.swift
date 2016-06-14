@@ -32,6 +32,9 @@ class CIItemStatsChartViewController: CIViewController {
     func chartButtonPressed(sender: UIButton) {
         let view = self.view as! CIItemStatsChartView
         let index = view.buttons.indexOf(sender as! CIButton)!
+        for i in 0..<view.buttons.count {
+            view.buttons[i].permanentHighlight = (i == index)
+        }
         delegate.loadChartData(view.chart, selectedButtonIndex:index)
     }
 }
