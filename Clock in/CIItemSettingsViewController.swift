@@ -92,7 +92,7 @@ extension CIItemSettingsViewControllerTargets {
     
     func addButtonPressed(sender: UIButton) {
         let newController = CIAddNotificationViewController()
-        newController.item = manager.item
+        newController.manager = manager
         presentViewController(newController, animated: true, completion: nil)
     }
     

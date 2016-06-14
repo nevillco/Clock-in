@@ -11,7 +11,12 @@ import Foundation
 import RealmSwift
 
 class CIAddNotificationViewController: CIViewController {
-    var item: CIModelItem?
+    var manager: CIModelItemManager? {
+        didSet {
+            self.view.backgroundColor = manager!.colorForItem()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = CIAddNotificationView()
@@ -37,7 +42,7 @@ extension CIAddNotificationViewControllerTargets {
     func goButtonPressed(sender: UIButton) {
         let view = self.view as! CIAddNotificationView
         let interval = view.picker.countDownDuration
-        if item == nil {
+        if manager == nil {
             let defaults = NSUserDefaults.standardUserDefaults()
             var defaultIntervals = defaults.objectForKey(.CIDefaultNotificationIntervals) as! [NSTimeInterval]
             if defaultIntervals.contains(interval) {
@@ -51,7 +56,6 @@ extension CIAddNotificationViewControllerTargets {
                 defaults.setObject(newIntervals, forKey: .CIDefaultNotificationIntervals)
                 dismissViewControllerAnimated(true, completion: {
                     presenter.loadDefaults()
-                    presenter.dialogAlert("Success".localized, message: "This time is now included in your default notifications.")
                     presenterView.table.reloadEmptyDataSet()
                     presenterView.table.reloadData()
                 })
@@ -60,22 +64,21 @@ extension CIAddNotificationViewControllerTargets {
         else {
             let newValue = CIDoubleObject()
             newValue.value = interval
-            if item!.notificationIntervals.contains(newValue) {
+            if manager!.item.notificationIntervals.contains(newValue) {
                 errorAlert("This time is already in your item's notifications.".localized)
             }
             else {
                 let realm = try! Realm()
                 var index = 0
-                while item!.notificationIntervals[index].value < interval {
+                while manager!.item.notificationIntervals[index].value < interval {
                     index += 1
                 }
                 try! realm.write {
-                    item!.notificationIntervals.insert(newValue, atIndex: index)
+                    manager!.item.notificationIntervals.insert(newValue, atIndex: index)
                 }
                 let presenter = presentingViewController as! CIItemSettingsViewController
                 let presenterView = presenter.view as! CIItemSettingsView
                 dismissViewControllerAnimated(true, completion: {
-                    presenter.dialogAlert("Success".localized, message: "This time is now included in your item's notifications.")
                     presenterView.table.reloadEmptyDataSet()
                     presenterView.table.reloadData()
                 })

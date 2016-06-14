@@ -56,7 +56,8 @@ class CIGlobalSettingsView: CIView {
         table.backgroundColor = .clearColor()
         addSubview(table)
         
-        deleteContainer.backgroundColor = .clearColor()
+        deleteContainer.backgroundColor = .CIGray
+        deleteContainer.layer.cornerRadius = CIConstants.cornerRadius
         deleteContainer.layer.borderWidth = 2.0
         deleteContainer.layer.borderColor = UIColor.whiteColor().CGColor
         addSubview(deleteContainer)
@@ -102,9 +103,9 @@ class CIGlobalSettingsView: CIView {
         
         deleteContainer.snp_makeConstraints{(make)->Void in
             make.top.equalTo(deleteLabel.snp_top).offset(-2 * CIConstants.verticalItemSpacing)
-            make.leading.equalTo(self.snp_leading).offset(-2)
-            make.trailing.equalTo(self.snp_trailing).offset(2)
-            make.bottom.equalTo(self.snp_bottom).offset(2)
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.bottom.equalTo(self.snp_bottomMargin).offset(-CIConstants.verticalItemSpacing)
         }
         
         deleteLabel.snp_makeConstraints{(make)->Void in
