@@ -103,7 +103,11 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         let xVals = xValues(selectedButtonIndex)
         let yValues = xVals.map({ self.yValue(atXLabel: $0, selectedButtonIndex: selectedButtonIndex) })
         let max = Int(yValues.maxElement()!)
-        return max >= 5
+        return max >= 10
+    }
+    
+    func descriptionForNoData() -> String {
+        return "This chart requires you have one day with at least 10 seconds of time clocked in.";
     }
 }
 

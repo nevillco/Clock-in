@@ -190,27 +190,28 @@ extension CIHomeViewCellStyling {
         }
     }
     
-    private func animateVisibleSubviews(clockedIn:Bool) {if(clockedIn) {
-        UIView.animateWithDuration(0.5, animations: {
-            self.layoutIfNeeded()
-            }, completion: nil)
-        UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
-            self.clockDurationLabel.alpha = 1
-            self.rewindButton.alpha = 1
-            self.cancelButton.alpha = 1
-            }, completion: nil)
-        
-    }
-    else {
-        UIView.animateWithDuration(0.5, animations: {
-            self.clockDurationLabel.alpha = 0
-            self.rewindButton.alpha = 0
-            self.cancelButton.alpha = 0
-            }, completion: {_ in
-                self.clockDurationLabel.text = "00:00:00" })
-        UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
-            self.layoutIfNeeded()
-            }, completion: nil)
+    private func animateVisibleSubviews(clockedIn:Bool) {
+        if(clockedIn) {
+            UIView.animateWithDuration(0.5, animations: {
+                self.layoutIfNeeded()
+                }, completion: nil)
+            UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
+                self.clockDurationLabel.alpha = 1
+                self.rewindButton.alpha = 1
+                self.cancelButton.alpha = 1
+                }, completion: nil)
+            
+        }
+        else {
+            UIView.animateWithDuration(0.5, animations: {
+                self.clockDurationLabel.alpha = 0
+                self.rewindButton.alpha = 0
+                self.cancelButton.alpha = 0
+                }, completion: {_ in
+                    self.clockDurationLabel.text = "0s" })
+            UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
+                self.layoutIfNeeded()
+                }, completion: nil)
         }
     }
 }

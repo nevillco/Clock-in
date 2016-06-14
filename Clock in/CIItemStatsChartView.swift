@@ -12,13 +12,16 @@ import Charts
 
 class CIItemStatsChartView: CIView {
     let topLine = UIView()
-    var buttons:[CIButton]
-    var chart:ChartViewBase
+    let buttons:[CIButton]
+    let chart:ChartViewBase
+    let noDataLabel = UILabel()
     let botLine = UIView()
     
     required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
         buttons = delegate.controlNames().map({ CIButton(primaryColor: .whiteColor(), title: $0) })
         chart = delegate.chartType().init()
+        noDataLabel.text = String(format: "Not enough data!\n%@", delegate.descriptionForNoData())
+        noDataLabel.backgroundColor = manager.colorForItem()
         super.init()
         backgroundColor = manager.colorForItem()
         setupSubviews()
@@ -34,10 +37,22 @@ class CIItemStatsChartView: CIView {
             line.backgroundColor = .whiteColor()
             addSubview(line)
         }
+        
         for button in buttons {
             addSubview(button)
         }
+        
         addSubview(chart)
+        
+        noDataLabel.font = UIFont.CIDefaultBodyFont
+        noDataLabel.textColor = .whiteColor()
+        noDataLabel.textAlignment = .Center
+        noDataLabel.numberOfLines = 0
+        let attributedText = NSMutableAttributedString(string: noDataLabel.text!)
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIEmptyDataSetTitleFont, range: (noDataLabel.text! as NSString).rangeOfString("Not enough data!"))
+        noDataLabel.attributedText = attributedText
+        noDataLabel.alpha = 0
+        addSubview(noDataLabel)
     }
     
     func constrainSubviews() {
@@ -86,12 +101,20 @@ class CIItemStatsChartView: CIView {
             make.trailing.equalTo(self.snp_trailing)
             make.height.equalTo(1)
         }
+        
         chart.snp_makeConstraints{(make)->Void in
             let topGuide = (buttons.count > 0) ? buttons[0] : topLine
             make.top.equalTo(topGuide.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.leading.equalTo(self.snp_leading)
             make.trailing.equalTo(self.snp_trailing)
             make.bottom.equalTo(botLine.snp_top).offset(-CIConstants.verticalItemSpacing)
+        }
+        
+        noDataLabel.snp_makeConstraints {(make)->Void in
+            make.leading.greaterThanOrEqualTo(chart.snp_leadingMargin)
+            make.trailing.lessThanOrEqualTo(chart.snp_trailingMargin)
+            make.centerX.equalTo(chart.snp_centerX)
+            make.centerY.equalTo(chart.snp_centerY)
         }
     }
 }
