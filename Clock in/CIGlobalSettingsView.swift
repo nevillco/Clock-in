@@ -58,7 +58,7 @@ class CIGlobalSettingsView: CIView {
         
         deleteContainer.backgroundColor = .CIGray
         deleteContainer.layer.cornerRadius = CIConstants.cornerRadius
-        deleteContainer.layer.borderWidth = 2.0
+        deleteContainer.layer.borderWidth = CIConstants.borderWidth
         deleteContainer.layer.borderColor = UIColor.whiteColor().CGColor
         addSubview(deleteContainer)
         

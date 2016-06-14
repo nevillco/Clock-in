@@ -28,5 +28,6 @@ extension UIFont {
     @nonobjc static let CIEmptyDataSetTitleFont = UIFont(name: "Lato-Hairline", size: 44.0)!
     @nonobjc static let CIEmptyDataSetBodyFont = UIFont(name: "Lato-Regular", size: 15.0)!
     
+    @nonobjc static let CIChartTitleFont = UIFont(name: "Lato-Bold", size: 28.0)!
     @nonobjc static let CIChartAxisLabelFont = UIFont(name: "Lato-Light", size: 13.0)!
 }

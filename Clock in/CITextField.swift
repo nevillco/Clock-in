@@ -21,7 +21,7 @@ class CITextField: UITextField {
     }
     
     func setDefaultStyle(placeholder:String) {
-        layer.borderWidth = 2.0
+        layer.borderWidth = CIConstants.borderWidth
         layer.borderColor = UIColor.whiteColor().CGColor
         layer.cornerRadius = CIConstants.cornerRadius
         font = UIFont.CITextFieldFont

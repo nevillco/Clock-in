@@ -59,7 +59,7 @@ class CIItemSettingsView: CIView {
         addSubview(table)
         
         bottomContainer.backgroundColor = .clearColor()
-        bottomContainer.layer.borderWidth = 2.0
+        bottomContainer.layer.borderWidth = CIConstants.borderWidth
         bottomContainer.layer.borderColor = UIColor.whiteColor().CGColor
         addSubview(bottomContainer)
         

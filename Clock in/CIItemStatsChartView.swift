@@ -12,6 +12,7 @@ import Charts
 
 class CIItemStatsChartView: CIView {
     let topLine = UIView()
+    let titleLabel = UILabel()
     let buttons:[CIButton]
     let chart:ChartViewBase
     let noDataLabel = UILabel()
@@ -20,8 +21,9 @@ class CIItemStatsChartView: CIView {
     required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
         buttons = delegate.controlNames().map({ CIButton(primaryColor: .whiteColor(), title: $0) })
         chart = delegate.chartType().init()
-        noDataLabel.text = String(format: "Not enough data!\n%@", delegate.descriptionForNoData())
+        noDataLabel.text = String(format: "%@\n%@", "Not enough data!".localized, delegate.descriptionForNoData())
         noDataLabel.backgroundColor = manager.colorForItem()
+        titleLabel.text = delegate.chartTitle()
         super.init()
         backgroundColor = manager.colorForItem()
         setupSubviews()
@@ -33,6 +35,12 @@ class CIItemStatsChartView: CIView {
     }
     
     func setupSubviews() {
+        titleLabel.font = .CIChartTitleFont
+        titleLabel.textColor = .whiteColor()
+        titleLabel.textAlignment = .Center
+        titleLabel.numberOfLines = 0
+        addSubview(titleLabel)
+        
         for line in [topLine, botLine] {
             line.backgroundColor = .whiteColor()
             addSubview(line)
@@ -63,9 +71,14 @@ class CIItemStatsChartView: CIView {
             make.height.equalTo(1)
         }
         
+        titleLabel.snp_makeConstraints{(make)->Void in
+            make.centerX.equalTo(self.snp_centerX)
+            make.top.equalTo(topLine.snp_bottom).offset(CIConstants.verticalItemSpacing)
+        }
+        
         for i in 0..<buttons.count {
             buttons[i].snp_makeConstraints{(make)->Void in
-                make.top.equalTo(topLine.snp_bottom).offset(CIConstants.verticalItemSpacing)
+                make.top.equalTo(titleLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
                 make.width.equalTo(CIConstants.buttonWidth)
             }
         }

@@ -19,7 +19,7 @@ class CISettingsViewHeader: CIView {
         self.backgroundColor = .CIGray
         self.layer.cornerRadius = CIConstants.cornerRadius
         self.layer.borderColor = UIColor.whiteColor().CGColor
-        self.layer.borderWidth = 2.0
+        self.layer.borderWidth = CIConstants.borderWidth
         setupSubviews()
         constrainSubviews()
     }

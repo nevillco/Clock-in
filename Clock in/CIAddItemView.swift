@@ -129,11 +129,16 @@ class CIAddItemView: CIView {
     
     func updateCharsLabel(charsRemaining: Int) {
         charsLabel.text = String(charsRemaining)
+        let warningColors = [UIColor.CIRed, UIColor.CIOrange]
         if charsRemaining < 0 {
-            charsLabel.textColor = UIColor.CIRed
+            charsLabel.textColor = (warningColors.contains(self.backgroundColor!)) ?
+                .whiteColor() :
+                .CIRed
         }
         else if charsRemaining <= CIConstants.charsRemainingForWarning {
-            charsLabel.textColor = UIColor.CIYellow
+            charsLabel.textColor = (warningColors.contains(self.backgroundColor!)) ?
+                .whiteColor() :
+                .CIOrange
         }
         else {
             charsLabel.textColor = UIColor.whiteColor()

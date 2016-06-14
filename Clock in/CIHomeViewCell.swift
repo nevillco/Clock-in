@@ -279,7 +279,7 @@ class CIHomeCellButton: UIButton {
         setTitleColor(.whiteColor(), forState: .Normal)
         setTitleColor(primaryColor, forState: .Highlighted)
         layer.borderColor = primaryColor.CGColor
-        layer.borderWidth = 2
+        layer.borderWidth = CIConstants.borderWidth
         layer.cornerRadius = CIConstants.cornerRadius
     }
     

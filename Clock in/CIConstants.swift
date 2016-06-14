@@ -15,6 +15,7 @@ class CIConstants {
     static let buttonWidth:CGFloat = 91
     static let buttonWidthWide:CGFloat = 145
     static let cornerRadius:CGFloat = 6
+    static let borderWidth:CGFloat = 2
     
     static let homeCellRowHeight:CGFloat = 81
     static let settingsHeaderHeight:CGFloat = 49
@@ -32,5 +33,6 @@ class CIConstants {
         60*120]
     
     static let pageControlHeight:CGFloat = 40.0
+    static let chartLeftOffset:CGFloat = 8.0
     static let chartRightOffset:CGFloat = 35.0
 }

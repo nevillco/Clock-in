@@ -24,7 +24,7 @@ class CIStatsViewCell: UICollectionViewCell {
     
     func setupSubviews() {
         self.layer.borderColor = UIColor.whiteColor().CGColor
-        self.layer.borderWidth = 2.0
+        self.layer.borderWidth = CIConstants.borderWidth
         self.layer.cornerRadius = CIConstants.cornerRadius
         
         label.text = "cell"

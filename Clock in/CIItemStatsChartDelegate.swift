@@ -18,4 +18,5 @@ protocol CIItemStatsChartDelegate {
     func styleChart(chart:ChartViewBase)
     func hasSufficientData(selectedButtonIndex:Int) -> Bool
     func descriptionForNoData() -> String
+    func chartTitle() -> String
 }

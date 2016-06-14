@@ -78,6 +78,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         let lineChart = chart as! LineChartView
         lineChart.descriptionText = ""
         lineChart.extraRightOffset = CIConstants.chartRightOffset
+        lineChart.extraLeftOffset = CIConstants.chartLeftOffset
         
         lineChart.legend.enabled = false
         
@@ -107,7 +108,11 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
     }
     
     func descriptionForNoData() -> String {
-        return "This chart requires you have one day with at least 10 seconds of time clocked in.";
+        return "This chart requires you have one day with at least 10 seconds of time clocked in.".localized;
+    }
+    
+    func chartTitle() -> String {
+        return "Clock-in Time by Day".localized
     }
 }
 
