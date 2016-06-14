@@ -92,7 +92,7 @@ extension CIHomeViewControllerTargets {
     func itemSettingsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let manager = itemManagers[cell.tag]
-        presentViewController(CIItemSettingsViewController(item: manager.item), animated: true, completion: nil)
+        presentViewController(CIItemSettingsViewController(manager: manager), animated: true, completion: nil)
     }
     
     func itemStatsButtonPressed(sender:UIButton) {

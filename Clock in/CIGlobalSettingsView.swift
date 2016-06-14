@@ -18,7 +18,7 @@ class CIGlobalSettingsView: CIView {
     let table = UITableView()
     let deleteContainer = CIView()
     let deleteLabel = UILabel()
-    let deleteButton = CIButton(primaryColor: .whiteColor(), title: "delete items".localized)
+    let deleteButton = CIButton(primaryColor: .CIRed, title: "delete items".localized)
     
     override init() {
         super.init()
@@ -56,7 +56,9 @@ class CIGlobalSettingsView: CIView {
         table.backgroundColor = .clearColor()
         addSubview(table)
         
-        deleteContainer.backgroundColor = .CIRed
+        deleteContainer.backgroundColor = .clearColor()
+        deleteContainer.layer.borderWidth = 2.0
+        deleteContainer.layer.borderColor = UIColor.whiteColor().CGColor
         addSubview(deleteContainer)
         
         deleteLabel.text = "Tap the button to the right to delete all of your items. Be careful, there is no undo.".localized
@@ -99,10 +101,10 @@ class CIGlobalSettingsView: CIView {
         }
         
         deleteContainer.snp_makeConstraints{(make)->Void in
-            make.leading.equalTo(self.snp_leading)
-            make.trailing.equalTo(self.snp_trailing)
-            make.bottom.equalTo(self.snp_bottom)
-            make.top.equalTo(deleteLabel.snp_top).offset(-CIConstants.verticalItemSpacing)
+            make.top.equalTo(deleteLabel.snp_top).offset(-2 * CIConstants.verticalItemSpacing)
+            make.leading.equalTo(self.snp_leading).offset(-2)
+            make.trailing.equalTo(self.snp_trailing).offset(2)
+            make.bottom.equalTo(self.snp_bottom).offset(2)
         }
         
         deleteLabel.snp_makeConstraints{(make)->Void in
@@ -113,7 +115,7 @@ class CIGlobalSettingsView: CIView {
         
         deleteButton.snp_makeConstraints{(make)->Void in
             make.trailing.equalTo(deleteContainer.snp_trailingMargin)
-            make.bottom.equalTo(deleteContainer.snp_bottomMargin).offset(-CIConstants.verticalItemSpacing)
+            make.centerY.equalTo(deleteContainer.snp_centerY)
             make.width.equalTo(CIConstants.buttonWidth)
         }
     }

@@ -21,10 +21,10 @@ class CIItemSettingsView: CIView {
     let renameButton = CIButton(primaryColor: .whiteColor(), title: "rename".localized)
     let deleteButton = CIButton(primaryColor: .whiteColor(), title: "delete".localized)
     
-    required init(name:String) {
+    required init(name:String, backgroundColor: UIColor) {
         self.itemName = name
         super.init()
-        backgroundColor = .CIGray
+        self.backgroundColor = backgroundColor
         setupSubviews()
         constrainSubviews()
     }
@@ -58,7 +58,9 @@ class CIItemSettingsView: CIView {
         table.backgroundColor = .clearColor()
         addSubview(table)
         
-        bottomContainer.backgroundColor = .CIRed
+        bottomContainer.backgroundColor = .clearColor()
+        bottomContainer.layer.borderWidth = 2.0
+        bottomContainer.layer.borderColor = UIColor.whiteColor().CGColor
         addSubview(bottomContainer)
         
         bottomContainer.addSubview(renameButton)
@@ -92,9 +94,9 @@ class CIItemSettingsView: CIView {
         
         bottomContainer.snp_makeConstraints{(make)->Void in
             make.top.equalTo(renameButton.snp_top).offset(-2 * CIConstants.verticalItemSpacing)
-            make.leading.equalTo(self.snp_leading)
-            make.trailing.equalTo(self.snp_trailing)
-            make.bottom.equalTo(self.snp_bottom)
+            make.leading.equalTo(self.snp_leading).offset(-2)
+            make.trailing.equalTo(self.snp_trailing).offset(2)
+            make.bottom.equalTo(self.snp_bottom).offset(2)
         }
         
         renameButton.snp_makeConstraints{(make)->Void in

@@ -16,7 +16,7 @@ class CISettingsViewCell: CITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .CIGray
+        self.backgroundColor = .clearColor()
         setupSubviews()
         constrainSubviews()
     }

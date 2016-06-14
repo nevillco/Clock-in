@@ -13,11 +13,11 @@ import RealmSwift
 
 class CIItemSettingsViewController: CIViewController {
     var notificationsOn = false
-    let item:CIModelItem
+    let manager:CIModelItemManager
     var renameField = UITextField()
     
-    required init(item:CIModelItem) {
-        self.item = item
+    required init(manager:CIModelItemManager) {
+        self.manager = manager
         super.init()
     }
     
@@ -27,7 +27,7 @@ class CIItemSettingsViewController: CIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = CIItemSettingsView(name: item.name)
+        let view = CIItemSettingsView(name: manager.item.name, backgroundColor: manager.colorForItem())
         loadDefaults()
         addTargets(view)
         addDelegates(view)
@@ -53,7 +53,7 @@ private extension CIItemSettingsViewController {
     func saveRealm() {
         let realm = try! Realm()
         try! realm.write {
-            realm.add(item, update: true)
+            realm.add(manager.item, update: true)
         }
     }
     
@@ -81,7 +81,7 @@ extension CIItemSettingsViewControllerTargets {
         let cell = sender.superview as! CISettingsViewCell
         let realm = try! Realm()
         try! realm.write {
-            item.notificationIntervals.removeAtIndex(cell.tag)
+            manager.item.notificationIntervals.removeAtIndex(cell.tag)
         }
         
         let view = self.view as! CIItemSettingsView
@@ -92,7 +92,7 @@ extension CIItemSettingsViewControllerTargets {
     
     func addButtonPressed(sender: UIButton) {
         let newController = CIAddNotificationViewController()
-        newController.item = item
+        newController.item = manager.item
         presentViewController(newController, animated: true, completion: nil)
     }
     
@@ -104,7 +104,7 @@ extension CIItemSettingsViewControllerTargets {
             let presenterView = presenter.view as! CIHomeView
             let realm = try! Realm()
             try! realm.write{
-                realm.delete(self.item)
+                realm.delete(self.manager.item)
             }
             self.dismissViewControllerAnimated(true, completion: {_ in
                 presenter.reloadManagers()
@@ -135,7 +135,7 @@ extension CIItemSettingsViewControllerTargets {
                 })
             }
             else {
-                CIModelItemCreator.rename(self.item, toName: name)
+                CIModelItemCreator.rename(self.manager.item, toName: name)
                 self.dialogAlert("Success".localized, message: "Your item has been renamed.".localized)
                 let view = self.view as! CIItemSettingsView
                 view.titleLabel.text = name
@@ -192,12 +192,12 @@ extension CIItemSettingsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDe
 
 extension CIItemSettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notificationsOn ? item.notificationIntervals.count : 0
+        return notificationsOn ? manager.item.notificationIntervals.count : 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(.CISettingsCellReuseIdentifier) as! CISettingsViewCell
-        let interval = item.notificationIntervals[indexPath.row]
+        let interval = manager.item.notificationIntervals[indexPath.row]
         
         cell.label.text = NSDate.longStringForInterval(Int(interval.value))
         cell.tag = indexPath.row
@@ -219,9 +219,10 @@ extension CIItemSettingsViewController: UITableViewDataSource, UITableViewDelega
         if(!notificationsOn) { return nil }
         
         let header = CISettingsViewHeader()
+        header.backgroundColor = manager.colorForItem()
         
         let max = CIConstants.maxNotifications
-        let current = item.notificationIntervals.count
+        let current = manager.item.notificationIntervals.count
         
         let text = String(format: "%d notifications allowed\n%d remaining", max, (max - current))
         let attributedText = NSMutableAttributedString(string: text)
