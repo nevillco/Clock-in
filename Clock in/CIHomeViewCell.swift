@@ -18,6 +18,7 @@ class CIHomeViewCell: CITableViewCell {
     let controlContainer = CIView()
     
     let clockDurationLabel = UILabel()
+    let rewindButton = UIButton()
     let cancelButton = UIButton()
     
     var timer:NSTimer?
@@ -73,6 +74,13 @@ class CIHomeViewCell: CITableViewCell {
         clockDurationLabel.alpha = 0
         controlContainer.addSubview(clockDurationLabel)
         
+        rewindButton.setTitle("rewind".localized, forState: .Normal)
+        rewindButton.setTitleColor(.whiteColor(), forState: .Normal)
+        rewindButton.setTitleColor(.CIGray, forState: .Highlighted)
+        rewindButton.titleLabel!.font = UIFont.CITextButtonFont
+        rewindButton.alpha = 0
+        controlContainer.addSubview(rewindButton)
+        
         cancelButton.setTitle("cancel".localized, forState: .Normal)
         cancelButton.setTitleColor(.whiteColor(), forState: .Normal)
         cancelButton.setTitleColor(.CIGray, forState: .Highlighted)
@@ -112,8 +120,13 @@ class CIHomeViewCell: CITableViewCell {
             make.centerY.equalTo(controlContainer.snp_centerY)
         }
         
-        cancelButton.snp_makeConstraints{(make)->Void in
+        rewindButton.snp_makeConstraints{(make)->Void in
             make.leading.equalTo(clockButton.snp_trailing)
+            make.centerY.equalTo(controlContainer.snp_centerY)
+        }
+        
+        cancelButton.snp_makeConstraints{(make)->Void in
+            make.leading.equalTo(rewindButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
             make.centerY.equalTo(controlContainer.snp_centerY)
         }
         
@@ -183,6 +196,7 @@ extension CIHomeViewCellStyling {
             }, completion: nil)
         UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
             self.clockDurationLabel.alpha = 1
+            self.rewindButton.alpha = 1
             self.cancelButton.alpha = 1
             }, completion: nil)
         
@@ -190,6 +204,7 @@ extension CIHomeViewCellStyling {
     else {
         UIView.animateWithDuration(0.5, animations: {
             self.clockDurationLabel.alpha = 0
+            self.rewindButton.alpha = 0
             self.cancelButton.alpha = 0
             }, completion: {_ in
                 self.clockDurationLabel.text = "00:00:00" })
@@ -202,8 +217,8 @@ extension CIHomeViewCellStyling {
 
 typealias CIHomeViewCellTimer = CIHomeViewCell
 extension CIHomeViewCellTimer {
-    func startTimer(startTime:NSDate) {
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(updateDurationLabel), userInfo: startTime, repeats: true)
+    func startTimer(manager:CIModelItemManager) {
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(updateDurationLabel), userInfo: manager, repeats: true)
     }
     
     func resetTimer() {
@@ -212,8 +227,8 @@ extension CIHomeViewCellTimer {
     }
     
     func updateDurationLabel() {
-        let startTime = timer!.userInfo as! NSDate
-        let interval = NSDate().timeIntervalSinceDate(startTime)
+        let manager = timer!.userInfo as! CIModelItemManager
+        let interval = manager.currentClockTime()
         self.clockDurationLabel.text = NSDate.stringForInterval(Int(interval))
     }
 }

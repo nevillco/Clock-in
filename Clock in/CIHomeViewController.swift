@@ -75,7 +75,7 @@ extension CIHomeViewControllerTargets {
         }
         else {
             manager.clockIn()
-            cell.startTimer(manager.lastClockIn!)
+            cell.startTimer(manager)
         }
         cell.applyClockedStyle(manager.clockedIn)
     }
@@ -101,6 +101,12 @@ extension CIHomeViewControllerTargets {
         let delegates = [CILineGraphDelegate(item: manager.item)]
         let viewControllers = delegates.map({ CIItemStatsChartViewController(delegate: $0) })
         presentViewController(CIStatsPageViewController(viewControllers:viewControllers), animated: true, completion: nil)
+    }
+    
+    func rewindButtonPressed(sender: UIButton) {
+        let cell = sender.superview!.superview as! CIHomeViewCell
+        let manager = itemManagers[cell.tag]
+        presentViewController(CIRewindViewController(manager: manager), animated: true, completion: nil)
     }
 }
 
@@ -149,8 +155,10 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.clockButton.addTarget(self, action: #selector(clockButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.settingsButton.addTarget(self, action: #selector(itemSettingsButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        cell.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.statsButton.addTarget(self, action: #selector(itemStatsButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        cell.rewindButton.addTarget(self, action: #selector(rewindButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        cell.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         return cell
     }
