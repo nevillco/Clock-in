@@ -16,11 +16,11 @@ class CIItemStatsChartView: CIView {
     var chart:ChartViewBase
     let botLine = UIView()
     
-    required init(item: CIModelItem, delegate: CIItemStatsChartDelegate) {
+    required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
         buttons = delegate.controlNames().map({ CIButton(primaryColor: .whiteColor(), title: $0) })
         chart = delegate.chartType().init()
         super.init()
-        backgroundColor = UIColor.CIColorPalette[item.colorIndex]
+        backgroundColor = manager.colorForItem()
         setupSubviews()
         constrainSubviews()
     }

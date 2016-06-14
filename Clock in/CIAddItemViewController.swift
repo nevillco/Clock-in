@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class CIAddItemViewController: CIViewController {
-    var availableColors = UIColor.CIAvailableColors()
+    var availableColors = CIModelItemManager.CIAvailableColors()
     var selectedColor = UIColor.clearColor()
     var itemsAdded = 0
     

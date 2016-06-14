@@ -15,7 +15,7 @@ class CIRewindViewController: CIViewController {
     
     required init(manager: CIModelItemManager) {
         self.manager = manager
-        let view = CIRewindView(backgroundColor: UIColor.CIColorPalette[manager.item.colorIndex])
+        let view = CIRewindView(backgroundColor: manager.colorForItem())
         view.startTimer(manager.lastClockIn!)
         super.init()
         self.view = view

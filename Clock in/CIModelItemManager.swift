@@ -50,6 +50,10 @@ class CIModelItemManager {
         return NSDate().timeIntervalSinceDate(lastClockIn!) - rewindTime
     }
     
+    func colorForItem() -> UIColor {
+        return UIColor.CIColorPalette[item.colorIndex]
+    }
+    
     private func scheduleNotifications() {
         item.notificationIntervals.forEach({doubleObj in
             let notification = UILocalNotification()
@@ -68,5 +72,17 @@ class CIModelItemManager {
                 app.cancelLocalNotification(notification)
             }
         }
+    }
+    
+    static func CIAvailableColors() -> [UIColor] {
+        let realm = try! Realm()
+        let modelItems = realm.objects(CIModelItem.self)
+        var colors = UIColor.CIColorPalette
+        var takenIndices:[Int] = modelItems.map({ $0.colorIndex })
+        takenIndices.sortInPlace({ $1 < $0 })
+        for index in takenIndices {
+            colors.removeAtIndex(index)
+        }
+        return colors
     }
 }

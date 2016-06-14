@@ -11,9 +11,9 @@ import Foundation
 
 class CIItemStatsChartViewController: CIViewController {
     let delegate:CIItemStatsChartDelegate
-    let item: CIModelItem
-    required init(item: CIModelItem, delegate: CIItemStatsChartDelegate) {
-        self.item = item
+    let manager: CIModelItemManager
+    required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
+        self.manager = manager
         self.delegate = delegate
         super.init()
     }
@@ -24,7 +24,7 @@ class CIItemStatsChartViewController: CIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = CIItemStatsChartView(item: item, delegate: delegate)
+        let view = CIItemStatsChartView(manager: manager, delegate: delegate)
         delegate.styleChart(view.chart)
         addTargets(view)
         self.view = view

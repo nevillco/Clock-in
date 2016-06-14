@@ -97,10 +97,10 @@ extension CIHomeViewControllerTargets {
     
     func itemStatsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
-        let item = itemManagers[cell.tag].item
-        let delegateTypes = [CILineGraphDelegate(item: item)]
-        let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(item: item, delegate: $0) })
-        presentViewController(CIStatsPageViewController(viewControllers:viewControllers, item: item), animated: true, completion: nil)
+        let manager = itemManagers[cell.tag]
+        let delegateTypes = [CILineGraphDelegate(item: manager.item)]
+        let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(manager: manager, delegate: $0) })
+        presentViewController(CIStatsPageViewController(viewControllers:viewControllers, manager: manager), animated: true, completion: nil)
     }
     
     func rewindButtonPressed(sender: UIButton) {
@@ -146,11 +146,11 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(.CIHomeCellReuseIdentifier) as! CIHomeViewCell
-        let item = itemManagers[indexPath.row].item
-        let color = UIColor.CIColorPalette[item.colorIndex]
+        let manager = itemManagers[indexPath.row]
+        let color = manager.colorForItem()
         
         cell.primaryColor = color
-        cell.nameLabel.text = item.name
+        cell.nameLabel.text = manager.item.name
         cell.tag = indexPath.row
         
         cell.clockButton.addTarget(self, action: #selector(clockButtonPressed(_:)), forControlEvents: .TouchUpInside)

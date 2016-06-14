@@ -89,6 +89,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         lineChart.leftAxis.axisLineColor = .whiteColor()
         lineChart.leftAxis.axisLineWidth = 2.0
         lineChart.leftAxis.valueFormatter = YAxisFormatter()
+        lineChart.leftAxis.axisMinValue = 0
         
         lineChart.xAxis.labelFont = .CIChartAxisLabelFont
         lineChart.xAxis.labelTextColor = .whiteColor()
