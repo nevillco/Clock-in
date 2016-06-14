@@ -14,6 +14,7 @@ extension UIFont {
     @nonobjc static let CIBoldBodyFont = UIFont(name: "Lato-Bold", size: 14.0)!
     @nonobjc static let CILargeTextButtonFont = UIFont(name: "Lato-Regular", size: 26.0)!
     @nonobjc static let CITextButtonFont = UIFont(name: "Lato-Regular", size: 18.0)!
+    @nonobjc static let CITimerTextFont = UIFont(name: "Lato-Bold", size: 18.0)!
     @nonobjc static let CITextFieldFont = UIFont(name: "Lato-Regular", size: 22.0)!
     
     @nonobjc static let CIHomeTitleLightFont = UIFont(name: "Lato-Light", size: 40.0)!
@@ -26,4 +27,6 @@ extension UIFont {
     
     @nonobjc static let CIEmptyDataSetTitleFont = UIFont(name: "Lato-Hairline", size: 44.0)!
     @nonobjc static let CIEmptyDataSetBodyFont = UIFont(name: "Lato-Regular", size: 15.0)!
+    
+    @nonobjc static let CIChartAxisLabelFont = UIFont(name: "Lato-Light", size: 13.0)!
 }

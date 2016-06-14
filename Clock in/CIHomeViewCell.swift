@@ -66,9 +66,9 @@ class CIHomeViewCell: CITableViewCell {
         settingsButton.titleLabel!.font = UIFont.CITextButtonFont
         controlContainer.addSubview(settingsButton)
         
-        clockDurationLabel.text = "00:00"
+        clockDurationLabel.text = "0s"
         clockDurationLabel.textColor = .whiteColor()
-        clockDurationLabel.font = UIFont.CITextButtonFont
+        clockDurationLabel.font = UIFont.CITimerTextFont
         clockDurationLabel.numberOfLines = 1
         clockDurationLabel.alpha = 0
         controlContainer.addSubview(clockDurationLabel)
@@ -214,15 +214,7 @@ extension CIHomeViewCellTimer {
     func updateDurationLabel() {
         let startTime = timer!.userInfo as! NSDate
         let interval = NSDate().timeIntervalSinceDate(startTime)
-        self.clockDurationLabel.text = stringFromTimeInterval(interval)
-    }
-    
-    private func stringFromTimeInterval(interval: NSTimeInterval) -> String {
-        let interval = Int(interval)
-        let seconds = interval % 60
-        let minutes = (interval / 60) % 60
-        let hours = (interval / 3600)
-        return (hours == 0) ? String(format: "%02d:%02d", minutes, seconds) : String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        self.clockDurationLabel.text = NSDate.stringForInterval(Int(interval))
     }
 }
 

@@ -59,8 +59,48 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
             let value = yValue(atXLabel: xValues[i], forItem: item, selectedButtonIndex: selectedButtonIndex)
             dataEntries.append(ChartDataEntry(value: value, xIndex: i))
         }
-        let dataSet = LineChartDataSet(yVals: dataEntries, label: "Clock time by day")
+        
+        let dataSet = LineChartDataSet(yVals: dataEntries, label: "")
+        dataSet.circleColors = [UIColor.whiteColor()]
+        dataSet.circleRadius = 6.0
+        dataSet.lineWidth = 2.0
+        dataSet.colors = [UIColor.whiteColor()]
+        dataSet.drawValuesEnabled = false
+        dataSet.drawFilledEnabled = true
+        dataSet.highlightEnabled = false
+        
         let data = LineChartData(xVals: xValues, dataSet: dataSet)
+        
         chart.data = data
+    }
+    
+    func styleChart(chart: ChartViewBase) {
+        let lineChart = chart as! LineChartView
+        lineChart.descriptionText = ""
+        lineChart.extraRightOffset = CIConstants.chartRightOffset
+        
+        lineChart.legend.enabled = false
+        
+        lineChart.rightAxis.enabled = false
+        
+        lineChart.leftAxis.labelFont = .CIChartAxisLabelFont
+        lineChart.leftAxis.labelTextColor = .whiteColor()
+        lineChart.leftAxis.gridColor = .whiteColor()
+        lineChart.leftAxis.axisLineColor = .whiteColor()
+        lineChart.leftAxis.axisLineWidth = 2.0
+        lineChart.leftAxis.valueFormatter = YAxisFormatter()
+        
+        lineChart.xAxis.labelFont = .CIChartAxisLabelFont
+        lineChart.xAxis.labelTextColor = .whiteColor()
+        lineChart.xAxis.labelPosition = .Bottom
+        lineChart.xAxis.axisLineColor = .whiteColor()
+        lineChart.xAxis.axisLineWidth = 2.0
+        lineChart.xAxis.gridLineWidth = 0.0
+    }
+}
+
+class YAxisFormatter: NSNumberFormatter {
+    override func stringFromNumber(number: NSNumber) -> String? {
+        return NSDate.stringForInterval(number.integerValue)
     }
 }

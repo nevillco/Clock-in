@@ -32,6 +32,5 @@ class CIConstants {
         60*120]
     
     static let pageControlHeight:CGFloat = 40.0
-    static let statsCellHeight:CGFloat = 32.0
-    static let statsCollectionHeight:CGFloat = 60.0
+    static let chartRightOffset:CGFloat = 35.0
 }

@@ -15,4 +15,5 @@ protocol CIItemStatsChartDelegate {
     func xValues(forItem item: CIModelItem, selectedButtonIndex:Int) -> [String]
     func yValue(atXLabel xLabel:String, forItem item:CIModelItem, selectedButtonIndex:Int) -> Double
     func loadChartData(chart: ChartViewBase, selectedButtonIndex:Int)
+    func styleChart(chart:ChartViewBase)
 }

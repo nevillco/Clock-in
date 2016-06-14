@@ -23,7 +23,8 @@ extension NSDate {
             return String(format: "%dh%dm", hours, minutes)
         }
         else if minutes > 0 {
-            return String(format: "%dm", minutes)
+            if seconds == 0 { return String(format:"%dm", minutes) }
+            return String(format: "%dm%ds", minutes, seconds)
         }
         return String(format: "%ds", seconds)
     }

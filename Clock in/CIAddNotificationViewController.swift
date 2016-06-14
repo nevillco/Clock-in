@@ -9,8 +9,10 @@
 import UIKit
 import DZNEmptyDataSet
 import Foundation
+import RealmSwift
 
 class CIAddNotificationViewController: CIViewController {
+    var item: CIModelItem?
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = CIAddNotificationView()
@@ -36,25 +38,49 @@ extension CIAddNotificationViewControllerTargets {
     func goButtonPressed(sender: UIButton) {
         let view = self.view as! CIAddNotificationView
         let interval = view.picker.countDownDuration
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var defaultIntervals = defaults.objectForKey(.CIDefaultNotificationIntervals) as! [NSTimeInterval]
-        
-        if defaultIntervals.contains(interval) {
-            errorAlert("This time is already in your default notifications.".localized)
+        if item == nil {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            var defaultIntervals = defaults.objectForKey(.CIDefaultNotificationIntervals) as! [NSTimeInterval]
+            if defaultIntervals.contains(interval) {
+                errorAlert("This time is already in your default notifications.".localized)
+            }
+            else {
+                let presenter = presentingViewController as! CIGlobalSettingsViewController
+                let presenterView = presenter.view as! CIGlobalSettingsView
+                defaultIntervals.append(interval)
+                let newIntervals = defaultIntervals.sort()
+                defaults.setObject(newIntervals, forKey: .CIDefaultNotificationIntervals)
+                dismissViewControllerAnimated(true, completion: {
+                    presenter.loadDefaults()
+                    presenter.dialogAlert("Success".localized, message: "This time is now included in your default notifications.")
+                    presenterView.table.reloadEmptyDataSet()
+                    presenterView.table.reloadData()
+                })
+            }
         }
         else {
-            let presenter = presentingViewController as! CIGlobalSettingsViewController
-            let presenterView = presenter.view as! CIGlobalSettingsView
-            defaultIntervals.append(interval)
-            let newIntervals = defaultIntervals.sort()
-            defaults.setObject(newIntervals, forKey: .CIDefaultNotificationIntervals)
-            dismissViewControllerAnimated(true, completion: {
-                presenter.dialogAlert("Success".localized, message: "This time is now included in your default notifications.")
-                presenter.loadDefaults()
-                presenterView.table.reloadEmptyDataSet()
-                presenterView.table.reloadData()
-            })
+            let newValue = CIDoubleObject()
+            newValue.value = interval
+            if item!.notificationIntervals.contains(newValue) {
+                errorAlert("This time is already in your item's notifications.".localized)
+            }
+            else {
+                let realm = try! Realm()
+                var index = 0
+                while item!.notificationIntervals[index].value < interval {
+                    index += 1
+                }
+                try! realm.write {
+                    item!.notificationIntervals.insert(newValue, atIndex: index)
+                }
+                let presenter = presentingViewController as! CIItemSettingsViewController
+                let presenterView = presenter.view as! CIItemSettingsView
+                dismissViewControllerAnimated(true, completion: {
+                    presenter.dialogAlert("Success".localized, message: "This time is now included in your item's notifications.")
+                    presenterView.table.reloadEmptyDataSet()
+                    presenterView.table.reloadData()
+                })
+            }
         }
     }
 }

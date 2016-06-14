@@ -23,9 +23,10 @@ class CIItemStatsChartViewController: CIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = CIItemStatsChartView(buttonNames: delegate.controlNames(), chartType: delegate.chartType().self)
+        delegate.styleChart(view.chart)
         addTargets(view)
-        addDelegates(view)
         self.view = view
+        chartButtonPressed(view.buttons[0])
     }
     
     func chartButtonPressed(sender: UIButton) {
@@ -40,8 +41,5 @@ private extension CIItemStatsChartViewController {
         for button in view.buttons {
             button.addTarget(self, action: #selector(chartButtonPressed(_:)), forControlEvents: .TouchUpInside)
         }
-    }
-    
-    func addDelegates(view: CIItemStatsChartView) {
     }
 }

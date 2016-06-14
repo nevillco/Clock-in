@@ -91,7 +91,9 @@ extension CIItemSettingsViewControllerTargets {
     }
     
     func addButtonPressed(sender: UIButton) {
-        presentViewController(CIAddNotificationViewController(), animated: true, completion: nil)
+        let newController = CIAddNotificationViewController()
+        newController.item = item
+        presentViewController(newController, animated: true, completion: nil)
     }
     
     func deleteItemButtonPressed(sender: UIButton) {
