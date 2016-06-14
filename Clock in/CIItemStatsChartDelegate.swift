@@ -12,8 +12,9 @@ import Charts
 protocol CIItemStatsChartDelegate {
     func controlNames() -> [String]
     func chartType() -> ChartViewBase.Type
-    func xValues(forItem item: CIModelItem, selectedButtonIndex:Int) -> [String]
-    func yValue(atXLabel xLabel:String, forItem item:CIModelItem, selectedButtonIndex:Int) -> Double
+    func xValues(selectedButtonIndex:Int) -> [String]
+    func yValue(atXLabel xLabel:String, selectedButtonIndex:Int) -> Double
     func loadChartData(chart: ChartViewBase, selectedButtonIndex:Int)
     func styleChart(chart:ChartViewBase)
+    func hasSufficientData(selectedButtonIndex:Int) -> Bool
 }

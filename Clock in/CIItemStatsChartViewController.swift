@@ -37,7 +37,10 @@ class CIItemStatsChartViewController: CIViewController {
         for i in 0..<view.buttons.count {
             view.buttons[i].permanentHighlight = (i == index)
         }
-        delegate.loadChartData(view.chart, selectedButtonIndex:index)
+        
+        if delegate.hasSufficientData(index) {
+            delegate.loadChartData(view.chart, selectedButtonIndex:index)
+        }
     }
 }
 

@@ -25,7 +25,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         return LineChartView.self
     }
     
-    func xValues(forItem item:CIModelItem, selectedButtonIndex:Int) -> [String] {
+    func xValues(selectedButtonIndex:Int) -> [String] {
         formatter.dateFormat = "M/dd/yy"
         var currentDate = item.createDate.roundToDay()
         var xValues:[String] = []
@@ -36,7 +36,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         return xValues
     }
     
-    func yValue(atXLabel xLabel:String, forItem item:CIModelItem, selectedButtonIndex:Int) -> Double {
+    func yValue(atXLabel xLabel:String, selectedButtonIndex:Int) -> Double {
         formatter.dateFormat = "M/dd/yy"
         var total = 0.0
         for entry in item.entries {
@@ -53,10 +53,10 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
     }
     
     func loadChartData(chart: ChartViewBase, selectedButtonIndex:Int) {
-        let xValues = self.xValues(forItem: item, selectedButtonIndex:selectedButtonIndex)
+        let xValues = self.xValues(selectedButtonIndex)
         var dataEntries:[ChartDataEntry] = []
         for i in 0..<xValues.count {
-            let value = yValue(atXLabel: xValues[i], forItem: item, selectedButtonIndex: selectedButtonIndex)
+            let value = yValue(atXLabel: xValues[i], selectedButtonIndex: selectedButtonIndex)
             dataEntries.append(ChartDataEntry(value: value, xIndex: i))
         }
         
@@ -97,6 +97,13 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         lineChart.xAxis.axisLineColor = .whiteColor()
         lineChart.xAxis.axisLineWidth = 2.0
         lineChart.xAxis.gridLineWidth = 0.0
+    }
+    
+    func hasSufficientData(selectedButtonIndex: Int) -> Bool {
+        let xVals = xValues(selectedButtonIndex)
+        let yValues = xVals.map({ self.yValue(atXLabel: $0, selectedButtonIndex: selectedButtonIndex) })
+        let max = Int(yValues.maxElement()!)
+        return max >= 5
     }
 }
 
