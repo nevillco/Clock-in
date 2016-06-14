@@ -26,23 +26,24 @@ class CIModelItemManager {
     }
     
     func clockOut() {
-        let newEntry = CIModelEntry()
-        newEntry.startDate = lastClockIn!
-        newEntry.time = currentClockTime()
-        
+        let newEntries = generateEntries(NSDate().dateByAddingTimeInterval(adjustTime), firstRun: true)
         let realm = try! Realm()
         try! realm.write {
-            item.entries.append(newEntry)
+            for newEntry in newEntries {
+                item.entries.append(newEntry)
+            }
         }
         
         lastClockIn = nil
         clockedIn = false
+        adjustTime = 0
         cancelNotifications()
     }
     
     func cancelClockIn() {
         lastClockIn = nil
         clockedIn = false
+        adjustTime = 0
         cancelNotifications()
     }
 
@@ -71,6 +72,26 @@ class CIModelItemManager {
             if notification.category! == item.name {
                 app.cancelLocalNotification(notification)
             }
+        }
+    }
+    
+    private func generateEntries(targetDate:NSDate, firstRun:Bool) -> [CIModelEntry] {
+        if targetDate.sameDay(lastClockIn!) {
+            let newEntry = CIModelEntry()
+            newEntry.startDate = lastClockIn!
+            newEntry.time = targetDate.timeIntervalSinceDate(lastClockIn!)
+            return [newEntry]
+        }
+        else {
+            var targetDateShifted = targetDate.roundToDay()
+            if(!firstRun) { targetDateShifted = targetDateShifted.advancedByDays(-1) }
+            let partialInterval = targetDate.timeIntervalSinceDate(targetDateShifted)
+            let newEntry = CIModelEntry()
+            newEntry.startDate = targetDateShifted
+            newEntry.time = partialInterval
+            var entries = [newEntry]
+            entries.appendContentsOf(generateEntries(targetDateShifted, firstRun:false))
+            return entries
         }
     }
     

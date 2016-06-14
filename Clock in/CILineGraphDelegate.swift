@@ -28,8 +28,10 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
     func xValues(selectedButtonIndex:Int) -> [String] {
         formatter.dateFormat = "M/dd/yy"
         var currentDate = item.createDate.roundToDay()
+        let sortedEntries = item.entries.sorted("startDate", ascending: true)
+        let lastDate = sortedEntries.last!.startDate
         var xValues:[String] = []
-        while(currentDate.timeIntervalSinceNow < 0.0) {
+        while(currentDate.timeIntervalSinceDate(lastDate) <= 0.0) {
             xValues.append(formatter.stringFromDate(currentDate))
             currentDate = currentDate.advancedByDays(1)
         }
@@ -43,8 +45,8 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
             let dateToCompare = formatter.dateFromString(xLabel)!.roundToDay()
             let entryDate = entry.startDate.roundToDay()
             let includeConditional = (selectedButtonIndex == 0) ?
-            entryDate.sameDay(dateToCompare) :
-            entryDate.timeIntervalSinceDate(dateToCompare) <= 0
+                entryDate.sameDay(dateToCompare) :
+                entryDate.timeIntervalSinceDate(dateToCompare) <= 0
             if includeConditional {
                 total += entry.time
             }
