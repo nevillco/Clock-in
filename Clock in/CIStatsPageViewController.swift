@@ -12,6 +12,7 @@ import SnapKit
 class CIStatsPageViewController: UIViewController {
     let pageViewController: UIPageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
     
+    let item:CIModelItem
     var viewControllers: [CIViewController] = []
     var currentIndex = 0
     
@@ -19,10 +20,11 @@ class CIStatsPageViewController: UIViewController {
     let backButton = UIButton()
     let pageControl: UIPageControl = UIPageControl()
     
-    init(viewControllers: [CIViewController]) {
+    init(viewControllers: [CIViewController], item: CIModelItem) {
         self.viewControllers = viewControllers
+        self.item = item
         super.init(nibName: nil, bundle: nil)
-        self.view.backgroundColor = .CIGreen
+        self.view.backgroundColor = UIColor.CIColorPalette[item.colorIndex]
         setupExternalControls()
     }
     
@@ -99,9 +101,11 @@ extension CIStatsPageViewStyle {
     }
     
     func setupSubviews() {
-        titleLabel.text = "global stats".localized
+        titleLabel.text = item.name
         titleLabel.font = UIFont.CIDefaultTitleFont
         titleLabel.textColor = .whiteColor()
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.6
         view.addSubview(titleLabel)
         
         backButton.setTitle("‹go back".localized, forState: .Normal)
@@ -119,6 +123,7 @@ extension CIStatsPageViewStyle {
         }
         
         titleLabel.snp_makeConstraints {(make)->Void in
+            make.leading.greaterThanOrEqualTo(backButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
             make.trailing.equalTo(self.view.snp_trailingMargin)
             make.topMargin.equalTo(self.view).offset(CIConstants.paddingFromTop)
         }

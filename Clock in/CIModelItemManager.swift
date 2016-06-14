@@ -32,7 +32,6 @@ class CIModelItemManager {
         
         let realm = try! Realm()
         try! realm.write {
-            realm.add(newEntry)
             item.entries.append(newEntry)
         }
         
@@ -45,6 +44,10 @@ class CIModelItemManager {
         lastClockIn = nil
         clockedIn = false
         cancelNotifications()
+    }
+
+    func currentClockTime() -> NSTimeInterval {
+        return NSDate().timeIntervalSinceDate(lastClockIn!) - rewindTime
     }
     
     private func scheduleNotifications() {
@@ -65,9 +68,5 @@ class CIModelItemManager {
                 app.cancelLocalNotification(notification)
             }
         }
-    }
-    
-    func currentClockTime() -> NSTimeInterval {
-        return NSDate().timeIntervalSinceDate(lastClockIn!) - rewindTime
     }
 }

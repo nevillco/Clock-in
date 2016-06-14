@@ -97,10 +97,10 @@ extension CIHomeViewControllerTargets {
     
     func itemStatsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
-        let manager = itemManagers[cell.tag]
-        let delegates = [CILineGraphDelegate(item: manager.item)]
-        let viewControllers = delegates.map({ CIItemStatsChartViewController(delegate: $0) })
-        presentViewController(CIStatsPageViewController(viewControllers:viewControllers), animated: true, completion: nil)
+        let item = itemManagers[cell.tag].item
+        let delegateTypes = [CILineGraphDelegate(item: item)]
+        let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(item: item, delegate: $0) })
+        presentViewController(CIStatsPageViewController(viewControllers:viewControllers, item: item), animated: true, completion: nil)
     }
     
     func rewindButtonPressed(sender: UIButton) {

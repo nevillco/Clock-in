@@ -16,12 +16,12 @@ class CIItemStatsChartView: CIView {
     var chart:ChartViewBase
     let botLine = UIView()
     
-    required init(buttonNames:[String], chartType:ChartViewBase.Type) {
-        buttons = buttonNames.map({ CIButton(primaryColor: .whiteColor(), title: $0) })
-        chart = chartType.self.init()
+    required init(item: CIModelItem, delegate: CIItemStatsChartDelegate) {
+        buttons = delegate.controlNames().map({ CIButton(primaryColor: .whiteColor(), title: $0) })
+        chart = delegate.chartType().init()
         super.init()
-        backgroundColor = .CIGreen
-        setupSubviews(buttonNames)
+        backgroundColor = UIColor.CIColorPalette[item.colorIndex]
+        setupSubviews()
         constrainSubviews()
     }
     
@@ -29,7 +29,7 @@ class CIItemStatsChartView: CIView {
         fatalError(CIError.CoderInitUnimplementedString)
     }
     
-    func setupSubviews(buttonNames:[String]) {
+    func setupSubviews() {
         for line in [topLine, botLine] {
             line.backgroundColor = .whiteColor()
             addSubview(line)

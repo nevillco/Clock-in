@@ -13,7 +13,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
     let formatter = NSDateFormatter()
     let item: CIModelItem
     
-    init(item: CIModelItem) {
+    required init(item: CIModelItem) {
         self.item = item
     }
     
