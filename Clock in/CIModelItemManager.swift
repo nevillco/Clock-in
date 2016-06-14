@@ -13,7 +13,7 @@ class CIModelItemManager {
     let item: CIModelItem
     var clockedIn = false
     var lastClockIn: NSDate? = nil
-    var rewindTime: NSTimeInterval = 0.0
+    var adjustTime: NSTimeInterval = 0.0
     
     init(item: CIModelItem) {
         self.item = item
@@ -47,7 +47,7 @@ class CIModelItemManager {
     }
 
     func currentClockTime() -> NSTimeInterval {
-        return NSDate().timeIntervalSinceDate(lastClockIn!) - rewindTime
+        return NSDate().timeIntervalSinceDate(lastClockIn!) + adjustTime
     }
     
     func colorForItem() -> UIColor {

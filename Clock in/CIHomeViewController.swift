@@ -103,10 +103,10 @@ extension CIHomeViewControllerTargets {
         presentViewController(CIStatsPageViewController(viewControllers:viewControllers, manager: manager), animated: true, completion: nil)
     }
     
-    func rewindButtonPressed(sender: UIButton) {
+    func adjustButtonPressed(sender: UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let manager = itemManagers[cell.tag]
-        presentViewController(CIRewindViewController(manager: manager), animated: true, completion: nil)
+        presentViewController(CIAdjustViewController(manager: manager), animated: true, completion: nil)
     }
 }
 
@@ -157,7 +157,7 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.settingsButton.addTarget(self, action: #selector(itemSettingsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.statsButton.addTarget(self, action: #selector(itemStatsButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
-        cell.rewindButton.addTarget(self, action: #selector(rewindButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        cell.adjustButton.addTarget(self, action: #selector(adjustButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.cancelButton.addTarget(self, action: #selector(cancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         return cell

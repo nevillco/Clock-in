@@ -45,8 +45,8 @@
 		2DB752C21D09F69400D55196 /* CIModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C11D09F69400D55196 /* CIModelItem.swift */; };
 		2DB752C41D09F72700D55196 /* CIModelEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C31D09F72700D55196 /* CIModelEntry.swift */; };
 		2DB752C61D0A00F700D55196 /* CIHomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */; };
-		2DD9A49A1D10501C00303C6C /* CIRewindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9A4991D10501C00303C6C /* CIRewindViewController.swift */; };
-		2DD9A49C1D1050B000303C6C /* CIRewindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9A49B1D1050B000303C6C /* CIRewindView.swift */; };
+		2DD9A49A1D10501C00303C6C /* CIAdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9A4991D10501C00303C6C /* CIAdjustViewController.swift */; };
+		2DD9A49C1D1050B000303C6C /* CIAdjustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD9A49B1D1050B000303C6C /* CIAdjustView.swift */; };
 		2DFFF86D1D0F122F00DE8FF5 /* CIStatsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */; };
 		2DFFF86F1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */; };
 		2DFFF8721D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */; };
@@ -96,8 +96,8 @@
 		2DB752C11D09F69400D55196 /* CIModelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelItem.swift; sourceTree = "<group>"; };
 		2DB752C31D09F72700D55196 /* CIModelEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelEntry.swift; sourceTree = "<group>"; };
 		2DB752C51D0A00F700D55196 /* CIHomeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIHomeViewCell.swift; sourceTree = "<group>"; };
-		2DD9A4991D10501C00303C6C /* CIRewindViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIRewindViewController.swift; sourceTree = "<group>"; };
-		2DD9A49B1D1050B000303C6C /* CIRewindView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIRewindView.swift; sourceTree = "<group>"; };
+		2DD9A4991D10501C00303C6C /* CIAdjustViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAdjustViewController.swift; sourceTree = "<group>"; };
+		2DD9A49B1D1050B000303C6C /* CIAdjustView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAdjustView.swift; sourceTree = "<group>"; };
 		2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStatsPageViewController.swift; sourceTree = "<group>"; };
 		2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsChartViewController.swift; sourceTree = "<group>"; };
 		2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsChartView.swift; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 				2DA2F06F1D0E28480064D196 /* CIItemSettingsView.swift */,
 				2D8C6A291D0DBF50008C8FA4 /* CIAddNotificationView.swift */,
 				2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */,
-				2DD9A49B1D1050B000303C6C /* CIRewindView.swift */,
+				2DD9A49B1D1050B000303C6C /* CIAdjustView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -221,7 +221,7 @@
 				2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */,
 				2DA2F0711D0E285B0064D196 /* CIItemSettingsViewController.swift */,
 				2D8C6A2B1D0DBFF8008C8FA4 /* CIAddNotificationViewController.swift */,
-				2DD9A4991D10501C00303C6C /* CIRewindViewController.swift */,
+				2DD9A4991D10501C00303C6C /* CIAdjustViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D8C6A231D0DAD40008C8FA4 /* CISettingsViewCell.swift in Sources */,
-				2DD9A49A1D10501C00303C6C /* CIRewindViewController.swift in Sources */,
+				2DD9A49A1D10501C00303C6C /* CIAdjustViewController.swift in Sources */,
 				2D3BC8F31D0894CF00EC0425 /* CIAppDelegate.swift in Sources */,
 				2D3BC9201D08C0F600EC0425 /* CIColor.swift in Sources */,
 				2DFFF86D1D0F122F00DE8FF5 /* CIStatsPageViewController.swift in Sources */,
@@ -422,7 +422,7 @@
 				2DFFF86F1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift in Sources */,
 				2DFFF87A1D0F3C7200DE8FF5 /* CILineGraphDelegate.swift in Sources */,
 				2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */,
-				2DD9A49C1D1050B000303C6C /* CIRewindView.swift in Sources */,
+				2DD9A49C1D1050B000303C6C /* CIAdjustView.swift in Sources */,
 				2DA2F0741D0E33E10064D196 /* CIModelItemCreator.swift in Sources */,
 				2DB752C21D09F69400D55196 /* CIModelItem.swift in Sources */,
 				2DB752BE1D09DBC800D55196 /* CITextField.swift in Sources */,
