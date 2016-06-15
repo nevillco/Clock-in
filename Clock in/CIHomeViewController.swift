@@ -133,7 +133,8 @@ extension CIHomeViewControllerTargets {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let manager = itemManagers[cell.tag]
         let delegateTypes:[CIItemStatsChartDelegate] = [CIItemLineChartDelegate(item: manager.item),
-                                                        CIItemWeekdayBarChartDelegate(item: manager.item)]
+                                                        CIItemWeekdayBarChartDelegate(item: manager.item),
+                                                        CIItemClockInsOverIntervalsDelegate(item: manager.item)]
         let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(manager: manager, delegate: $0) })
         presentViewController(CIStatsPageViewController(viewControllers:viewControllers, manager: manager), animated: true, completion: nil)
     }

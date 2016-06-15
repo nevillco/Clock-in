@@ -118,13 +118,13 @@ class CIItemStatsChartView: CIView {
         }
         else if buttons.count == 3 {
             buttons[0].snp_makeConstraints{(make)->Void in
-                make.centerX.equalTo(self.snp_centerX)
+                make.trailing.equalTo(buttons[1].snp_leading).offset(-CIConstants.horizontalItemSpacing)
             }
             buttons[1].snp_makeConstraints{(make)->Void in
-                make.leading.equalTo(buttons[0].snp_trailing).offset(CIConstants.horizontalItemSpacing)
+                make.centerX.equalTo(self.snp_centerX)
             }
             buttons[2].snp_makeConstraints{(make)->Void in
-                make.trailing.equalTo(buttons[0].snp_leading).offset(-CIConstants.horizontalItemSpacing)
+                make.leading.equalTo(buttons[1].snp_trailing).offset(CIConstants.horizontalItemSpacing)
             }
             
         }
