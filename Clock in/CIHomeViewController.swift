@@ -61,13 +61,13 @@ private extension CIHomeViewController {
             return
         }
         let hasReceivedClockInAlert:Bool = defaults.boolForKey(.CIDefaultAlertClockInReceived)
-        if !hasReceivedClockInAlert && itemManagers.count > 0 {
+        if !(hasReceivedClockInAlert) && itemManagers.count > 0 {
             dialogAlert("Nice!".localized, message: "Now that you have an item, just press the clock button next to it when you start that activity. Clock back out the same way when you're done.".localized)
             defaults.setBool(true, forKey: .CIDefaultAlertClockInReceived)
             return
         }
         let hasReceivedClockOutAlert:Bool = defaults.boolForKey(.CIDefaultAlertClockOutReceived)
-        if !hasReceivedClockOutAlert && hasClockedOut {
+        if !(hasReceivedClockOutAlert) && hasClockedOut {
             dialogAlert("That's it!".localized, message: "We'll keep all sorts of stats and charts on your progress as you go. Feel free to check out the Settings to contact the developer with any questions.".localized)
             defaults.setBool(true, forKey: .CIDefaultAlertClockOutReceived)
             return

@@ -26,11 +26,12 @@ class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
     }
     
     func xValues(selectedButtonIndex:Int) -> [String] {
+        let formatter = NSDateFormatter()
         if selectedButtonIndex == 0 {
-            return ["S", "M", "T", "W", "T", "F", "S"]
+            return formatter.weekdaySymbols
         }
         else {
-            return ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+            return formatter.shortMonthSymbols
         }
     }
     
@@ -109,5 +110,14 @@ class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
     
     func chartTitle(selectedButtonIndex: Int) -> String {
         return (selectedButtonIndex == 0) ? "Clocked Time by Weekday".localized : "Clocked Time by Month".localized
+    }
+    
+    func formatSelectedValues(xValue: String, yValue: Double, selectedButtonIndex: Int) -> (String, String) {
+        var xString = xValue
+        if selectedButtonIndex == 1 {
+            let xIndex = xValues(1).indexOf(xValue)!
+            xString = NSDateFormatter().monthSymbols[xIndex]
+        }
+        return (xString.uppercaseString, NSDate.longStringForInterval(Int(yValue)).uppercaseString)
     }
 }

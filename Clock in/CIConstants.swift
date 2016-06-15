@@ -35,4 +35,5 @@ class CIConstants {
     static let pageControlHeight:CGFloat = 40.0
     static let chartLeftOffset:CGFloat = 8.0
     static let chartRightOffset:CGFloat = 35.0
+    static let chartLabelSpacing:CGFloat = 14.0
 }

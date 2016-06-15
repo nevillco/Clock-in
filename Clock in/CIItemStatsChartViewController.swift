@@ -8,8 +8,9 @@
 
 import UIKit
 import Foundation
+import Charts
 
-class CIItemStatsChartViewController: CIViewController {
+class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
     let delegate:CIItemStatsChartDelegate
     let manager: CIModelItemManager
     required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
@@ -27,6 +28,7 @@ class CIItemStatsChartViewController: CIViewController {
         let view = CIItemStatsChartView(manager: manager, delegate: delegate)
         delegate.styleChart(view.chart)
         addTargets(view)
+        addDelegates(view)
         self.view = view
         chartButtonPressed(view.buttons[0])
     }
@@ -42,10 +44,31 @@ class CIItemStatsChartViewController: CIViewController {
             delegate.loadChartData(view.chart, selectedButtonIndex:index)
             view.titleLabel.text = delegate.chartTitle(index)
             view.noDataLabel.alpha = 0
+            view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
+            view.chart.animate(yAxisDuration: 0.5)
+            view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
+            view.selectedPointDataLabel.text = " "
+            view.selectedPointDataLabel.alpha = 1
+            view.selectedPointInfoLabel.alpha = 1
         }
         else {
             view.noDataLabel.alpha = 1
+            view.selectedPointDataLabel.alpha = 0
+            view.selectedPointInfoLabel.alpha = 0
         }
+    }
+    
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        let view = self.view as! CIItemStatsChartView
+        var selectedIndex:Int = 0
+        for i in 1..<view.buttons.count {
+            if view.buttons[i].permanentHighlight { selectedIndex = i }
+        }
+        let xValue = delegate.xValues(selectedIndex)[entry.xIndex]
+        let yValue = delegate.yValue(atXLabel: xValue, selectedButtonIndex: selectedIndex)
+        let (formattedX, formatterY) = delegate.formatSelectedValues(xValue, yValue: yValue, selectedButtonIndex: selectedIndex)
+        view.selectedPointInfoLabel.text = formattedX
+        view.selectedPointDataLabel.text = formatterY
     }
 }
 
@@ -54,5 +77,9 @@ private extension CIItemStatsChartViewController {
         for button in view.buttons {
             button.addTarget(self, action: #selector(chartButtonPressed(_:)), forControlEvents: .TouchUpInside)
         }
+    }
+    
+    func addDelegates(view: CIItemStatsChartView) {
+        view.chart.delegate = self
     }
 }

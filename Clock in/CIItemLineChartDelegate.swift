@@ -14,6 +14,7 @@ class CIItemLineChartDelegate: CIItemStatsChartDelegate {
     let item: CIModelItem
     
     required init(item: CIModelItem) {
+        formatter.dateFormat = "M/dd/yy"
         self.item = item
     }
     
@@ -118,5 +119,12 @@ class CIItemLineChartDelegate: CIItemStatsChartDelegate {
     
     func chartTitle(selectedButtonIndex: Int) -> String {
         return "Clocked Time by Day".localized
+    }
+    
+    func formatSelectedValues(xValue: String, yValue: Double, selectedButtonIndex: Int) -> (String, String) {
+        formatter.dateFormat = "M/dd/yy"
+        let xDate = formatter.dateFromString(xValue)!
+        formatter.dateFormat = "MMMM d"
+        return (formatter.stringFromDate(xDate).uppercaseString, NSDate.longStringForInterval(Int(yValue)).uppercaseString)
     }
 }

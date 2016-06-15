@@ -30,4 +30,6 @@ extension UIFont {
     
     @nonobjc static let CIChartTitleFont = UIFont(name: "Lato-Bold", size: 28.0)!
     @nonobjc static let CIChartAxisLabelFont = UIFont(name: "Lato-Light", size: 13.0)!
+    @nonobjc static let CIChartInfoLabelFont = UIFont(name: "Oswald-Regular", size: 18.0)!
+    @nonobjc static let CIChartDataLabelFont = UIFont(name: "Oswald-Bold", size: 30.0)!
 }
