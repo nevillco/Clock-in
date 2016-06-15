@@ -29,7 +29,6 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         formatter.dateFormat = "M/dd/yy"
         var currentDate = item.createDate.roundToDay()
         let sortedEntries = item.entries.sorted("startDate", ascending: true)
-        print(sortedEntries)
         let lastDate = sortedEntries.last!.startDate
         var xValues:[String] = []
         while(currentDate.timeIntervalSinceDate(lastDate) <= 0.0) {
