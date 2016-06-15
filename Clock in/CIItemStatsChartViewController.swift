@@ -42,14 +42,18 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
         
         if manager.item.entries.count > 0 {
             delegate.loadChartData(view.chart, selectedButtonIndex:index)
+            view.chart.notifyDataSetChanged()
+            delegate.setMinimumAxisRange(view.chart)
+            
             view.titleLabel.text = delegate.chartTitle(index)
             view.noDataLabel.alpha = 0
-            view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
-            view.chart.animate(yAxisDuration: 0.5)
             view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
             view.selectedPointDataLabel.text = " "
             view.selectedPointDataLabel.alpha = 1
             view.selectedPointInfoLabel.alpha = 1
+            
+            view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
+            view.chart.animate(yAxisDuration: 0.5)
         }
         else {
             view.noDataLabel.alpha = 1

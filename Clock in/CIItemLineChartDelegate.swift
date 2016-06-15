@@ -79,6 +79,12 @@ class CIItemLineChartDelegate: CIItemStatsChartDelegate {
         chart.data = data
     }
     
+    func setMinimumAxisRange(chart: ChartViewBase) {
+        let lineChart = chart as! LineChartView
+        lineChart.leftAxis.resetCustomAxisMax()
+        lineChart.leftAxis.axisMaxValue = max(lineChart.leftAxis.axisMaxValue, 10.0)
+    }
+    
     func styleChart(chart: ChartViewBase) {
         let lineChart = chart as! LineChartView
         lineChart.descriptionText = ""

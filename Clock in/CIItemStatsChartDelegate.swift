@@ -18,6 +18,7 @@ protocol CIItemStatsChartDelegate {
     func styleChart(chart:ChartViewBase)
     func chartTitle(selectedIndex: Int) -> String
     func formatSelectedValues(xValue: String, yValue: Double, selectedButtonIndex: Int) -> (String, String)
+    func setMinimumAxisRange(chart:ChartViewBase)
 }
 
 class CIChartIntervalFormatter: NSNumberFormatter {

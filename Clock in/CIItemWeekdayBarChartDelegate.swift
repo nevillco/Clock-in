@@ -72,6 +72,12 @@ class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
         chart.data = data
     }
     
+    func setMinimumAxisRange(chart: ChartViewBase) {
+        let barChart = chart as! BarChartView
+        barChart.leftAxis.resetCustomAxisMax()
+        barChart.leftAxis.axisMaxValue = max(barChart.leftAxis.axisMaxValue, 10.0)
+    }
+    
     func styleChart(chart:ChartViewBase) {
         let barChart = chart as! BarChartView
         barChart.descriptionText = ""

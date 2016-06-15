@@ -79,6 +79,12 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         chart.data = data
     }
     
+    func setMinimumAxisRange(chart: ChartViewBase) {
+        let barChart = chart as! BarChartView
+        barChart.leftAxis.resetCustomAxisMax()
+        barChart.leftAxis.axisMaxValue = max(barChart.leftAxis.axisMaxValue, 7.0)
+    }
+    
     func styleChart(chart: ChartViewBase) {
         let barChart = chart as! BarChartView
         barChart.descriptionText = ""
@@ -117,7 +123,7 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         let xDate = formatter.dateFromString(xValue)!
         formatter.dateFormat = "MMMM d"
         let selectedInterval = item.notificationIntervals[selectedButtonIndex].value
-        let yString = String(format: "%d clock-in%@ over %@", Int(yValue), (Int(yValue) == 1 ? "" : "s"), NSDate.longStringForInterval(Int(selectedInterval)))
+        let yString = String(format: "%d CLOCK%@ OVER %@", Int(yValue), (Int(yValue) == 1 ? "" : "S"), NSDate.longStringForInterval(Int(selectedInterval)).uppercaseString)
         return (formatter.stringFromDate(xDate).uppercaseString, yString)
     }
 }
