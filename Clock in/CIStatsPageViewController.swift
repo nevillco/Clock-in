@@ -75,6 +75,7 @@ class CIStatsPageViewController: UIViewController {
         else {
             pageViewController.setViewControllers([destination], direction: .Reverse, animated: true, completion: nil)
         }
+        currentIndex = sender.currentPage
     }
 }
 

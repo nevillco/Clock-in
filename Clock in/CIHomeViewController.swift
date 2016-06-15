@@ -18,6 +18,9 @@ class CIHomeViewController: CIViewController {
         let view = CIHomeView()
         addDelegates(view)
         addTargets(view)
+        if(itemManagers.count == 0) {
+            view.addItemButton.startFlicker()
+        }
         self.view = view
     }
     
@@ -28,6 +31,10 @@ class CIHomeViewController: CIViewController {
     
     func reloadManagers() {
         self.itemManagers = CIHomeViewController.loadManagers()
+        if(itemManagers.count == 0) {
+            let view = self.view as! CIHomeView
+            view.addItemButton.startFlicker()
+        }
     }
     
     static func loadManagers() -> [CIModelItemManager] {
@@ -69,6 +76,10 @@ extension CIHomeViewControllerTargets {
         if(itemManagers.count >= CIConstants.maxItems) {
             errorAlert("You've reached the maximum number of items. Delete an item (under Settings) to make some space for a new one.".localized)
             return
+        }
+        if(itemManagers.count == 0) {
+            let view = self.view as! CIHomeView
+            view.addItemButton.stopFlicker()
         }
         presentViewController(CIAddItemViewController(), animated: true, completion: nil)
     }

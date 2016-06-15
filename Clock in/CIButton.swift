@@ -15,6 +15,8 @@ class CIButton: UIButton {
     
     let primaryColor:UIColor
     
+    var timer:NSTimer?
+    
     override var highlighted: Bool {
         didSet {
             //if permanentHighlight, apply opposite style
@@ -69,5 +71,18 @@ class CIButton: UIButton {
         if(self.superview == nil) { return nil }
         if(self.superview!.backgroundColor == nil) { return .whiteColor() }
         return self.superview!.backgroundColor
+    }
+    
+    func startFlicker() {
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(flicker(_:)), userInfo: nil, repeats: true)
+    }
+    
+    func stopFlicker() {
+        self.timer?.invalidate()
+        self.timer = nil
+    }
+    
+    func flicker(sender: AnyObject) {
+        self.permanentHighlight = !self.permanentHighlight
     }
 }

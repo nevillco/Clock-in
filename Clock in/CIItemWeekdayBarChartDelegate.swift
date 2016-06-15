@@ -59,12 +59,11 @@ class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
         }
         
         let dataSet = BarChartDataSet(yVals: dataEntries, label: "")
-        dataSet.colors = [UIColor.whiteColor()]
+        dataSet.colors = [UIColor.whiteColor().colorWithAlphaComponent(0.6)]
         dataSet.drawValuesEnabled = false
-        dataSet.barBorderColor = .whiteColor()
-        dataSet.barBorderWidth = CIConstants.borderWidth
-        dataSet.highlightColor = UIColor.colorForItem(item)
-        dataSet.highlightAlpha = 1.0
+        dataSet.highlightColor = UIColor.whiteColor()
+        dataSet.highlightLineWidth = 10
+        dataSet.highlightAlpha = 0.5
         dataSet.highlightEnabled = true
         
         let data = BarChartData(xVals: xValues, dataSet: dataSet)
