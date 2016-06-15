@@ -69,7 +69,9 @@ class CIItemLineChartDelegate: CIItemStatsChartDelegate {
         dataSet.colors = [UIColor.whiteColor()]
         dataSet.drawValuesEnabled = false
         dataSet.drawFilledEnabled = true
-        dataSet.highlightEnabled = false
+        dataSet.highlightEnabled = true
+        dataSet.highlightColor = UIColor.whiteColor()
+        dataSet.highlightLineWidth = 2.0
         
         let data = LineChartData(xVals: xValues, dataSet: dataSet)
         

@@ -27,7 +27,7 @@ class CIItemSettingsViewController: CIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = CIItemSettingsView(name: manager.item.name, backgroundColor: manager.colorForItem())
+        let view = CIItemSettingsView(name: manager.item.name, backgroundColor: UIColor.colorForItem(manager.item))
         loadDefaults()
         addTargets(view)
         addDelegates(view)
@@ -219,7 +219,7 @@ extension CIItemSettingsViewController: UITableViewDataSource, UITableViewDelega
         if(!notificationsOn) { return nil }
         
         let header = CISettingsViewHeader()
-        header.backgroundColor = manager.colorForItem()
+        header.backgroundColor = UIColor.colorForItem(manager.item)
         
         let max = CIConstants.maxNotifications
         let current = manager.item.notificationIntervals.count

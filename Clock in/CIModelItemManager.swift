@@ -51,10 +51,6 @@ class CIModelItemManager {
         return NSDate().timeIntervalSinceDate(lastClockIn!) + adjustTime
     }
     
-    func colorForItem() -> UIColor {
-        return UIColor.CIColorPalette[item.colorIndex]
-    }
-    
     private func scheduleNotifications() {
         item.notificationIntervals.forEach({doubleObj in
             let notification = UILocalNotification()

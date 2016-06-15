@@ -182,7 +182,7 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(.CIHomeCellReuseIdentifier) as! CIHomeViewCell
         let manager = itemManagers[indexPath.row]
-        let color = manager.colorForItem()
+        let color = UIColor.colorForItem(manager.item)
         
         cell.primaryColor = color
         cell.nameLabel.text = manager.item.name

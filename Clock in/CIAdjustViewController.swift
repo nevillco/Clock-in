@@ -16,7 +16,7 @@ class CIAdjustViewController: CIViewController {
     
     required init(manager: CIModelItemManager) {
         self.manager = manager
-        let view = CIAdjustView(backgroundColor: manager.colorForItem())
+        let view = CIAdjustView(backgroundColor: UIColor.colorForItem(manager.item))
         view.startTimer(manager)
         self.selectedButton = view.rewindButton
         super.init()

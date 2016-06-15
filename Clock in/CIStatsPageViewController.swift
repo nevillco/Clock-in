@@ -24,7 +24,7 @@ class CIStatsPageViewController: UIViewController {
         self.viewControllers = viewControllers
         self.manager = manager
         super.init(nibName: nil, bundle: nil)
-        self.view.backgroundColor = manager.colorForItem()
+        self.view.backgroundColor = UIColor.colorForItem(manager.item)
         setupExternalControls()
     }
     

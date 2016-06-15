@@ -13,7 +13,7 @@ import RealmSwift
 class CIAddNotificationViewController: CIViewController {
     var manager: CIModelItemManager? {
         didSet {
-            self.view.backgroundColor = manager!.colorForItem()
+            self.view.backgroundColor = UIColor.colorForItem(manager!.item)
         }
     }
     

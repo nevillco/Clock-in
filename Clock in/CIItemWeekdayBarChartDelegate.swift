@@ -46,7 +46,6 @@ class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
                 total += entry.time
             }
         }
-        print(xLabel, total)
         return total
     }
     
@@ -63,7 +62,8 @@ class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
         dataSet.drawValuesEnabled = false
         dataSet.barBorderColor = .whiteColor()
         dataSet.barBorderWidth = CIConstants.borderWidth
-        dataSet.highlightColor = UIColor.clearColor()
+        dataSet.highlightColor = UIColor.colorForItem(item)
+        dataSet.highlightAlpha = 1.0
         dataSet.highlightEnabled = true
         
         let data = BarChartData(xVals: xValues, dataSet: dataSet)

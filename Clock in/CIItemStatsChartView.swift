@@ -22,9 +22,9 @@ class CIItemStatsChartView: CIView {
         buttons = delegate.controlNames().map({ CIButton(primaryColor: .whiteColor(), title: $0) })
         chart = delegate.chartType().init()
         noDataLabel.text = String(format: "%@\n%@", "Not enough data!".localized, delegate.descriptionForNoData())
-        noDataLabel.backgroundColor = manager.colorForItem()
+        noDataLabel.backgroundColor = UIColor.colorForItem(manager.item)
         super.init()
-        backgroundColor = manager.colorForItem()
+        backgroundColor = UIColor.colorForItem(manager.item)
         setupSubviews()
         constrainSubviews()
     }

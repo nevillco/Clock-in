@@ -28,4 +28,8 @@ extension UIColor {
     @nonobjc static let CIPurple = UIColor(red:0.69, green:0.25, blue:0.80, alpha:1.00)
     @nonobjc static let CIGray = UIColor(red:0.59, green:0.59, blue:0.59, alpha:1.00)
     @nonobjc static let CIBlack = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.00)
+    
+    static func colorForItem(item: CIModelItem) -> UIColor {
+        return CIColorPalette[item.colorIndex]
+    }
 }
