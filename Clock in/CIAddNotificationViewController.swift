@@ -70,7 +70,8 @@ extension CIAddNotificationViewControllerTargets {
             else {
                 let realm = try! Realm()
                 var index = 0
-                while manager!.item.notificationIntervals[index].value < interval {
+                while manager!.item.notificationIntervals[index].value < interval &&
+                      index < manager!.item.notificationIntervals.count - 1{
                     index += 1
                 }
                 try! realm.write {

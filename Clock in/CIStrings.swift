@@ -17,6 +17,7 @@ extension String {
     static let CIDefaultAlertClockInReceived = "AlertClockIn"
     static let CIDefaultAlertClockOutReceived = "AlertClockOut"
     static let CIDefaultAlertForcedClockOut = "AlertForcedClockOut"
+    static let CIHasWrittenDefaults = "HasWrittenDefaults"
     
     static let CIHomeCellReuseIdentifier = "HomeCell"
     static let CISettingsCellReuseIdentifier = "SettingsCell"

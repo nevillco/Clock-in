@@ -74,7 +74,7 @@ private extension CIHomeViewController {
         }
         let wasForcedToClockOut:Bool = defaults.boolForKey(.CIDefaultAlertForcedClockOut)
         if wasForcedToClockOut {
-            dialogAlert("Whoops...".localized, message: "The app terminated while an item was clocked in. We automatically clocked out for you. Make sure you don't terminate the app while clocked in (Leaving it in the background is fine)!")
+            dialogAlert("Whoops...".localized, message: "The app terminated while an item was clocked in. We automatically clocked out for you. Make sure you don't terminate the app while clocked in (Leaving it in the background is fine)!".localized)
             defaults.setBool(false, forKey: .CIDefaultAlertForcedClockOut)
             return
         }
@@ -132,7 +132,8 @@ extension CIHomeViewControllerTargets {
     func itemStatsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let manager = itemManagers[cell.tag]
-        let delegateTypes = [CILineGraphDelegate(item: manager.item)]
+        let delegateTypes:[CIItemStatsChartDelegate] = [CIItemLineChartDelegate(item: manager.item),
+                                                        CIItemWeekdayBarChartDelegate(item: manager.item)]
         let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(manager: manager, delegate: $0) })
         presentViewController(CIStatsPageViewController(viewControllers:viewControllers, manager: manager), animated: true, completion: nil)
     }

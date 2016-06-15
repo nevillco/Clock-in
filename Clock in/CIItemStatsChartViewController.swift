@@ -40,6 +40,7 @@ class CIItemStatsChartViewController: CIViewController {
         
         if delegate.hasSufficientData(index) {
             delegate.loadChartData(view.chart, selectedButtonIndex:index)
+            view.titleLabel.text = delegate.chartTitle(index)
             view.noDataLabel.alpha = 0
         }
         else {

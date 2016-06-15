@@ -18,5 +18,11 @@ protocol CIItemStatsChartDelegate {
     func styleChart(chart:ChartViewBase)
     func hasSufficientData(selectedButtonIndex:Int) -> Bool
     func descriptionForNoData() -> String
-    func chartTitle() -> String
+    func chartTitle(selectedIndex: Int) -> String
+}
+
+class CIChartIntervalFormatter: NSNumberFormatter {
+    override func stringFromNumber(number: NSNumber) -> String? {
+        return NSDate.stringForInterval(number.integerValue)
+    }
 }

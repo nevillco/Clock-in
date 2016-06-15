@@ -23,7 +23,6 @@ class CIItemStatsChartView: CIView {
         chart = delegate.chartType().init()
         noDataLabel.text = String(format: "%@\n%@", "Not enough data!".localized, delegate.descriptionForNoData())
         noDataLabel.backgroundColor = manager.colorForItem()
-        titleLabel.text = delegate.chartTitle()
         super.init()
         backgroundColor = manager.colorForItem()
         setupSubviews()
@@ -38,7 +37,9 @@ class CIItemStatsChartView: CIView {
         titleLabel.font = .CIChartTitleFont
         titleLabel.textColor = .whiteColor()
         titleLabel.textAlignment = .Center
-        titleLabel.numberOfLines = 0
+        titleLabel.numberOfLines = 1
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.5
         addSubview(titleLabel)
         
         for line in [topLine, botLine] {
@@ -74,6 +75,8 @@ class CIItemStatsChartView: CIView {
         titleLabel.snp_makeConstraints{(make)->Void in
             make.centerX.equalTo(self.snp_centerX)
             make.top.equalTo(topLine.snp_bottom).offset(CIConstants.verticalItemSpacing)
+            make.leading.greaterThanOrEqualTo(self.snp_leadingMargin)
+            make.trailing.lessThanOrEqualTo(self.snp_trailingMargin)
         }
         
         for i in 0..<buttons.count {

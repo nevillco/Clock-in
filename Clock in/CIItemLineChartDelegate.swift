@@ -9,7 +9,7 @@
 import Foundation
 import Charts
 
-class CILineGraphDelegate: CIItemStatsChartDelegate {
+class CIItemLineChartDelegate: CIItemStatsChartDelegate {
     let formatter = NSDateFormatter()
     let item: CIModelItem
     
@@ -91,7 +91,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         lineChart.leftAxis.gridColor = .whiteColor()
         lineChart.leftAxis.axisLineColor = .whiteColor()
         lineChart.leftAxis.axisLineWidth = 2.0
-        lineChart.leftAxis.valueFormatter = YAxisFormatter()
+        lineChart.leftAxis.valueFormatter = CIChartIntervalFormatter()
         lineChart.leftAxis.axisMinValue = 0
         
         lineChart.xAxis.labelFont = .CIChartAxisLabelFont
@@ -114,13 +114,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         return "This chart requires you have one day with at least 10 seconds of time clocked in.".localized;
     }
     
-    func chartTitle() -> String {
+    func chartTitle(selectedButtonIndex: Int) -> String {
         return "Clocked Time by Day".localized
-    }
-}
-
-class YAxisFormatter: NSNumberFormatter {
-    override func stringFromNumber(number: NSNumber) -> String? {
-        return NSDate.stringForInterval(number.integerValue)
     }
 }
