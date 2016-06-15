@@ -40,7 +40,7 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
             view.buttons[i].permanentHighlight = (i == index)
         }
         
-        if delegate.hasSufficientData(index) {
+        if manager.item.entries.count > 0 {
             delegate.loadChartData(view.chart, selectedButtonIndex:index)
             view.titleLabel.text = delegate.chartTitle(index)
             view.noDataLabel.alpha = 0

@@ -23,7 +23,7 @@ class CIItemStatsChartView: CIView {
     required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
         buttons = delegate.controlNames().map({ CIButton(primaryColor: .whiteColor(), title: $0) })
         chart = delegate.chartType().init()
-        noDataLabel.text = String(format: "%@\n%@", "Not enough data!".localized, delegate.descriptionForNoData())
+        noDataLabel.text = "No Data!\nLog some time on this item to view stats.".localized
         noDataLabel.backgroundColor = UIColor.colorForItem(manager.item)
         super.init()
         backgroundColor = UIColor.colorForItem(manager.item)
@@ -60,7 +60,7 @@ class CIItemStatsChartView: CIView {
         noDataLabel.textAlignment = .Center
         noDataLabel.numberOfLines = 0
         let attributedText = NSMutableAttributedString(string: noDataLabel.text!)
-        attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIEmptyDataSetTitleFont, range: (noDataLabel.text! as NSString).rangeOfString("Not enough data!"))
+        attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIEmptyDataSetTitleFont, range: (noDataLabel.text! as NSString).rangeOfString("No Data!"))
         noDataLabel.attributedText = attributedText
         noDataLabel.alpha = 0
         addSubview(noDataLabel)
@@ -82,6 +82,47 @@ class CIItemStatsChartView: CIView {
         addSubview(selectedPointDataLabel)
     }
     
+    func constrainButtons(startIndex:Int) {
+        let rowEnd = min(startIndex + 3, buttons.count)
+        
+        let aboveRef = startIndex == 0 ? titleLabel : buttons[startIndex - 1]
+        for i in startIndex..<rowEnd {
+            buttons[i].snp_makeConstraints{(make)->Void in
+                make.top.equalTo(aboveRef.snp_bottom).offset(CIConstants.verticalItemSpacing)
+                make.width.equalTo(CIConstants.buttonWidth)
+            }
+        }
+        
+        let rowCount = rowEnd - startIndex
+        if rowCount == 1 {
+            buttons[startIndex].snp_makeConstraints{(make)->Void in
+                make.centerX.equalTo(self.snp_centerX)
+            }
+        }
+        else if rowCount == 2 {
+            buttons[startIndex].snp_makeConstraints{(make)->Void in
+                make.trailing.equalTo(self.snp_centerX).offset(-0.5 * CIConstants.horizontalItemSpacing)
+            }
+            buttons[startIndex + 1].snp_makeConstraints{(make)->Void in
+                make.leading.equalTo(self.snp_centerX).offset(0.5 * CIConstants.horizontalItemSpacing)
+            }
+        }
+        else if rowCount == 3 {
+            buttons[startIndex].snp_makeConstraints{(make)->Void in
+                make.trailing.equalTo(buttons[startIndex + 1].snp_leading).offset(-CIConstants.horizontalItemSpacing)
+            }
+            buttons[startIndex + 1].snp_makeConstraints{(make)->Void in
+                make.centerX.equalTo(self.snp_centerX)
+            }
+            buttons[startIndex + 2].snp_makeConstraints{(make)->Void in
+                make.leading.equalTo(buttons[startIndex + 1].snp_trailing).offset(CIConstants.horizontalItemSpacing)
+            }
+        }
+        if rowEnd < buttons.count {
+            constrainButtons(rowEnd)
+        }
+    }
+    
     func constrainSubviews() {
         topLine.snp_makeConstraints{(make)->Void in
             make.top.equalTo(self.snp_top)
@@ -97,40 +138,10 @@ class CIItemStatsChartView: CIView {
             make.trailing.lessThanOrEqualTo(self.snp_trailingMargin)
         }
         
-        for i in 0..<buttons.count {
-            buttons[i].snp_makeConstraints{(make)->Void in
-                make.top.equalTo(titleLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
-                make.width.equalTo(CIConstants.buttonWidth)
-            }
-        }
-        if buttons.count == 1 {
-            buttons[0].snp_makeConstraints{(make)->Void in
-                make.centerX.equalTo(self.snp_centerX)
-            }
-        }
-        else if buttons.count == 2 {
-            buttons[0].snp_makeConstraints{(make)->Void in
-                make.trailing.equalTo(self.snp_centerX).offset(-0.5 * CIConstants.horizontalItemSpacing)
-            }
-            buttons[1].snp_makeConstraints{(make)->Void in
-                make.leading.equalTo(self.snp_centerX).offset(0.5 * CIConstants.horizontalItemSpacing)
-            }
-        }
-        else if buttons.count == 3 {
-            buttons[0].snp_makeConstraints{(make)->Void in
-                make.trailing.equalTo(buttons[1].snp_leading).offset(-CIConstants.horizontalItemSpacing)
-            }
-            buttons[1].snp_makeConstraints{(make)->Void in
-                make.centerX.equalTo(self.snp_centerX)
-            }
-            buttons[2].snp_makeConstraints{(make)->Void in
-                make.leading.equalTo(buttons[1].snp_trailing).offset(CIConstants.horizontalItemSpacing)
-            }
-            
-        }
+        constrainButtons(0)
         
         chart.snp_makeConstraints{(make)->Void in
-            let topGuide = (buttons.count > 0) ? buttons[0] : topLine
+            let topGuide = (buttons.count > 0) ? buttons.last! : topLine
             make.top.equalTo(topGuide.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.leading.equalTo(self.snp_leading)
             make.trailing.equalTo(self.snp_trailing)
@@ -163,6 +174,5 @@ class CIItemStatsChartView: CIView {
             make.trailing.equalTo(self.snp_trailing)
             make.height.equalTo(1)
         }
-        
     }
 }

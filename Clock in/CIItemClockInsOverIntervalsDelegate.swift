@@ -20,22 +20,8 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
     
     func controlNames() -> [String] {
         let intervals = item.notificationIntervals
-        var controlNames:[String] = []
-        if intervals.count >= 1 {
-            controlNames.append(NSDate.stringForInterval(Int(firstInterval())))
-        }
-        if intervals.count >= 3 {
-            controlNames.append(NSDate.stringForInterval(Int(midInterval())))
-        }
-        if intervals.count >= 2 {
-            controlNames.append(NSDate.stringForInterval(Int(lastInterval())))
-        }
-        return controlNames
+        return intervals.map({ NSDate.stringForInterval(Int($0.value)) })
     }
-    
-    func firstInterval() -> Double { return item.notificationIntervals.first!.value }
-    func midInterval() -> Double { return item.notificationIntervals[item.notificationIntervals.count / 2].value }
-    func lastInterval() -> Double { return item.notificationIntervals.last!.value }
     
     func chartType() -> ChartViewBase.Type {
         return BarChartView.self
@@ -60,7 +46,7 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         for entry in item.entries {
             let dateToCompare = formatter.dateFromString(xLabel)!.roundToDay()
             let entryDate = entry.startDate.roundToDay()
-            let selectedInterval = [firstInterval(), lastInterval(), midInterval()][selectedButtonIndex]
+            let selectedInterval = item.notificationIntervals[selectedButtonIndex].value
             
             let includeConditional = entryDate.sameDay(dateToCompare) &&
                 entry.time >= selectedInterval
@@ -120,15 +106,6 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         barChart.xAxis.axisLineColor = .whiteColor()
         barChart.xAxis.axisLineWidth = 2.0
         barChart.xAxis.gridLineWidth = 0.0
-
-    }
-    
-    func hasSufficientData(selectedButtonIndex: Int) -> Bool {
-        return item.entries.count > 0
-    }
-    
-    func descriptionForNoData() -> String {
-        return "This chart requires you have a notification time set.".localized;
     }
     
     func chartTitle(selectedButtonIndex: Int) -> String {
@@ -139,7 +116,7 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         formatter.dateFormat = "M/dd/yy"
         let xDate = formatter.dateFromString(xValue)!
         formatter.dateFormat = "MMMM d"
-        let selectedInterval = [firstInterval(), midInterval(), lastInterval()][selectedButtonIndex]
+        let selectedInterval = item.notificationIntervals[selectedButtonIndex].value
         let yString = String(format: "%d clock-in%@ over %@", Int(yValue), (Int(yValue) == 1 ? "" : "s"), NSDate.longStringForInterval(Int(selectedInterval)))
         return (formatter.stringFromDate(xDate).uppercaseString, yString)
     }

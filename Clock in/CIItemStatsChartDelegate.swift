@@ -16,8 +16,6 @@ protocol CIItemStatsChartDelegate {
     func yValue(atXLabel xLabel:String, selectedButtonIndex:Int) -> Double
     func loadChartData(chart: ChartViewBase, selectedButtonIndex:Int)
     func styleChart(chart:ChartViewBase)
-    func hasSufficientData(selectedButtonIndex:Int) -> Bool
-    func descriptionForNoData() -> String
     func chartTitle(selectedIndex: Int) -> String
     func formatSelectedValues(xValue: String, yValue: Double, selectedButtonIndex: Int) -> (String, String)
 }

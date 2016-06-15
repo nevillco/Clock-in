@@ -105,18 +105,6 @@ class CIItemLineChartDelegate: CIItemStatsChartDelegate {
         lineChart.xAxis.gridLineWidth = 0.0
     }
     
-    func hasSufficientData(selectedButtonIndex: Int) -> Bool {
-        if item.entries.count == 0 { return false }
-        let xVals = xValues(selectedButtonIndex)
-        let yValues = xVals.map({ self.yValue(atXLabel: $0, selectedButtonIndex: selectedButtonIndex) })
-        let max = Int(yValues.maxElement()!)
-        return max >= 10
-    }
-    
-    func descriptionForNoData() -> String {
-        return "This chart requires you have one day with at least 10 seconds of time clocked in.".localized;
-    }
-    
     func chartTitle(selectedButtonIndex: Int) -> String {
         return "Clocked Time by Day".localized
     }

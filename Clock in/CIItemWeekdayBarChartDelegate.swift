@@ -99,15 +99,6 @@ class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
         barChart.xAxis.gridLineWidth = 0.0
     }
     
-    func hasSufficientData(selectedButtonIndex:Int) -> Bool {
-        return item.entries.count > 0
-        
-    }
-    
-    func descriptionForNoData() -> String {
-        return "This chart requires you clock in at least once.".localized
-    }
-    
     func chartTitle(selectedButtonIndex: Int) -> String {
         return (selectedButtonIndex == 0) ? "Clocked Time by Weekday".localized : "Clocked Time by Month".localized
     }
