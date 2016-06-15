@@ -29,6 +29,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
         formatter.dateFormat = "M/dd/yy"
         var currentDate = item.createDate.roundToDay()
         let sortedEntries = item.entries.sorted("startDate", ascending: true)
+        print(sortedEntries)
         let lastDate = sortedEntries.last!.startDate
         var xValues:[String] = []
         while(currentDate.timeIntervalSinceDate(lastDate) <= 0.0) {
@@ -103,6 +104,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
     }
     
     func hasSufficientData(selectedButtonIndex: Int) -> Bool {
+        if item.entries.count == 0 { return false }
         let xVals = xValues(selectedButtonIndex)
         let yValues = xVals.map({ self.yValue(atXLabel: $0, selectedButtonIndex: selectedButtonIndex) })
         let max = Int(yValues.maxElement()!)
@@ -114,7 +116,7 @@ class CILineGraphDelegate: CIItemStatsChartDelegate {
     }
     
     func chartTitle() -> String {
-        return "Clock-in Time by Day".localized
+        return "Clocked Time by Day".localized
     }
 }
 

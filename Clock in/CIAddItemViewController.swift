@@ -85,6 +85,7 @@ extension CIAddItemViewControllerTargets {
         let presenterView = presenter.view as! CIHomeView
         dismissViewControllerAnimated(true, completion: {
             presenter.reloadManagers()
+            presenter.viewDidAppear(false)
             presenterView.table.insertRowsAtIndexPaths(self.indexPathsToReloadOnDismiss(), withRowAnimation: .Middle)
             presenterView.table.reloadEmptyDataSet()
         })
