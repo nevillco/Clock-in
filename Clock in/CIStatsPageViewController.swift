@@ -59,11 +59,22 @@ class CIStatsPageViewController: UIViewController {
     }
     
     private func addTargets() {
+        pageControl.addTarget(self, action: #selector(pageControlPressed(_:)), forControlEvents: .ValueChanged)
         backButton.addTarget(self, action: #selector(backButtonPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
     func backButtonPressed(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func pageControlPressed(sender: UIPageControl) {
+        let destination = viewControllers[sender.currentPage]
+        if sender.currentPage > currentIndex {
+            pageViewController.setViewControllers([destination], direction: .Forward, animated: true, completion: nil)
+        }
+        else {
+            pageViewController.setViewControllers([destination], direction: .Reverse, animated: true, completion: nil)
+        }
     }
 }
 

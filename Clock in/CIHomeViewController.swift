@@ -54,24 +54,6 @@ private extension CIHomeViewController {
     
     func presentAlertIfNecessary(hasClockedOut: Bool) {
         let defaults = NSUserDefaults.standardUserDefaults()
-        let hasReceivedAddItemAlert:Bool = defaults.boolForKey(.CIDefaultAlertAddItemReceived)
-        if !hasReceivedAddItemAlert {
-            dialogAlert("Welcome!".localized, message: "Welcome to Clock:in! To get started, press the \"add item\" button in the top right and add a hobby you're interested in tracking.".localized)
-            defaults.setBool(true, forKey: .CIDefaultAlertAddItemReceived)
-            return
-        }
-        let hasReceivedClockInAlert:Bool = defaults.boolForKey(.CIDefaultAlertClockInReceived)
-        if !(hasReceivedClockInAlert) && itemManagers.count > 0 {
-            dialogAlert("Nice!".localized, message: "Now that you have an item, just press the clock button next to it when you start that activity. Clock back out the same way when you're done.".localized)
-            defaults.setBool(true, forKey: .CIDefaultAlertClockInReceived)
-            return
-        }
-        let hasReceivedClockOutAlert:Bool = defaults.boolForKey(.CIDefaultAlertClockOutReceived)
-        if !(hasReceivedClockOutAlert) && hasClockedOut {
-            dialogAlert("That's it!".localized, message: "We'll keep all sorts of stats and charts on your progress as you go. Feel free to check out the Settings to contact the developer with any questions.".localized)
-            defaults.setBool(true, forKey: .CIDefaultAlertClockOutReceived)
-            return
-        }
         let wasForcedToClockOut:Bool = defaults.boolForKey(.CIDefaultAlertForcedClockOut)
         if wasForcedToClockOut {
             dialogAlert("Whoops...".localized, message: "The app terminated while an item was clocked in. We automatically clocked out for you. Make sure you don't terminate the app while clocked in (Leaving it in the background is fine)!".localized)
@@ -134,7 +116,8 @@ extension CIHomeViewControllerTargets {
         let manager = itemManagers[cell.tag]
         let delegateTypes:[CIItemStatsChartDelegate] = [CIItemLineChartDelegate(item: manager.item),
                                                         CIItemWeekdayBarChartDelegate(item: manager.item),
-                                                        CIItemClockInsOverIntervalsDelegate(item: manager.item)]
+                                                        CIItemClockInsOverIntervalsDelegate(item: manager.item),
+                                                        CIItemClockInsByHourDelegate(item: manager.item)]
         let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(manager: manager, delegate: $0) })
         presentViewController(CIStatsPageViewController(viewControllers:viewControllers, manager: manager), animated: true, completion: nil)
     }

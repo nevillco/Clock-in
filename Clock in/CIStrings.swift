@@ -13,9 +13,6 @@ extension String {
     
     static let CIDefaultNotificationsOn = "NotificationsOn"
     static let CIDefaultNotificationIntervals = "NotificationIntervals"
-    static let CIDefaultAlertAddItemReceived = "AlertAddItem"
-    static let CIDefaultAlertClockInReceived = "AlertClockIn"
-    static let CIDefaultAlertClockOutReceived = "AlertClockOut"
     static let CIDefaultAlertForcedClockOut = "AlertForcedClockOut"
     static let CIHasWrittenDefaults = "HasWrittenDefaults"
     

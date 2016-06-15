@@ -68,9 +68,6 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
         if hasWrittenDefaults { return }
         defaults.setBool(notificationsEnabledInSettings(), forKey: .CIDefaultNotificationsOn)
         defaults.setObject(CIConstants.notificationIntervals, forKey: .CIDefaultNotificationIntervals)
-        defaults.setBool(false, forKey: .CIDefaultAlertAddItemReceived)
-        defaults.setBool(false, forKey: .CIDefaultAlertClockInReceived)
-        defaults.setBool(false, forKey: .CIDefaultAlertClockOutReceived)
         defaults.setBool(false, forKey: .CIDefaultAlertForcedClockOut)
         defaults.setBool(true, forKey:  .CIHasWrittenDefaults)
     }

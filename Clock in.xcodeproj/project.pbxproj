@@ -10,6 +10,7 @@
 		27F9FD9D3AFEAD37B3934E63 /* Pods_Clock_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */; };
 		2D2A0AD71D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD61D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift */; };
 		2D2A0AD91D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD81D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift */; };
+		2D2A0ADC1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0ADB1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift */; };
 		2D3BC8F31D0894CF00EC0425 /* CIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F21D0894CF00EC0425 /* CIAppDelegate.swift */; };
 		2D3BC8F51D0894CF00EC0425 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F41D0894CF00EC0425 /* Assets.xcassets */; };
 		2D3BC8F81D0894CF00EC0425 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F61D0894CF00EC0425 /* LaunchScreen.storyboard */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		2D2A0AD61D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemWeekdayBarChartDelegate.swift; sourceTree = "<group>"; };
 		2D2A0AD81D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemClockInsOverIntervalsDelegate.swift; sourceTree = "<group>"; };
+		2D2A0ADB1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemClockInsByHourDelegate.swift; sourceTree = "<group>"; };
 		2D3BC8EF1D0894CF00EC0425 /* Clock in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clock in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D3BC8F21D0894CF00EC0425 /* CIAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIAppDelegate.swift; sourceTree = "<group>"; };
 		2D3BC8F41D0894CF00EC0425 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				2DFFF8791D0F3C7200DE8FF5 /* CIItemLineChartDelegate.swift */,
 				2D2A0AD61D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift */,
 				2D2A0AD81D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift */,
+				2D2A0ADB1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift */,
 			);
 			name = Charts;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */,
 				2DB752C61D0A00F700D55196 /* CIHomeViewCell.swift in Sources */,
 				2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */,
+				2D2A0ADC1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift in Sources */,
 				2D8C6A211D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift in Sources */,
 				2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */,
 				2DFFF8721D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift in Sources */,
