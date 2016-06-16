@@ -34,6 +34,21 @@ class CIAddItemView: CIView {
         fatalError(CIError.CoderInitUnimplementedString)
     }
     
+    func successMessage() {
+        UIView.animateWithDuration(1.0, animations: {
+            self.titleLabel.alpha = 0
+            self.titleLabel.text = "success!".localized
+            self.titleLabel.alpha = 1
+            })
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), {
+            UIView.animateWithDuration(1.0, animations: {
+                self.titleLabel.alpha = 0
+                self.titleLabel.text = "add item".localized
+                self.titleLabel.alpha = 1
+                })
+            });
+    }
+    
     func setupSubviews() {
         backButton.setTitle("‹go back".localized, forState: .Normal)
         backButton.titleLabel!.font = UIFont.CILargeTextButtonFont

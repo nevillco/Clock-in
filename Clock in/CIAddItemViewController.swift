@@ -96,6 +96,7 @@ extension CIAddItemViewControllerTargets {
         let name = view.nameField.text!
         if let error = CIModelItemCreator.validate(name) {
             errorAlert(error)
+            return
         }
         else {
             CIModelItemCreator.createItem(name, color: selectedColor)
@@ -118,7 +119,8 @@ extension CIAddItemViewControllerTargets {
         else {
             view.colorCollection.reloadData()
             collectionView(view.colorCollection, didSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
-            dialogAlert("Success".localized, message: "Your new item has been created. Feel free to add another, or go back to the home page.".localized)
+            let view = self.view as! CIAddItemView
+            view.successMessage()
         }
     }
     
