@@ -14,7 +14,7 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var shouldResetRealm = true
+    var shouldResetRealm = false
     var shouldResetNSUserDefaults = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

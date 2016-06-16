@@ -10,7 +10,7 @@ import Foundation
 import Charts
 import RealmSwift
 
-class CIItemWeekdayBarChartDelegate: CIItemStatsChartDelegate {
+class CIItemStatsFilteredBarChartDelegate: CIItemStatsChartDelegate {
     let item: CIModelItem
     
     required init(item: CIModelItem) {

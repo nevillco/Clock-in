@@ -9,7 +9,7 @@
 import Foundation
 import Charts
 
-class CIItemClockInsByHourDelegate: CIItemStatsChartDelegate {
+class CIItemStatsClockInsByHourChartDelegate: CIItemStatsChartDelegate {
     let formatter = NSDateFormatter()
     let item: CIModelItem
     

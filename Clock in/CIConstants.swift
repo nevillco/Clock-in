@@ -20,6 +20,8 @@ class CIConstants {
     static let homeCellRowHeight:CGFloat = 81
     static let settingsHeaderHeight:CGFloat = 49
     static let settingsCellRowHeight:CGFloat = 39
+    static let statsCellHeaderHeight:CGFloat = 30
+    static let statsCellRowHeight:CGFloat = 94
     
     static let itemMaxChars = 18
     static let charsRemainingForWarning = 5

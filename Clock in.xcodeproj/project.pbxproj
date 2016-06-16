@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		27F9FD9D3AFEAD37B3934E63 /* Pods_Clock_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */; };
-		2D2A0AD71D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD61D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift */; };
-		2D2A0AD91D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD81D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift */; };
-		2D2A0ADC1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0ADB1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift */; };
+		2D2A0AD71D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD61D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift */; };
+		2D2A0AD91D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD81D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift */; };
+		2D2A0ADC1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0ADB1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift */; };
+		2D2A0AE01D133B0800563E9C /* CIItemStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */; };
+		2D2A0AE21D13413900563E9C /* CIStatsCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AE11D13413900563E9C /* CIStatsCellHeader.swift */; };
 		2D3BC8F31D0894CF00EC0425 /* CIAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F21D0894CF00EC0425 /* CIAppDelegate.swift */; };
 		2D3BC8F51D0894CF00EC0425 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F41D0894CF00EC0425 /* Assets.xcassets */; };
 		2D3BC8F81D0894CF00EC0425 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D3BC8F61D0894CF00EC0425 /* LaunchScreen.storyboard */; };
@@ -55,13 +57,15 @@
 		2DFFF8721D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */; };
 		2DFFF8761D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */; };
 		2DFFF8781D0F3BE400DE8FF5 /* CIStatsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8771D0F3BE400DE8FF5 /* CIStatsViewCell.swift */; };
-		2DFFF87A1D0F3C7200DE8FF5 /* CIItemLineChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8791D0F3C7200DE8FF5 /* CIItemLineChartDelegate.swift */; };
+		2DFFF87A1D0F3C7200DE8FF5 /* CIItemStatsLineChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFFF8791D0F3C7200DE8FF5 /* CIItemStatsLineChartDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D2A0AD61D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemWeekdayBarChartDelegate.swift; sourceTree = "<group>"; };
-		2D2A0AD81D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemClockInsOverIntervalsDelegate.swift; sourceTree = "<group>"; };
-		2D2A0ADB1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemClockInsByHourDelegate.swift; sourceTree = "<group>"; };
+		2D2A0AD61D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsFilteredBarChartDelegate.swift; sourceTree = "<group>"; };
+		2D2A0AD81D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsClockInsOverIntervalsChartDelegate.swift; sourceTree = "<group>"; };
+		2D2A0ADB1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsClockInsByHourChartDelegate.swift; sourceTree = "<group>"; };
+		2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsTableViewController.swift; sourceTree = "<group>"; };
+		2D2A0AE11D13413900563E9C /* CIStatsCellHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStatsCellHeader.swift; sourceTree = "<group>"; };
 		2D3BC8EF1D0894CF00EC0425 /* Clock in.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clock in.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D3BC8F21D0894CF00EC0425 /* CIAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIAppDelegate.swift; sourceTree = "<group>"; };
 		2D3BC8F41D0894CF00EC0425 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,7 +113,7 @@
 		2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsChartView.swift; sourceTree = "<group>"; };
 		2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsChartDelegate.swift; sourceTree = "<group>"; };
 		2DFFF8771D0F3BE400DE8FF5 /* CIStatsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIStatsViewCell.swift; sourceTree = "<group>"; };
-		2DFFF8791D0F3C7200DE8FF5 /* CIItemLineChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemLineChartDelegate.swift; sourceTree = "<group>"; };
+		2DFFF8791D0F3C7200DE8FF5 /* CIItemStatsLineChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsLineChartDelegate.swift; sourceTree = "<group>"; };
 		5F9F0C5CB33FBE582C71B8AF /* Pods-Clock in.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.release.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.release.xcconfig"; sourceTree = "<group>"; };
 		83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Clock_in.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90BDD7487C1AF5647EA3BB2 /* Pods-Clock in.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Clock in.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Clock in/Pods-Clock in.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +131,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D2A0ADD1D133A5300563E9C /* Item Chart Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				2DFFF8791D0F3C7200DE8FF5 /* CIItemStatsLineChartDelegate.swift */,
+				2D2A0AD61D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift */,
+				2D2A0AD81D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift */,
+				2D2A0ADB1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift */,
+			);
+			name = "Item Chart Delegates";
+			sourceTree = "<group>";
+		};
 		2D3BC8E61D0894CF00EC0425 = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +263,7 @@
 				2D8C6A221D0DAD40008C8FA4 /* CISettingsViewCell.swift */,
 				2D8C6A271D0DB859008C8FA4 /* CISettingsViewHeader.swift */,
 				2DFFF8771D0F3BE400DE8FF5 /* CIStatsViewCell.swift */,
+				2D2A0AE11D13413900563E9C /* CIStatsCellHeader.swift */,
 			);
 			name = Tables;
 			sourceTree = "<group>";
@@ -258,10 +274,8 @@
 				2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */,
 				2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */,
 				2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */,
-				2DFFF8791D0F3C7200DE8FF5 /* CIItemLineChartDelegate.swift */,
-				2D2A0AD61D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift */,
-				2D2A0AD81D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift */,
-				2D2A0ADB1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift */,
+				2D2A0ADD1D133A5300563E9C /* Item Chart Delegates */,
+				2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */,
 			);
 			name = Charts;
 			sourceTree = "<group>";
@@ -416,22 +430,23 @@
 				2D8C6A231D0DAD40008C8FA4 /* CISettingsViewCell.swift in Sources */,
 				2DD9A49A1D10501C00303C6C /* CIAdjustViewController.swift in Sources */,
 				2D3BC8F31D0894CF00EC0425 /* CIAppDelegate.swift in Sources */,
-				2D2A0AD91D11A41100563E9C /* CIItemClockInsOverIntervalsDelegate.swift in Sources */,
+				2D2A0AD91D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift in Sources */,
 				2D3BC9201D08C0F600EC0425 /* CIColor.swift in Sources */,
 				2DFFF86D1D0F122F00DE8FF5 /* CIStatsPageViewController.swift in Sources */,
+				2D2A0AE21D13413900563E9C /* CIStatsCellHeader.swift in Sources */,
 				2D8C6A2C1D0DBFF8008C8FA4 /* CIAddNotificationViewController.swift in Sources */,
 				2D3BC9071D08A12B00EC0425 /* CIHomeViewController.swift in Sources */,
 				2DFFF8781D0F3BE400DE8FF5 /* CIStatsViewCell.swift in Sources */,
 				2D3BC9051D089DCD00EC0425 /* CIHomeView.swift in Sources */,
 				2DB752C61D0A00F700D55196 /* CIHomeViewCell.swift in Sources */,
 				2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */,
-				2D2A0ADC1D11D83E00563E9C /* CIItemClockInsByHourDelegate.swift in Sources */,
+				2D2A0ADC1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift in Sources */,
 				2D8C6A211D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift in Sources */,
 				2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */,
 				2DFFF8721D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift in Sources */,
 				2DA2F0701D0E28480064D196 /* CIItemSettingsView.swift in Sources */,
 				2DFFF86F1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift in Sources */,
-				2DFFF87A1D0F3C7200DE8FF5 /* CIItemLineChartDelegate.swift in Sources */,
+				2DFFF87A1D0F3C7200DE8FF5 /* CIItemStatsLineChartDelegate.swift in Sources */,
 				2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */,
 				2DD9A49C1D1050B000303C6C /* CIAdjustView.swift in Sources */,
 				2DA2F0741D0E33E10064D196 /* CIModelItemCreator.swift in Sources */,
@@ -440,7 +455,8 @@
 				2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */,
 				2D8C6A2A1D0DBF50008C8FA4 /* CIAddNotificationView.swift in Sources */,
 				2D3BC9251D08C3AD00EC0425 /* CIBaseClasses.swift in Sources */,
-				2D2A0AD71D10DE6400563E9C /* CIItemWeekdayBarChartDelegate.swift in Sources */,
+				2D2A0AE01D133B0800563E9C /* CIItemStatsTableViewController.swift in Sources */,
+				2D2A0AD71D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift in Sources */,
 				2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */,
 				2DB752C41D09F72700D55196 /* CIModelEntry.swift in Sources */,
 				2D8C6A281D0DB859008C8FA4 /* CISettingsViewHeader.swift in Sources */,

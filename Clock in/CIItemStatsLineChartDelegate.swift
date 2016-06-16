@@ -9,7 +9,7 @@
 import Foundation
 import Charts
 
-class CIItemLineChartDelegate: CIItemStatsChartDelegate {
+class CIItemStatsLineChartDelegate: CIItemStatsChartDelegate {
     let formatter = NSDateFormatter()
     let item: CIModelItem
     

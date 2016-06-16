@@ -9,37 +9,47 @@
 import UIKit
 import SnapKit
 
-class CIStatsViewCell: UICollectionViewCell {
-    let label = UILabel()
+class CIStatsViewCell: CITableViewCell {
+    let infoLabel = UILabel()
+    let dataLabel = UILabel()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .clearColor()
         setupSubviews()
         constrainSubviews()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init(coder aDecoder: NSCoder) {
+        fatalError(CIError.CoderInitUnimplementedString)
     }
     
     func setupSubviews() {
-        self.layer.borderColor = UIColor.whiteColor().CGColor
-        self.layer.borderWidth = CIConstants.borderWidth
-        self.layer.cornerRadius = CIConstants.cornerRadius
+        infoLabel.font = UIFont.CIStatsInfoLabelFont
+        infoLabel.textColor = .whiteColor()
+        infoLabel.numberOfLines = 1
+        infoLabel.textAlignment = .Left
+        infoLabel.text = "INFO LABEL"
+        addSubview(infoLabel)
         
-        label.text = "cell"
-        label.textColor = .whiteColor()
-        label.font = UIFont.CIButtonRegularFont
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(label)
+        dataLabel.font = UIFont.CIStatsDataLabelFont
+        dataLabel.textColor = .whiteColor()
+        dataLabel.numberOfLines = 1
+        dataLabel.textAlignment = .Center
+        dataLabel.text = " "
+        dataLabel.adjustsFontSizeToFitWidth = true
+        dataLabel.minimumScaleFactor = 0.5
+        addSubview(dataLabel)
     }
     
     func constrainSubviews() {
-        label.snp_makeConstraints{(make)->Void in
+        infoLabel.snp_makeConstraints{(make)->Void in
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.top.equalTo(self.snp_topMargin)
+        }
+        dataLabel.snp_makeConstraints{(make)->Void in
             make.centerX.equalTo(self.snp_centerX)
-            make.centerY.equalTo(self.snp_centerY)
+            make.top.equalTo(infoLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
         }
     }
 }

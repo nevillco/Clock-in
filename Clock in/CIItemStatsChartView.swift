@@ -65,14 +65,14 @@ class CIItemStatsChartView: CIView {
         noDataLabel.alpha = 0
         addSubview(noDataLabel)
         
-        selectedPointInfoLabel.font = UIFont.CIChartInfoLabelFont
+        selectedPointInfoLabel.font = UIFont.CIStatsInfoLabelFont
         selectedPointInfoLabel.textColor = .whiteColor()
         selectedPointInfoLabel.numberOfLines = 1
         selectedPointInfoLabel.textAlignment = .Left
         selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
         addSubview(selectedPointInfoLabel)
         
-        selectedPointDataLabel.font = UIFont.CIChartDataLabelFont
+        selectedPointDataLabel.font = UIFont.CIStatsDataLabelFont
         selectedPointDataLabel.textColor = .whiteColor()
         selectedPointDataLabel.numberOfLines = 1
         selectedPointDataLabel.textAlignment = .Center

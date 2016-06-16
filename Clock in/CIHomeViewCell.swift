@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class CIHomeViewCell: CITableViewCell {
-    
     let clockButton = CIHomeCellButton(primaryColor: .CIBlue)
     let nameLabel = UILabel()
     let statsButton = UIButton()
