@@ -17,6 +17,7 @@ class CIItemSettingsView: CIView {
     let titleLabel = UILabel()
     let notificationsLabel = UILabel()
     let table = UITableView()
+    let colorCollection = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
     let bottomContainer = CIView()
     let renameButton = CIButton(primaryColor: .whiteColor(), title: "rename".localized)
     let deleteButton = CIButton(primaryColor: .whiteColor(), title: "delete".localized)
@@ -58,6 +59,10 @@ class CIItemSettingsView: CIView {
         table.backgroundColor = .clearColor()
         addSubview(table)
         
+        colorCollection.setContentCompressionResistancePriority(1000, forAxis: .Vertical)
+        colorCollection.backgroundColor = .clearColor()
+        addSubview(colorCollection)
+        
         bottomContainer.backgroundColor = .clearColor()
         bottomContainer.layer.borderWidth = CIConstants.borderWidth
         bottomContainer.layer.borderColor = UIColor.whiteColor().CGColor
@@ -86,10 +91,17 @@ class CIItemSettingsView: CIView {
         }
         
         table.snp_makeConstraints {(make)->Void in
-            make.top.equalTo(notificationsLabel.snp_bottom).offset(2 * CIConstants.verticalItemSpacing)
+            make.top.equalTo(notificationsLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
-            make.bottom.equalTo(deleteButton.snp_top).offset(-CIConstants.verticalItemSpacing)
+            make.bottom.equalTo(colorCollection.snp_top).offset(-CIConstants.verticalItemSpacing)
+        }
+        
+        colorCollection.snp_makeConstraints{(make)->Void in
+            make.height.equalTo(table.snp_height).dividedBy(2)
+            make.leading.equalTo(self.snp_leadingMargin)
+            make.trailing.equalTo(self.snp_trailingMargin)
+            make.bottom.equalTo(bottomContainer.snp_top).offset(-CIConstants.verticalItemSpacing)
         }
         
         bottomContainer.snp_makeConstraints{(make)->Void in

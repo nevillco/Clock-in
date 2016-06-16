@@ -11,9 +11,9 @@ import Foundation
 import RealmSwift
 
 class CIAddNotificationViewController: CIViewController {
-    var manager: CIModelItemManager? {
+    var item: CIModelItem? {
         didSet {
-            self.view.backgroundColor = UIColor.colorForItem(manager!.item)
+            self.view.backgroundColor = UIColor.colorForItem(item!)
         }
     }
     
@@ -42,7 +42,7 @@ extension CIAddNotificationViewControllerTargets {
     func goButtonPressed(sender: UIButton) {
         let view = self.view as! CIAddNotificationView
         let interval = view.picker.countDownDuration
-        if manager == nil {
+        if item == nil {
             let defaults = NSUserDefaults.standardUserDefaults()
             var defaultIntervals = defaults.objectForKey(.CIDefaultNotificationIntervals) as! [NSTimeInterval]
             if defaultIntervals.contains(interval) {
@@ -64,18 +64,18 @@ extension CIAddNotificationViewControllerTargets {
         else {
             let newValue = CIDoubleObject()
             newValue.value = interval
-            if manager!.item.notificationIntervals.contains(newValue) {
+            if item!.notificationIntervals.contains(newValue) {
                 errorAlert("This time is already in your item's notifications.".localized)
             }
             else {
                 let realm = try! Realm()
                 var index = 0
-                while index < manager!.item.notificationIntervals.count &&
-                    manager!.item.notificationIntervals[index].value < interval {
+                while index < item!.notificationIntervals.count &&
+                    item!.notificationIntervals[index].value < interval {
                     index += 1
                 }
                 try! realm.write {
-                    manager!.item.notificationIntervals.insert(newValue, atIndex: index)
+                    item!.notificationIntervals.insert(newValue, atIndex: index)
                 }
                 let presenter = presentingViewController as! CIItemSettingsViewController
                 let presenterView = presenter.view as! CIItemSettingsView

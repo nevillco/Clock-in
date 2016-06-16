@@ -20,13 +20,13 @@ class CIItemStatsChartView: CIView {
     let selectedPointInfoLabel = UILabel()
     let selectedPointDataLabel = UILabel()
     
-    required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
+    required init(color: UIColor, delegate: CIItemStatsChartDelegate) {
         buttons = delegate.controlNames().map({ CIButton(primaryColor: .whiteColor(), title: $0) })
         chart = delegate.chartType().init()
         noDataLabel.text = "No Data!\nLog some time on this item to view stats.".localized
-        noDataLabel.backgroundColor = UIColor.colorForItem(manager.item)
+        noDataLabel.backgroundColor = color
         super.init()
-        backgroundColor = UIColor.colorForItem(manager.item)
+        backgroundColor = color
         setupSubviews()
         constrainSubviews()
     }

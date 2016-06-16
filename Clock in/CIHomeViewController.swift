@@ -119,18 +119,18 @@ extension CIHomeViewControllerTargets {
     func itemSettingsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let manager = itemManagers[cell.tag]
-        presentViewController(CIItemSettingsViewController(manager: manager), animated: true, completion: nil)
+        presentViewController(CIItemSettingsViewController(item: manager.item), animated: true, completion: nil)
     }
     
     func itemStatsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
-        let manager = itemManagers[cell.tag]
-        let delegateTypes:[CIItemStatsChartDelegate] = [CIItemLineChartDelegate(item: manager.item),
-                                                        CIItemWeekdayBarChartDelegate(item: manager.item),
-                                                        CIItemClockInsOverIntervalsDelegate(item: manager.item),
-                                                        CIItemClockInsByHourDelegate(item: manager.item)]
-        let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(manager: manager, delegate: $0) })
-        presentViewController(CIStatsPageViewController(viewControllers:viewControllers, manager: manager), animated: true, completion: nil)
+        let item = itemManagers[cell.tag].item
+        let delegateTypes:[CIItemStatsChartDelegate] = [CIItemLineChartDelegate(item: item),
+                                                        CIItemWeekdayBarChartDelegate(item: item),
+                                                        CIItemClockInsOverIntervalsDelegate(item: item),
+                                                        CIItemClockInsByHourDelegate(item: item)]
+        let viewControllers = delegateTypes.map({ CIItemStatsChartViewController(item: item, delegate: $0) })
+        presentViewController(CIStatsPageViewController(viewControllers:viewControllers, item: item), animated: true, completion: nil)
     }
     
     func adjustButtonPressed(sender: UIButton) {

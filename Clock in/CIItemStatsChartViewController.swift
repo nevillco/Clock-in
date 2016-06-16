@@ -12,9 +12,9 @@ import Charts
 
 class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
     let delegate:CIItemStatsChartDelegate
-    let manager: CIModelItemManager
-    required init(manager: CIModelItemManager, delegate: CIItemStatsChartDelegate) {
-        self.manager = manager
+    let item: CIModelItem
+    required init(item: CIModelItem, delegate: CIItemStatsChartDelegate) {
+        self.item = item
         self.delegate = delegate
         super.init()
     }
@@ -25,7 +25,7 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = CIItemStatsChartView(manager: manager, delegate: delegate)
+        let view = CIItemStatsChartView(color: UIColor.colorForItem(item), delegate: delegate)
         delegate.styleChart(view.chart)
         addTargets(view)
         addDelegates(view)
@@ -40,7 +40,7 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
             view.buttons[i].permanentHighlight = (i == index)
         }
         
-        if manager.item.entries.count > 0 {
+        if item.entries.count > 0 {
             delegate.loadChartData(view.chart, selectedButtonIndex:index)
             view.chart.notifyDataSetChanged()
             delegate.setMinimumAxisRange(view.chart)

@@ -35,7 +35,7 @@ private extension CIAddItemViewController {
         view.nameField.delegate = self
         view.colorCollection.delegate = self
         view.colorCollection.dataSource = self
-        view.colorCollection.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: .CIAddItemCellReuseIdentifier)
+        view.colorCollection.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: .CIDefaultCollectionCellReuseIdentifier)
     }
     
     func indexPathsToReloadOnDismiss() -> [NSIndexPath] {
@@ -55,7 +55,7 @@ extension CIAddItemViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(.CIAddItemCellReuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(.CIDefaultCollectionCellReuseIdentifier, forIndexPath: indexPath)
         
         let row:Int = indexPath.item
         cell.backgroundColor = availableColors[row]
@@ -66,7 +66,7 @@ extension CIAddItemViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(50, 50)
+        return CIConstants.colorCollectionCellSize
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

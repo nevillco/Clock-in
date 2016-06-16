@@ -12,7 +12,7 @@ import SnapKit
 class CIStatsPageViewController: UIViewController {
     let pageViewController: UIPageViewController = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
     
-    let manager:CIModelItemManager
+    let item:CIModelItem
     var viewControllers: [CIViewController] = []
     var currentIndex = 0
     
@@ -20,11 +20,11 @@ class CIStatsPageViewController: UIViewController {
     let backButton = UIButton()
     let pageControl: UIPageControl = UIPageControl()
     
-    init(viewControllers: [CIViewController], manager: CIModelItemManager) {
+    init(viewControllers: [CIViewController], item: CIModelItem) {
         self.viewControllers = viewControllers
-        self.manager = manager
+        self.item = item
         super.init(nibName: nil, bundle: nil)
-        self.view.backgroundColor = UIColor.colorForItem(manager.item)
+        self.view.backgroundColor = UIColor.colorForItem(item)
         setupExternalControls()
     }
     
@@ -113,7 +113,7 @@ extension CIStatsPageViewStyle {
     }
     
     func setupSubviews() {
-        titleLabel.text = manager.item.name
+        titleLabel.text = item.name
         titleLabel.font = UIFont.CIDefaultTitleFont
         titleLabel.textColor = .whiteColor()
         titleLabel.adjustsFontSizeToFitWidth = true

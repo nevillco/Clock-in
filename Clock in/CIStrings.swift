@@ -18,6 +18,6 @@ extension String {
     
     static let CIHomeCellReuseIdentifier = "HomeCell"
     static let CISettingsCellReuseIdentifier = "SettingsCell"
-    static let CIAddItemCellReuseIdentifier = "AddItemCell"
+    static let CIDefaultCollectionCellReuseIdentifier = "DefaultCollectionCell"
     static let CIStatsCellReuseIdentifier = "StatsCell"
 }

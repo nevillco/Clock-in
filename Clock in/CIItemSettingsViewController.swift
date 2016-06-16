@@ -13,11 +13,11 @@ import RealmSwift
 
 class CIItemSettingsViewController: CIViewController {
     var notificationsOn = false
-    let manager:CIModelItemManager
+    let item:CIModelItem
     var renameField = UITextField()
     
-    required init(manager:CIModelItemManager) {
-        self.manager = manager
+    required init(item:CIModelItem) {
+        self.item = item
         super.init()
     }
     
@@ -27,7 +27,7 @@ class CIItemSettingsViewController: CIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = CIItemSettingsView(name: manager.item.name, backgroundColor: UIColor.colorForItem(manager.item))
+        let view = CIItemSettingsView(name: item.name, backgroundColor: UIColor.colorForItem(item))
         loadDefaults()
         addTargets(view)
         addDelegates(view)
@@ -48,12 +48,16 @@ private extension CIItemSettingsViewController {
         view.table.delegate = self
         view.table.dataSource = self
         view.table.registerClass(CISettingsViewCell.self, forCellReuseIdentifier: .CISettingsCellReuseIdentifier)
+        
+        view.colorCollection.delegate = self
+        view.colorCollection.dataSource = self
+        view.colorCollection.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: .CIDefaultCollectionCellReuseIdentifier)
     }
     
     func saveRealm() {
         let realm = try! Realm()
         try! realm.write {
-            realm.add(manager.item, update: true)
+            realm.add(item, update: true)
         }
     }
     
@@ -81,7 +85,7 @@ extension CIItemSettingsViewControllerTargets {
         let cell = sender.superview as! CISettingsViewCell
         let realm = try! Realm()
         try! realm.write {
-            manager.item.notificationIntervals.removeAtIndex(cell.tag)
+            item.notificationIntervals.removeAtIndex(cell.tag)
         }
         
         let view = self.view as! CIItemSettingsView
@@ -92,7 +96,7 @@ extension CIItemSettingsViewControllerTargets {
     
     func addButtonPressed(sender: UIButton) {
         let newController = CIAddNotificationViewController()
-        newController.manager = manager
+        newController.item = item
         presentViewController(newController, animated: true, completion: nil)
     }
     
@@ -104,7 +108,7 @@ extension CIItemSettingsViewControllerTargets {
             let presenterView = presenter.view as! CIHomeView
             let realm = try! Realm()
             try! realm.write{
-                realm.delete(self.manager.item)
+                realm.delete(self.item)
             }
             self.dismissViewControllerAnimated(true, completion: {_ in
                 presenter.reloadManagers()
@@ -135,7 +139,7 @@ extension CIItemSettingsViewControllerTargets {
                 })
             }
             else {
-                CIModelItemCreator.rename(self.manager.item, toName: name)
+                CIModelItemCreator.rename(self.item, toName: name)
                 self.dialogAlert("Success".localized, message: "Your item has been renamed.".localized)
                 let view = self.view as! CIItemSettingsView
                 view.titleLabel.text = name
@@ -192,12 +196,12 @@ extension CIItemSettingsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDe
 
 extension CIItemSettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notificationsOn ? manager.item.notificationIntervals.count : 0
+        return notificationsOn ? item.notificationIntervals.count : 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(.CISettingsCellReuseIdentifier) as! CISettingsViewCell
-        let interval = manager.item.notificationIntervals[indexPath.row]
+        let interval = item.notificationIntervals[indexPath.row]
         
         cell.label.text = NSDate.longStringForInterval(Int(interval.value))
         cell.tag = indexPath.row
@@ -219,10 +223,10 @@ extension CIItemSettingsViewController: UITableViewDataSource, UITableViewDelega
         if(!notificationsOn) { return nil }
         
         let header = CISettingsViewHeader()
-        header.backgroundColor = UIColor.colorForItem(manager.item)
+        header.backgroundColor = UIColor.colorForItem(item)
         
         let max = CIConstants.maxNotifications
-        let current = manager.item.notificationIntervals.count
+        let current = item.notificationIntervals.count
         
         let text = String(format: "%d notifications allowed\n%d remaining", max, (max - current))
         let attributedText = NSMutableAttributedString(string: text)
@@ -239,5 +243,45 @@ extension CIItemSettingsViewController: UITableViewDataSource, UITableViewDelega
         header.addButton.addTarget(self, action: #selector(addButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         return header
+    }
+}
+
+extension CIItemSettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let colorCount = CIModelItemManager.CIAvailableColors().count
+        return colorCount
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(.CIDefaultCollectionCellReuseIdentifier, forIndexPath: indexPath)
+        
+        let row:Int = indexPath.item
+        let availableColors = CIModelItemManager.CIAvailableColors()
+        cell.backgroundColor = availableColors[row]
+        cell.layer.borderColor = UIColor.blackColor().CGColor
+        cell.layer.borderWidth = 4.0
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CIConstants.colorCollectionCellSize
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let row:Int = indexPath.item
+        let availableColors = CIModelItemManager.CIAvailableColors()
+        let color = availableColors[row]
+        let colorIndex = UIColor.CIColorPalette.indexOf(color)!
+        
+        let realm = try! Realm()
+        try! realm.write {
+            item.colorIndex = colorIndex
+        }
+        
+        let view = self.view as! CIItemSettingsView
+        view.backgroundColor = color
+        view.table.reloadData()
+        collectionView.reloadData()
     }
 }
