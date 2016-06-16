@@ -20,7 +20,9 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
     
     func controlNames() -> [String] {
         let intervals = item.notificationIntervals
-        return intervals.map({ NSDate.stringForInterval(Int($0.value)) })
+        var intervalStrings = intervals.map({ ">".stringByAppendingString(NSDate.stringForInterval(Int($0.value))) })
+        intervalStrings.insert("all".localized, atIndex: 0)
+        return intervalStrings
     }
     
     func chartType() -> ChartViewBase.Type {
@@ -33,7 +35,8 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         let sortedEntries = item.entries.sorted("startDate", ascending: true)
         let lastDate = sortedEntries.last!.startDate
         var xValues:[String] = []
-        while(currentDate.timeIntervalSinceDate(lastDate) <= 0.0) {
+        let minimumXValues = 5
+        while(currentDate.timeIntervalSinceDate(lastDate) <= 0.0 || xValues.count < minimumXValues) {
             xValues.append(formatter.stringFromDate(currentDate))
             currentDate = currentDate.advancedByDays(1)
         }
@@ -46,7 +49,8 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         for entry in item.entries {
             let dateToCompare = formatter.dateFromString(xLabel)!.roundToDay()
             let entryDate = entry.startDate.roundToDay()
-            let selectedInterval = item.notificationIntervals[selectedButtonIndex].value
+            let selectedInterval:Double = (selectedButtonIndex == 0) ?
+            0 : item.notificationIntervals[selectedButtonIndex - 1].value
             
             let includeConditional = entryDate.sameDay(dateToCompare) &&
                 entry.time >= selectedInterval
@@ -121,8 +125,11 @@ class CIItemClockInsOverIntervalsDelegate: CIItemStatsChartDelegate {
         formatter.dateFormat = "M/dd/yy"
         let xDate = formatter.dateFromString(xValue)!
         formatter.dateFormat = "MMMM d"
-        let selectedInterval = item.notificationIntervals[selectedButtonIndex].value
-        let yString = String(format: "%d CLOCK%@ OVER %@", Int(yValue), (Int(yValue) == 1 ? "" : "S"), NSDate.longStringForInterval(Int(selectedInterval)).uppercaseString)
+        var yString = String(format: "%d CLOCK-IN%@", Int(yValue), (Int(yValue) == 1 ? "" : "S"))
+        if selectedButtonIndex > 0 {
+            let selectedInterval = item.notificationIntervals[selectedButtonIndex-1].value
+            yString = yString.stringByAppendingString(String(format: " OVER %@", NSDate.longStringForInterval(Int(selectedInterval)).uppercaseString))
+        }
         return (formatter.stringFromDate(xDate).uppercaseString, yString)
     }
 }

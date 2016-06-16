@@ -109,7 +109,7 @@ class CIItemClockInsByHourDelegate: CIItemStatsChartDelegate {
     }
     
     func formatSelectedValues(xValue: String, yValue: Double, selectedButtonIndex: Int) -> (String, String) {
-        var yString = String(format: "%d CLOCK%@ ", Int(yValue), (Int(yValue) == 1 ? "" : "S"))
+        var yString = String(format: "%d CLOCK-IN%@ ", Int(yValue), (Int(yValue) == 1 ? "" : "S"))
         yString = yString.stringByAppendingString(controlNames()[selectedButtonIndex].uppercaseString)
         return (xValue.uppercaseString, yString)
     }
