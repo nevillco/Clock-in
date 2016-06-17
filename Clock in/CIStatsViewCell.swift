@@ -45,11 +45,11 @@ class CIStatsViewCell: CITableViewCell {
     func constrainSubviews() {
         infoLabel.snp_makeConstraints{(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
-            make.top.equalTo(self.snp_topMargin)
+            make.top.equalTo(self.snp_top)
         }
         dataLabel.snp_makeConstraints{(make)->Void in
             make.centerX.equalTo(self.snp_centerX)
-            make.top.equalTo(infoLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
+            make.bottom.equalTo(self.snp_bottom)
         }
     }
 }

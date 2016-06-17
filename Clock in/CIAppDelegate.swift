@@ -14,16 +14,21 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var shouldResetRealm = false
+    var shouldResetRealm = true
     var shouldResetNSUserDefaults = false
-    var shouldGenerateTestData = false
+    var shouldGenerateTestData = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        if(shouldResetRealm) { purgeRealm() }
         if(shouldResetNSUserDefaults) { purgeNSUserDefaults() }
-        
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge], categories: nil))
         initNSUserDefaultsIfNeeded()
+        
+        if(shouldResetRealm) { purgeRealm() }
+        if(shouldGenerateTestData) {
+            purgeRealm()
+            generateTestData()
+        }
+        
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.backgroundColor = .whiteColor()
@@ -56,7 +61,12 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
         let appDomain = NSBundle.mainBundle().bundleIdentifier!
         
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
-        
+    }
+    
+    func generateTestData() {
+        for name in CIModelTestItemProfile.profileNames {
+            CIModelItemCreator.createItem(name, color: CIModelItemManager.CIAvailableColors()[0])
+        }
     }
     
     func notificationsEnabledInSettings() -> Bool {

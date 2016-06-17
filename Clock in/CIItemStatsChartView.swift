@@ -53,6 +53,8 @@ class CIItemStatsChartView: CIView {
             addSubview(button)
         }
         
+        chart.noDataText = ""
+        chart.noDataTextDescription = ""
         addSubview(chart)
         
         noDataLabel.font = UIFont.CIDefaultBodyFont

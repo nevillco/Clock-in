@@ -11,10 +11,10 @@ import Charts
 import RealmSwift
 
 class CIItemStatsFilteredBarChartDelegate: CIItemStatsChartDelegate {
-    let item: CIModelItem
+    let itemName: String
     
-    required init(item: CIModelItem) {
-        self.item = item
+    required init(itemName: String) {
+        self.itemName = itemName
     }
     
     func controlNames() -> [String] {
@@ -23,6 +23,13 @@ class CIItemStatsFilteredBarChartDelegate: CIItemStatsChartDelegate {
     
     func chartType() -> ChartViewBase.Type {
         return BarChartView.self
+    }
+
+    func loadItem() -> CIModelItem {
+        let realm = try! Realm()
+        let predicate = NSPredicate(format: "name == %@", itemName)
+        let itemsWithName = realm.objects(CIModelItem.self).filter(predicate)
+        return itemsWithName[0]
     }
     
     func xValues(selectedButtonIndex:Int) -> [String] {
@@ -39,6 +46,7 @@ class CIItemStatsFilteredBarChartDelegate: CIItemStatsChartDelegate {
         let index = xValues(selectedButtonIndex).indexOf(xLabel)!
         let component = selectedButtonIndex == 0 ? NSCalendarUnit.Weekday : NSCalendarUnit.Month
         let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
+        let item = loadItem()
         
         var total:Double = 0.0
         for entry in item.entries {
@@ -117,6 +125,9 @@ class CIItemStatsFilteredBarChartDelegate: CIItemStatsChartDelegate {
         if selectedButtonIndex == 1 {
             let xIndex = xValues(1).indexOf(xValue)!
             xString = NSDateFormatter().monthSymbols[xIndex]
+        }
+        else {
+            xString = xString.stringByAppendingString("S")
         }
         return (xString.uppercaseString, NSDate.longStringForInterval(Int(yValue)).uppercaseString)
     }

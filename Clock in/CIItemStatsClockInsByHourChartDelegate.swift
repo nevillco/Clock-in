@@ -8,14 +8,15 @@
 
 import Foundation
 import Charts
+import RealmSwift
 
 class CIItemStatsClockInsByHourChartDelegate: CIItemStatsChartDelegate {
     let formatter = NSDateFormatter()
-    let item: CIModelItem
+    let itemName: String
     
-    required init(item: CIModelItem) {
+    required init(itemName: String) {
         formatter.dateFormat = "M/dd/yy"
-        self.item = item
+        self.itemName = itemName
     }
     
     func controlNames() -> [String] {
@@ -31,9 +32,17 @@ class CIItemStatsClockInsByHourChartDelegate: CIItemStatsChartDelegate {
                 "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"]
     }
     
+    func loadItem() -> CIModelItem {
+        let realm = try! Realm()
+        let predicate = NSPredicate(format: "name == %@", itemName)
+        let itemsWithName = realm.objects(CIModelItem.self).filter(predicate)
+        return itemsWithName[0]
+    }
+    
     func yValue(atXLabel xLabel:String, selectedButtonIndex:Int) -> Double {
         formatter.dateFormat = "M/dd/yy"
         var total = 0.0
+        let item = loadItem()
         for entry in item.entries {
             let entryDate = entry.startDate
             let hourOfEntry = NSCalendar.currentCalendar().component(.Hour, fromDate: entryDate)

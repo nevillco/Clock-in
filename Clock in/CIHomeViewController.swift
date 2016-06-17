@@ -125,10 +125,10 @@ extension CIHomeViewControllerTargets {
     func itemStatsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let item = itemManagers[cell.tag].item
-        let delegateTypes:[CIItemStatsChartDelegate] = [CIItemStatsLineChartDelegate(item: item),
-                                                        CIItemStatsFilteredBarChartDelegate(item: item),
-                                                        CIItemStatsClockInsByHourChartDelegate(item: item),
-                                                        CIItemStatsClockInsOverIntervalsChartDelegate(item: item)]
+        let delegateTypes:[CIItemStatsChartDelegate] = [CIItemStatsLineChartDelegate(itemName: item.name),
+                                                        CIItemStatsFilteredBarChartDelegate(itemName: item.name),
+                                                        CIItemStatsClockInsByHourChartDelegate(itemName: item.name),
+                                                        CIItemStatsClockInsOverIntervalsChartDelegate(itemName: item.name)]
         var viewControllers:[CIViewController] = delegateTypes.map({ CIItemStatsChartViewController(item: item, delegate: $0) })
         viewControllers.append(CIItemStatsTableViewController(item: item))
         presentViewController(CIStatsPageViewController(viewControllers:viewControllers, item: item), animated: true, completion: nil)

@@ -41,19 +41,25 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
         }
         
         if item.entries.count > 0 {
-            delegate.loadChartData(view.chart, selectedButtonIndex:index)
-            delegate.setAxisLabels(view.chart)
-            view.chart.notifyDataSetChanged()
-            
-            view.titleLabel.text = delegate.chartTitle(index)
-            view.noDataLabel.alpha = 0
-            view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
-            view.selectedPointDataLabel.text = " "
-            view.selectedPointDataLabel.alpha = 1
-            view.selectedPointInfoLabel.alpha = 1
-            
-            view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
-            view.chart.animate(yAxisDuration: 0.5)
+            view.titleLabel.text = "Loading..."
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                self.delegate.loadChartData(view.chart, selectedButtonIndex:index)
+                self.delegate.setAxisLabels(view.chart)
+                dispatch_async(dispatch_get_main_queue()) {
+                    view.titleLabel.text = self.delegate.chartTitle(index)
+                    view.chart.notifyDataSetChanged()
+                    
+                    view.noDataLabel.alpha = 0
+                    view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
+                    view.selectedPointDataLabel.text = " "
+                    view.selectedPointDataLabel.alpha = 1
+                    view.selectedPointInfoLabel.alpha = 1
+                    
+                    view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
+                    view.chart.animate(yAxisDuration: 0.5)
+                }
+            }
         }
         else {
             view.noDataLabel.alpha = 1

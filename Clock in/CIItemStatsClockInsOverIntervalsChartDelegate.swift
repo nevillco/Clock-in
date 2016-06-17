@@ -8,17 +8,26 @@
 
 import Foundation
 import Charts
+import RealmSwift
 
 class CIItemStatsClockInsOverIntervalsChartDelegate: CIItemStatsChartDelegate {
     let formatter = NSDateFormatter()
-    let item: CIModelItem
+    let itemName: String
     
-    required init(item: CIModelItem) {
+    required init(itemName: String) {
         formatter.dateFormat = "M/dd/yy"
-        self.item = item
+        self.itemName = itemName
+    }
+    
+    func loadItem() -> CIModelItem {
+        let realm = try! Realm()
+        let predicate = NSPredicate(format: "name == %@", itemName)
+        let itemsWithName = realm.objects(CIModelItem.self).filter(predicate)
+        return itemsWithName[0]
     }
     
     func controlNames() -> [String] {
+        let item = loadItem()
         let intervals = item.notificationIntervals
         var intervalStrings = intervals.map({ ">".stringByAppendingString(NSDate.stringForInterval(Int($0.value))) })
         intervalStrings.insert("all".localized, atIndex: 0)
@@ -31,6 +40,7 @@ class CIItemStatsClockInsOverIntervalsChartDelegate: CIItemStatsChartDelegate {
     
     func xValues(selectedButtonIndex:Int) -> [String] {
         formatter.dateFormat = "M/dd/yy"
+        let item = loadItem()
         var currentDate = item.createDate.roundToDay()
         let sortedEntries = item.entries.sorted("startDate", ascending: true)
         let lastDate = sortedEntries.last!.startDate
@@ -46,6 +56,7 @@ class CIItemStatsClockInsOverIntervalsChartDelegate: CIItemStatsChartDelegate {
     func yValue(atXLabel xLabel:String, selectedButtonIndex:Int) -> Double {
         formatter.dateFormat = "M/dd/yy"
         var total = 0.0
+        let item = loadItem()
         for entry in item.entries {
             let dateToCompare = formatter.dateFromString(xLabel)!.roundToDay()
             let entryDate = entry.startDate.roundToDay()
@@ -126,6 +137,7 @@ class CIItemStatsClockInsOverIntervalsChartDelegate: CIItemStatsChartDelegate {
     }
     
     func formatSelectedValues(xValue: String, yValue: Double, selectedButtonIndex: Int) -> (String, String) {
+        let item = loadItem()
         formatter.dateFormat = "M/dd/yy"
         let xDate = formatter.dateFromString(xValue)!
         formatter.dateFormat = "MMMM d"

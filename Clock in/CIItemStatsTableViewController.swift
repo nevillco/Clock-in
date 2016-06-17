@@ -65,7 +65,7 @@ private extension CIItemStatsTableViewController {
                 }
             }
         }
-        return totals.map({ NSDate.longStringForInterval(Int($0)) })
+        return totals.map({ NSDate.longStringForInterval(Int($0)).uppercaseString })
     }
     
     func daysClocked() -> [String] {
@@ -76,7 +76,7 @@ private extension CIItemStatsTableViewController {
         let percentDaysClockedIn = String(format:"%d%%", Int(round(100 * Double(daysClockedIn) / Double(daysSinceCreation))))
         let formatter = NSDateFormatter()
         formatter.dateStyle = .ShortStyle
-        return [formatter.stringFromDate(createdDate).uppercaseString, String(daysSinceCreation), String(daysClockedIn), percentDaysClockedIn]
+        return [formatter.stringFromDate(createdDate), String(daysSinceCreation), String(daysClockedIn), percentDaysClockedIn]
     }
     
     func streaks() -> [String] {
@@ -97,7 +97,7 @@ private extension CIItemStatsTableViewController {
             currentDate = currentDate.advancedByDays(1)
         }
         maxStreak = max(maxStreak, currentStreak)
-        return [currentStreak, maxStreak].map({ String(format: "%d day%@", $0, $0 == 1 ? "" : "s") })
+        return [currentStreak, maxStreak].map({ String(format: "%d day%@", $0, $0 == 1 ? "" : "s").uppercaseString })
     }
 }
 
