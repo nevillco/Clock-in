@@ -33,6 +33,13 @@ class CIItemSettingsViewController: CIViewController {
         addDelegates(view)
         self.view = view
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let view = self.view as! CIItemSettingsView
+        view.colorCollection.collectionViewLayout.invalidateLayout()
+        view.colorCollection.layoutSubviews()
+    }
 }
 
 private extension CIItemSettingsViewController {
@@ -265,7 +272,8 @@ extension CIItemSettingsViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CIConstants.colorCollectionCellSize
+        let isLandscape = UIDevice.currentDevice().orientation.isLandscape
+        return isLandscape ? CIConstants.colorCollectionLandscapeCellSize : CIConstants.colorCollectionCellSize
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

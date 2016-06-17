@@ -14,9 +14,9 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var shouldResetRealm = true
+    var shouldResetRealm = false
     var shouldResetNSUserDefaults = false
-    var shouldGenerateTestData = true
+    var shouldGenerateTestData = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if(shouldResetNSUserDefaults) { purgeNSUserDefaults() }

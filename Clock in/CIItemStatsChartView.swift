@@ -28,7 +28,7 @@ class CIItemStatsChartView: CIView {
         super.init()
         backgroundColor = color
         setupSubviews()
-        constrainSubviews()
+        //constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,6 +90,8 @@ class CIItemStatsChartView: CIView {
         selectedPointDataLabel.adjustsFontSizeToFitWidth = true
         selectedPointDataLabel.minimumScaleFactor = 0.5
         addSubview(selectedPointDataLabel)
+        
+        bringSubviewToFront(chart)
     }
     
     func constrainButtons(startIndex:Int) {
@@ -133,7 +135,32 @@ class CIItemStatsChartView: CIView {
         }
     }
     
-    func constrainSubviews() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let isLandscape = UIDevice.currentDevice().orientation.isLandscape
+        let controls = [titleLabel, selectedPointDataLabel, selectedPointInfoLabel]
+        for control in controls {
+            control.hidden = isLandscape
+        }
+        for button in buttons {
+            button.hidden = isLandscape
+        }
+        chart.highlightPerTapEnabled = !isLandscape
+        if isLandscape {
+            chart.snp_remakeConstraints{(make)->Void in
+                make.edges.equalTo(self)
+            }
+        }
+        else {
+            chart.snp_remakeConstraints{(make)->Void in
+                let topGuide = (buttons.count > 0) ? buttons.last! : topLine
+                make.top.equalTo(topGuide.snp_bottom).offset(CIConstants.verticalItemSpacing)
+                make.leading.equalTo(self.snp_leading)
+                make.trailing.equalTo(self.snp_trailing)
+                make.bottom.equalTo(selectedPointInfoLabel.snp_top).offset(-CIConstants.verticalItemSpacing)
+            }
+        }
+        
         topLine.snp_makeConstraints{(make)->Void in
             make.top.equalTo(self.snp_top)
             make.leading.equalTo(self.snp_leading)
@@ -149,14 +176,6 @@ class CIItemStatsChartView: CIView {
         }
         
         constrainButtons(0)
-        
-        chart.snp_makeConstraints{(make)->Void in
-            let topGuide = (buttons.count > 0) ? buttons.last! : topLine
-            make.top.equalTo(topGuide.snp_bottom).offset(CIConstants.verticalItemSpacing)
-            make.leading.equalTo(self.snp_leading)
-            make.trailing.equalTo(self.snp_trailing)
-            make.bottom.equalTo(selectedPointInfoLabel.snp_top).offset(-CIConstants.verticalItemSpacing)
-        }
         
         noDataLabel.snp_makeConstraints {(make)->Void in
             make.leading.greaterThanOrEqualTo(chart.snp_leadingMargin)

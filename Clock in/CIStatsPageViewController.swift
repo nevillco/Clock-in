@@ -77,6 +77,12 @@ class CIStatsPageViewController: UIViewController {
         }
         currentIndex = sender.currentPage
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        pageControl.frame = CGRectMake(0, CGRectGetMaxY(pageViewController.view.frame), self.view.bounds.size.width, CIConstants.pageControlHeight)
+    }
 }
 
 extension CIStatsPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {

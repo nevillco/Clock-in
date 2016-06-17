@@ -27,6 +27,7 @@ class CIConstants {
     static let charsRemainingForWarning = 5
     static let maxItems = UIColor.CIColorPalette.count
     static let colorCollectionCellSize = CGSizeMake(50, 50)
+    static let colorCollectionLandscapeCellSize = CGSizeMake(35, 35)
     
     static let maxNotifications = 8
     static let notificationIntervals:[NSTimeInterval] = [

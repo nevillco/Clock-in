@@ -75,11 +75,10 @@ class CIItemStatsLineChartDelegate: CIItemStatsChartDelegate {
         
         let dataSet = LineChartDataSet(yVals: dataEntries, label: "")
         dataSet.circleColors = [UIColor.whiteColor()]
-        dataSet.circleRadius = 3.0
+        dataSet.circleRadius = 2.0
         dataSet.lineWidth = 1.0
         dataSet.colors = [UIColor.whiteColor()]
         dataSet.drawValuesEnabled = false
-        dataSet.drawFilledEnabled = true
         dataSet.highlightEnabled = true
         dataSet.highlightColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         dataSet.highlightLineWidth = 2.0
