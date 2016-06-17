@@ -16,10 +16,11 @@ class CIItemStatsTableViewController: CIViewController {
     
     required init(item:CIModelItem) {
         self.item = item
-        self.sectionLabels = ["Clocked Time", "Days Clocked"]
+        self.sectionLabels = ["Clocked Time", "Days Clocked", "Streaks"]
         self.rowLabels = [
-            ["ALL TIME", "LAST YEAR", "LAST WEEK", "LAST 24 HOURS"],
-            ["CREATED DATE", "DAYS SINCE CREATION", "DAYS CLOCKED IN", "% OF DAYS CLOCKED IN"]]
+            ["ALL TIME", "LAST 30 DAYS", "LAST 7 DAYS", "LAST 24 HOURS"],
+            ["CREATED DATE", "DAYS SINCE CREATION", "DAYS CLOCKED IN", "% OF DAYS CLOCKED IN"],
+            ["CURRENT STREAK", "LONGEST STREAK"]]
         super.init()
         loadData()
     }
@@ -47,13 +48,13 @@ private extension CIItemStatsTableViewController {
     }
     
     func loadData(){
-        self.data = [clockedTime(), daysClocked()]
+        self.data = [clockedTime(), daysClocked(), streaks()]
     }
     
     func clockedTime() -> [String] {
         var totals:[Double] = [0, 0, 0, 0]
         let day:Double = 60*60*24
-        var maxIntervalDifferences = [-1,365*day,7*day,day]
+        var maxIntervalDifferences = [-1,30*day,7*day,day]
         for entry in item.entries {
             let now = NSDate()
             let entryDate = entry.startDate
@@ -77,15 +78,36 @@ private extension CIItemStatsTableViewController {
         formatter.dateStyle = .ShortStyle
         return [formatter.stringFromDate(createdDate).uppercaseString, String(daysSinceCreation), String(daysClockedIn), percentDaysClockedIn]
     }
+    
+    func streaks() -> [String] {
+        var currentStreak = 0
+        var maxStreak = 0
+        let createdDate = item.createDate.roundToDay()
+        var currentDate = createdDate
+        let endDate = NSDate().roundToDay()
+        let daysClockedIn = Array(Set(item.entries.map({ $0.startDate.roundToDay() })))
+        while endDate.timeIntervalSinceDate(currentDate) >= 0 {
+            if daysClockedIn.contains(currentDate) {
+                currentStreak += 1
+            }
+            else {
+                maxStreak = max(maxStreak, currentStreak)
+                currentStreak = 0
+            }
+            currentDate = currentDate.advancedByDays(1)
+        }
+        maxStreak = max(maxStreak, currentStreak)
+        return [currentStreak, maxStreak].map({ String(format: "%d day%@", $0, $0 == 1 ? "" : "s") })
+    }
 }
 
 extension CIItemStatsTableViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return data!.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return data![section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -94,6 +116,15 @@ extension CIItemStatsTableViewController: UITableViewDataSource, UITableViewDele
         cell.infoLabel.text = rowLabels[indexPath.section][indexPath.row]
         cell.dataLabel.text = data![indexPath.section][indexPath.row]
         cell.tag = indexPath.row
+        
+        let backgroundColor = (UIColor.colorForItem(item) == UIColor.CIBlack) ? UIColor.whiteColor() : UIColor.blackColor()
+        
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = backgroundColor.colorWithAlphaComponent(0.2)
+        }
+        else {
+            cell.backgroundColor = .clearColor()
+        }
         
         return cell
     }

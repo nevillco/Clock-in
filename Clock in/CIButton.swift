@@ -80,6 +80,7 @@ class CIButton: UIButton {
     func stopFlicker() {
         self.timer?.invalidate()
         self.timer = nil
+        self.permanentHighlight = false
     }
     
     func flicker(sender: AnyObject) {

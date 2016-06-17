@@ -11,6 +11,7 @@ import UIKit
 
 class CIStatsCellHeader: CIView {
     let label = UILabel()
+    let topLine = UIView()
     let botLine = UIView()
     
     required init(color: UIColor) {
@@ -30,6 +31,9 @@ class CIStatsCellHeader: CIView {
         label.textAlignment = .Center
         addSubview(label)
         
+        topLine.backgroundColor = .whiteColor()
+        addSubview(topLine)
+        
         botLine.backgroundColor = .whiteColor()
         addSubview(botLine)
     }
@@ -38,6 +42,13 @@ class CIStatsCellHeader: CIView {
         label.snp_makeConstraints{(make)->Void in
             make.centerY.equalTo(self.snp_centerY)
             make.centerX.equalTo(self.snp_centerX)
+        }
+        
+        topLine.snp_makeConstraints{(make)->Void in
+            make.top.equalTo(self.snp_top)
+            make.leading.equalTo(self.snp_leading)
+            make.trailing.equalTo(self.snp_trailing)
+            make.height.equalTo(1)
         }
         
         botLine.snp_makeConstraints{(make)->Void in

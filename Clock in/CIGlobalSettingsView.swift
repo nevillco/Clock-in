@@ -18,7 +18,7 @@ class CIGlobalSettingsView: CIView {
     let table = UITableView()
     let deleteContainer = CIView()
     let deleteLabel = UILabel()
-    let deleteButton = CIButton(primaryColor: .CIRed, title: "delete items".localized)
+    let deleteButton = CIButton(primaryColor: .whiteColor(), title: "delete items".localized)
     
     override init() {
         super.init()
@@ -56,10 +56,8 @@ class CIGlobalSettingsView: CIView {
         table.backgroundColor = .clearColor()
         addSubview(table)
         
-        deleteContainer.backgroundColor = .CIGray
+        deleteContainer.backgroundColor = .CIRed
         deleteContainer.layer.cornerRadius = CIConstants.cornerRadius
-        deleteContainer.layer.borderWidth = CIConstants.borderWidth
-        deleteContainer.layer.borderColor = UIColor.whiteColor().CGColor
         addSubview(deleteContainer)
         
         deleteLabel.text = "Tap the button to the right to delete all of your items. Be careful, there is no undo.".localized
