@@ -71,7 +71,7 @@ class CIModelItemCreator {
     static func generateTestData(profile:CIModelTestItemProfile) -> [CIModelEntry] {
         var entries = [CIModelEntry]()
         
-        let startDate = NSDate().roundToDay().advancedByDays(-(profile.daysToIterate + 1))
+        let startDate = NSDate().roundToDay().advancedByDays(-(profile.daysToIterate))
         let calendar = NSCalendar.currentCalendar()
         
         var currentDate = startDate

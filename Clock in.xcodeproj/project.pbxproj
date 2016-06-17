@@ -136,6 +136,7 @@
 		2D2A0ADD1D133A5300563E9C /* Item Chart Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */,
 				2DFFF8791D0F3C7200DE8FF5 /* CIItemStatsLineChartDelegate.swift */,
 				2D2A0AD61D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift */,
 				2D2A0AD81D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift */,
@@ -276,7 +277,6 @@
 			children = (
 				2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */,
 				2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */,
-				2DFFF8751D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift */,
 				2D2A0ADD1D133A5300563E9C /* Item Chart Delegates */,
 				2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */,
 			);

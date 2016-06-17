@@ -85,7 +85,7 @@ private extension CIItemStatsTableViewController {
         let createdDate = item.createDate.roundToDay()
         var currentDate = createdDate
         let endDate = NSDate().roundToDay()
-        let daysClockedIn = Array(Set(item.entries.map({ $0.startDate.roundToDay() })))
+        let daysClockedIn = Array(Set(item.entries.map({ $0.startDate.roundToDay() }))).sort({ $0.compare($1) == .OrderedAscending })
         while endDate.timeIntervalSinceDate(currentDate) >= 0 {
             if daysClockedIn.contains(currentDate) {
                 currentStreak += 1
@@ -94,7 +94,7 @@ private extension CIItemStatsTableViewController {
                 maxStreak = max(maxStreak, currentStreak)
                 currentStreak = 0
             }
-            currentDate = currentDate.advancedByDays(1)
+            currentDate = currentDate.advancedByDays(1).roundToDay()
         }
         maxStreak = max(maxStreak, currentStreak)
         return [currentStreak, maxStreak].map({ String(format: "%d day%@", $0, $0 == 1 ? "" : "s").uppercaseString })

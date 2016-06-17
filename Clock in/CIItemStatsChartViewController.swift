@@ -41,13 +41,13 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
         }
         
         if item.entries.count > 0 {
-            view.titleLabel.text = "Loading..."
+            view.animateTitleMessage("Loading...".localized)
             let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
             dispatch_async(dispatch_get_global_queue(priority, 0)) {
                 self.delegate.loadChartData(view.chart, selectedButtonIndex:index)
                 self.delegate.setAxisLabels(view.chart)
                 dispatch_async(dispatch_get_main_queue()) {
-                    view.titleLabel.text = self.delegate.chartTitle(index)
+                    view.animateTitleMessage(self.delegate.chartTitle(index))
                     view.chart.notifyDataSetChanged()
                     
                     view.noDataLabel.alpha = 0

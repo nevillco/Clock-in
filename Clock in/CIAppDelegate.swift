@@ -23,11 +23,11 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Badge], categories: nil))
         initNSUserDefaultsIfNeeded()
         
-        if(shouldResetRealm) { purgeRealm() }
         if(shouldGenerateTestData) {
             purgeRealm()
             generateTestData()
         }
+        else if(shouldResetRealm) { purgeRealm() }
         
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)

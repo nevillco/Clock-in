@@ -35,6 +35,14 @@ class CIItemStatsChartView: CIView {
         fatalError(CIError.CoderInitUnimplementedString)
     }
     
+    func animateTitleMessage(message:String) {
+        UIView.animateWithDuration(1.0, animations: {
+            self.titleLabel.alpha = 0
+            self.titleLabel.text = message.localized
+            self.titleLabel.alpha = 1
+        })
+    }
+    
     func setupSubviews() {
         titleLabel.font = .CIChartTitleFont
         titleLabel.textColor = .whiteColor()
