@@ -65,24 +65,20 @@ class CIItemStatsLineChartDelegate: CIItemStatsChartDelegate {
         
         let dataSet = LineChartDataSet(yVals: dataEntries, label: "")
         dataSet.circleColors = [UIColor.whiteColor()]
-        dataSet.circleRadius = 6.0
-        dataSet.lineWidth = 2.0
+        dataSet.circleRadius = 3.0
+        dataSet.lineWidth = 1.0
         dataSet.colors = [UIColor.whiteColor()]
         dataSet.drawValuesEnabled = false
         dataSet.drawFilledEnabled = true
         dataSet.highlightEnabled = true
-        dataSet.highlightColor = UIColor.whiteColor()
+        dataSet.highlightColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         dataSet.highlightLineWidth = 2.0
         
         let data = LineChartData(xVals: xValues, dataSet: dataSet)
         
+        (chart as! LineChartView).leftAxis.axisMaxValue = max(10.0, ceil(data.yMax))
+        
         chart.data = data
-    }
-    
-    func setMinimumAxisRange(chart: ChartViewBase) {
-        let lineChart = chart as! LineChartView
-        lineChart.leftAxis.resetCustomAxisMax()
-        lineChart.leftAxis.axisMaxValue = max(lineChart.leftAxis.axisMaxValue, 10.0)
     }
     
     func styleChart(chart: ChartViewBase) {
@@ -102,6 +98,7 @@ class CIItemStatsLineChartDelegate: CIItemStatsChartDelegate {
         lineChart.leftAxis.axisLineWidth = 2.0
         lineChart.leftAxis.valueFormatter = CIChartIntervalFormatter()
         lineChart.leftAxis.axisMinValue = 0
+        lineChart.leftAxis.granularity = 1.0
         
         lineChart.xAxis.labelFont = .CIChartAxisLabelFont
         lineChart.xAxis.labelTextColor = .whiteColor()
@@ -109,6 +106,13 @@ class CIItemStatsLineChartDelegate: CIItemStatsChartDelegate {
         lineChart.xAxis.axisLineColor = .whiteColor()
         lineChart.xAxis.axisLineWidth = 2.0
         lineChart.xAxis.gridLineWidth = 0.0
+    }
+    
+    func setAxisLabels(chart: ChartViewBase) {
+        let lineChart = chart as! LineChartView
+        if lineChart.leftAxis.labelCount > Int(lineChart.chartYMax) {
+            lineChart.leftAxis.setLabelCount(Int(lineChart.chartYMax) + 1, force: true)
+        }
     }
     
     func chartTitle(selectedButtonIndex: Int) -> String {

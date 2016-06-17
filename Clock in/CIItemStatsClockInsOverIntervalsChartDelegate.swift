@@ -79,13 +79,9 @@ class CIItemStatsClockInsOverIntervalsChartDelegate: CIItemStatsChartDelegate {
         
         let data = BarChartData(xVals: xValues, dataSet: dataSet)
         
+        (chart as! BarChartView).leftAxis.axisMaxValue = max(5.0, ceil(data.yMax))
+        
         chart.data = data
-    }
-    
-    func setMinimumAxisRange(chart: ChartViewBase) {
-        let barChart = chart as! BarChartView
-        barChart.leftAxis.resetCustomAxisMax()
-        barChart.leftAxis.axisMaxValue = max(barChart.leftAxis.axisMaxValue, 7.0)
     }
     
     func styleChart(chart: ChartViewBase) {
@@ -107,6 +103,7 @@ class CIItemStatsClockInsOverIntervalsChartDelegate: CIItemStatsChartDelegate {
         let formatter = NSNumberFormatter()
         formatter.maximumFractionDigits = 0
         barChart.leftAxis.valueFormatter = formatter
+        barChart.leftAxis.granularity = 1.0
         barChart.leftAxis.axisMinValue = 0
         
         barChart.xAxis.labelFont = .CIChartAxisLabelFont
@@ -115,6 +112,13 @@ class CIItemStatsClockInsOverIntervalsChartDelegate: CIItemStatsChartDelegate {
         barChart.xAxis.axisLineColor = .whiteColor()
         barChart.xAxis.axisLineWidth = 2.0
         barChart.xAxis.gridLineWidth = 0.0
+    }
+    
+    func setAxisLabels(chart: ChartViewBase) {
+        let barChart = chart as! BarChartView
+        if barChart.leftAxis.labelCount > Int(barChart.chartYMax) {
+            barChart.leftAxis.setLabelCount(Int(barChart.chartYMax) + 1, force: true)
+        }
     }
     
     func chartTitle(selectedButtonIndex: Int) -> String {

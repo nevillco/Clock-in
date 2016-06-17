@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27F9FD9D3AFEAD37B3934E63 /* Pods_Clock_in.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83BBF9938F477BDB43909BE7 /* Pods_Clock_in.framework */; };
+		2D0C38A41D14684700137F5B /* CIModelTestItemProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0C38A31D14684700137F5B /* CIModelTestItemProfile.swift */; };
 		2D2A0AD71D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD61D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift */; };
 		2D2A0AD91D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0AD81D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift */; };
 		2D2A0ADC1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2A0ADB1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D0C38A31D14684700137F5B /* CIModelTestItemProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelTestItemProfile.swift; sourceTree = "<group>"; };
 		2D2A0AD61D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsFilteredBarChartDelegate.swift; sourceTree = "<group>"; };
 		2D2A0AD81D11A41100563E9C /* CIItemStatsClockInsOverIntervalsChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsClockInsOverIntervalsChartDelegate.swift; sourceTree = "<group>"; };
 		2D2A0ADB1D11D83E00563E9C /* CIItemStatsClockInsByHourChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemStatsClockInsByHourChartDelegate.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				2DB752C31D09F72700D55196 /* CIModelEntry.swift */,
 				2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */,
 				2DA2F0731D0E33E10064D196 /* CIModelItemCreator.swift */,
+				2D0C38A31D14684700137F5B /* CIModelTestItemProfile.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				2DD9A49C1D1050B000303C6C /* CIAdjustView.swift in Sources */,
 				2DA2F0741D0E33E10064D196 /* CIModelItemCreator.swift in Sources */,
 				2DB752C21D09F69400D55196 /* CIModelItem.swift in Sources */,
+				2D0C38A41D14684700137F5B /* CIModelTestItemProfile.swift in Sources */,
 				2DB752BE1D09DBC800D55196 /* CITextField.swift in Sources */,
 				2D3BC91E1D08BACA00EC0425 /* CIStrings.swift in Sources */,
 				2D8C6A2A1D0DBF50008C8FA4 /* CIAddNotificationView.swift in Sources */,

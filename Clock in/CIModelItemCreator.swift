@@ -46,7 +46,17 @@ class CIModelItemCreator {
             item.notificationIntervals.append(doubleObj)
         }
         
+        let delegate = UIApplication.sharedApplication().delegate as! CIAppDelegate
+        
         try! realm.write {
+            if delegate.shouldGenerateTestData && CIModelTestItemProfile.profileNames.contains(name) {
+                let profile = CIModelTestItemProfile(profileName: name)
+                item.createDate = NSDate().roundToDay().advancedByDays(-(profile.daysToIterate + 1))
+                let entries = generateTestData(CIModelTestItemProfile(profileName: name))
+                for entry in entries {
+                    item.entries.append(entry)
+                }
+            }
             realm.add(item, update: false)
         }
     }
@@ -56,5 +66,54 @@ class CIModelItemCreator {
         try! realm.write {
             item.name = toName
         }
+    }
+    
+    static func generateTestData(profile:CIModelTestItemProfile) -> [CIModelEntry] {
+        var entries = [CIModelEntry]()
+        
+        let startDate = NSDate().roundToDay().advancedByDays(-(profile.daysToIterate + 1))
+        let calendar = NSCalendar.currentCalendar()
+        
+        var currentDate = startDate
+        
+        for _ in 0..<profile.daysToIterate {
+            let isWeekend = (calendar.component(.Weekday, fromDate: currentDate) % 7) <= 1
+            let probabilities = isWeekend ? profile.probabilitiesForClocksPerWeekend : profile.probabilitiesForClocksPerWeekday
+            
+            let newEntry = CIModelEntry()
+            
+            for _ in 0..<numClocks(probabilities) {
+                let randomTimeOffset:NSTimeInterval = doubleInRange(profile.minStartOffset, max: profile.maxStartOffset)
+                newEntry.startDate = currentDate.dateByAddingTimeInterval(randomTimeOffset)
+                
+                let randomTime:NSTimeInterval = doubleInRange(profile.minClockDuration, max: profile.maxClockDuration)
+                newEntry.time = randomTime
+                entries.append(newEntry)
+            }
+            currentDate = currentDate.advancedByDays(1)
+        }
+        return entries
+    }
+    
+    static func doubleInRange(min: UInt32, max:UInt32) -> Double {
+        return Double(arc4random_uniform(max - min) + min)
+    }
+    
+    //http://stackoverflow.com/questions/30309556/generate-random-numbers-with-a-given-distribution
+    static func numClocks(probabilities: [Double]) -> Int {
+        // Sum of all probabilities (so that we don't have to require that the sum is 1.0):
+        let sum = probabilities.reduce(0, combine: +)
+        // Random number in the range 0.0 <= rnd < sum :
+        let rnd = sum * Double(arc4random_uniform(UInt32.max)) / Double(UInt32.max)
+        // Find the first interval of accumulated probabilities into which `rnd` falls:
+        var accum = 0.0
+        for (i, p) in probabilities.enumerate() {
+            accum += p
+            if rnd < accum {
+                return i
+            }
+        }
+        // This point might be reached due to floating point inaccuracies:
+        return 0
     }
 }

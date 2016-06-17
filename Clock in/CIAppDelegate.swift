@@ -16,6 +16,7 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
     
     var shouldResetRealm = false
     var shouldResetNSUserDefaults = false
+    var shouldGenerateTestData = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if(shouldResetRealm) { purgeRealm() }
@@ -28,6 +29,7 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.backgroundColor = .whiteColor()
         self.window!.rootViewController = CIHomeViewController()
         self.window!.makeKeyAndVisible()
+        
         return true
     }
     

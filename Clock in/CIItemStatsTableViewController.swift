@@ -73,7 +73,7 @@ private extension CIItemStatsTableViewController {
         let day:Double = 60*60*24
         let daysSinceCreation = max(1, Int(NSDate().timeIntervalSinceDate(createdDate) / day))
         let daysClockedIn = Array(Set(item.entries.map({ $0.startDate.roundToDay() }))).count
-        let percentDaysClockedIn = String(format:"%d%%", Int(100 * round(Double(daysClockedIn) / Double(daysSinceCreation))))
+        let percentDaysClockedIn = String(format:"%d%%", Int(round(100 * Double(daysClockedIn) / Double(daysSinceCreation))))
         let formatter = NSDateFormatter()
         formatter.dateStyle = .ShortStyle
         return [formatter.stringFromDate(createdDate).uppercaseString, String(daysSinceCreation), String(daysClockedIn), percentDaysClockedIn]

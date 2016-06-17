@@ -31,7 +31,7 @@ extension NSDate {
     
     class func longStringForInterval(interval:Int) -> String {
         let days = interval / (3600 * 24)
-        let hours = interval / 3600
+        let hours = (interval / 3600) % 24
         let minutes = (interval / 60) % 60
         let seconds = interval % 60
         
@@ -71,7 +71,7 @@ extension NSDate {
     
     func sameDay(other: NSDate) -> Bool {
         let calendar = NSCalendar.currentCalendar()
-        return calendar.component([.Day], fromDate: self) == calendar.component([.Day], fromDate: other)
+        return calendar.components([.Day, .Month, .Year], fromDate: self) == calendar.components([.Day, .Month, .Year], fromDate: other)
     }
     
     func roundToDay() -> NSDate {

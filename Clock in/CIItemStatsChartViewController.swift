@@ -42,8 +42,8 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
         
         if item.entries.count > 0 {
             delegate.loadChartData(view.chart, selectedButtonIndex:index)
+            delegate.setAxisLabels(view.chart)
             view.chart.notifyDataSetChanged()
-            delegate.setMinimumAxisRange(view.chart)
             
             view.titleLabel.text = delegate.chartTitle(index)
             view.noDataLabel.alpha = 0
