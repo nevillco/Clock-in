@@ -29,10 +29,7 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
         addTargets(view)
         addDelegates(view)
         self.view = view
-        for i in 1..<view.buttons.count {
-            view.buttons[i].permanentHighlight = true
-        }
-        itemButtonPressed(view.buttons[0])
+        loadData()
     }
     
     func allItems() -> [CIModelItem] {
@@ -58,15 +55,19 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
     }
     
     func itemButtonPressed(sender: UIButton) {
-        let view = self.view as! CIGlobalStatsChartView
         let button = sender as! CIButton
         button.permanentHighlight = !button.permanentHighlight
-        
+        loadData()
+    }
+    
+    func loadData() {
+        let view = self.view as! CIGlobalStatsChartView
         view.animateTitleMessage("Loading...".localized)
-        if(hasData(selectedItems())) {
-            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                self.delegate.loadChartData(view.chart, selectedItems:self.selectedItems())
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            let items = self.selectedItems()
+            if(self.hasData(items)) {
+                self.delegate.loadChartData(view.chart, selectedItems:items)
                 self.delegate.setAxisLabels(view.chart)
                 dispatch_async(dispatch_get_main_queue()) {
                     view.animateTitleMessage(self.delegate.chartTitle())
@@ -83,18 +84,27 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
                     view.chart.animate(yAxisDuration: 0.5)
                 }
             }
-        }
-        else {
-            view.noDataLabel.alpha = 1
-            view.selectedPointDataLabel.alpha = 0
-            view.selectedPointInfoLabel.alpha = 0
-            view.chart.alpha = 0
+            else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    view.noDataLabel.alpha = 1
+                    view.selectedPointDataLabel.alpha = 0
+                    view.selectedPointInfoLabel.alpha = 0
+                    view.chart.alpha = 0
+                }
+            }
         }
     }
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         let view = self.view as! CIGlobalStatsChartView
-        let selectedItem = selectedItems()[dataSetIndex]
+        let itemCount = selectedItems().count
+        let selectedItem:CIModelItem
+        if chartView.data!.dataSetCount == itemCount {
+            selectedItem = selectedItems()[dataSetIndex]
+        }
+        else {
+            selectedItem = selectedItems()[entry.xIndex]
+        }
         let xValue = delegate.xValues(selectedItems())[entry.xIndex]
         let yValue = delegate.yValue(atXLabel: xValue, selectedItem: selectedItem)
         let (formattedX, formatterY) = delegate.formatSelectedValues(xValue, yValue: yValue, selectedItem: selectedItem)

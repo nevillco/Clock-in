@@ -55,6 +55,7 @@ class CIGlobalStatsChartView: CIView {
         addSubview(topLine)
         
         for button in buttons {
+            button.permanentHighlight = true
             addSubview(button)
         }
         
@@ -162,14 +163,14 @@ class CIGlobalStatsChartView: CIView {
             }
         }
         
-        topLine.snp_makeConstraints{(make)->Void in
+        topLine.snp_remakeConstraints{(make)->Void in
             make.top.equalTo(self.snp_top)
             make.leading.equalTo(self.snp_leading)
             make.trailing.equalTo(self.snp_trailing)
             make.height.equalTo(1)
         }
         
-        titleLabel.snp_makeConstraints{(make)->Void in
+        titleLabel.snp_remakeConstraints{(make)->Void in
             make.centerX.equalTo(self.snp_centerX)
             make.top.equalTo(topLine.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.leading.greaterThanOrEqualTo(self.snp_leadingMargin)
@@ -178,22 +179,22 @@ class CIGlobalStatsChartView: CIView {
         
         constrainButtons(0)
         
-        noDataLabel.snp_makeConstraints {(make)->Void in
+        noDataLabel.snp_remakeConstraints {(make)->Void in
             make.leading.greaterThanOrEqualTo(chart.snp_leadingMargin)
             make.trailing.lessThanOrEqualTo(chart.snp_trailingMargin)
             make.centerX.equalTo(chart.snp_centerX)
             make.centerY.equalTo(chart.snp_centerY)
         }
         
-        selectedPointDataLabel.snp_makeConstraints{(make)->Void in
+        selectedPointDataLabel.snp_remakeConstraints{(make)->Void in
             make.centerX.equalTo(self.snp_centerX)
             make.top.equalTo(selectedPointInfoLabel.snp_bottom).offset(-CIConstants.chartLabelSpacing)
             make.bottom.equalTo(self.snp_bottom)
-            make.leading.greaterThanOrEqualTo(self.snp_leadingMargin)
-            make.trailing.lessThanOrEqualTo(self.snp_trailingMargin)
+            make.leading.greaterThanOrEqualTo(self.snp_leadingMargin).offset(CIConstants.horizontalItemSpacing)
+            make.trailing.lessThanOrEqualTo(self.snp_trailingMargin).offset(-CIConstants.horizontalItemSpacing)
         }
         
-        selectedPointInfoLabel.snp_makeConstraints{(make)->Void in
+        selectedPointInfoLabel.snp_remakeConstraints{(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin).offset(CIConstants.horizontalItemSpacing)
             make.trailing.equalTo(self.snp_trailingMargin)
         }
