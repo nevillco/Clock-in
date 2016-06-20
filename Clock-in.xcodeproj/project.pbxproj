@@ -33,6 +33,10 @@
 		2D3BC9231D08C2AD00EC0425 /* CIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */; };
 		2D3BC9251D08C3AD00EC0425 /* CIBaseClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9241D08C3AD00EC0425 /* CIBaseClasses.swift */; };
 		2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3BC9261D08C5C900EC0425 /* CIButton.swift */; };
+		2D727A6F1D185AED0050441F /* CIGlobalStatsChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A6E1D185AED0050441F /* CIGlobalStatsChartViewController.swift */; };
+		2D727A711D185B470050441F /* CIGlobalStatsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A701D185B470050441F /* CIGlobalStatsChartView.swift */; };
+		2D727A741D185CB80050441F /* CIGlobalStatsChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A731D185CB80050441F /* CIGlobalStatsChartDelegate.swift */; };
+		2D727A761D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A751D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift */; };
 		2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */; };
 		2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */; };
 		2D8C6A211D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */; };
@@ -90,6 +94,10 @@
 		2D3BC9221D08C2AD00EC0425 /* CIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIConstants.swift; sourceTree = "<group>"; };
 		2D3BC9241D08C3AD00EC0425 /* CIBaseClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIBaseClasses.swift; sourceTree = "<group>"; };
 		2D3BC9261D08C5C900EC0425 /* CIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIButton.swift; sourceTree = "<group>"; };
+		2D727A6E1D185AED0050441F /* CIGlobalStatsChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsChartViewController.swift; sourceTree = "<group>"; };
+		2D727A701D185B470050441F /* CIGlobalStatsChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsChartView.swift; sourceTree = "<group>"; };
+		2D727A731D185CB80050441F /* CIGlobalStatsChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsChartDelegate.swift; sourceTree = "<group>"; };
+		2D727A751D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsLineChartDelegate.swift; sourceTree = "<group>"; };
 		2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelItemManager.swift; sourceTree = "<group>"; };
 		2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsViewController.swift; sourceTree = "<group>"; };
 		2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsView.swift; sourceTree = "<group>"; };
@@ -232,6 +240,7 @@
 				2DA2F06F1D0E28480064D196 /* CIItemSettingsView.swift */,
 				2D8C6A291D0DBF50008C8FA4 /* CIAddNotificationView.swift */,
 				2DFFF8711D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift */,
+				2D727A701D185B470050441F /* CIGlobalStatsChartView.swift */,
 				2DD9A49B1D1050B000303C6C /* CIAdjustView.swift */,
 			);
 			name = View;
@@ -241,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				2DD9A4981D0F513300303C6C /* Charts */,
+				2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */,
 				2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */,
 				2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */,
 				2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */,
@@ -260,6 +270,15 @@
 			name = Controls;
 			sourceTree = "<group>";
 		};
+		2D727A721D185CA40050441F /* Global Chart Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				2D727A731D185CB80050441F /* CIGlobalStatsChartDelegate.swift */,
+				2D727A751D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift */,
+			);
+			name = "Global Chart Delegates";
+			sourceTree = "<group>";
+		};
 		2D8C6A261D0DB7E7008C8FA4 /* Tables */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,8 +296,9 @@
 			children = (
 				2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */,
 				2DFFF86E1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift */,
+				2D727A6E1D185AED0050441F /* CIGlobalStatsChartViewController.swift */,
+				2D727A721D185CA40050441F /* Global Chart Delegates */,
 				2D2A0ADD1D133A5300563E9C /* Item Chart Delegates */,
-				2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */,
 			);
 			name = Charts;
 			sourceTree = "<group>";
@@ -448,6 +468,7 @@
 				2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */,
 				2DFFF8721D0F1D7A00DE8FF5 /* CIItemStatsChartView.swift in Sources */,
 				2DA2F0701D0E28480064D196 /* CIItemSettingsView.swift in Sources */,
+				2D727A6F1D185AED0050441F /* CIGlobalStatsChartViewController.swift in Sources */,
 				2DFFF86F1D0F1D6400DE8FF5 /* CIItemStatsChartViewController.swift in Sources */,
 				2DFFF87A1D0F3C7200DE8FF5 /* CIItemStatsLineChartDelegate.swift in Sources */,
 				2D3BC9271D08C5C900EC0425 /* CIButton.swift in Sources */,
@@ -461,6 +482,8 @@
 				2D3BC9251D08C3AD00EC0425 /* CIBaseClasses.swift in Sources */,
 				2D2A0AE01D133B0800563E9C /* CIItemStatsTableViewController.swift in Sources */,
 				2D2A0AD71D10DE6400563E9C /* CIItemStatsFilteredBarChartDelegate.swift in Sources */,
+				2D727A741D185CB80050441F /* CIGlobalStatsChartDelegate.swift in Sources */,
+				2D727A761D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift in Sources */,
 				2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */,
 				2DB752C41D09F72700D55196 /* CIModelEntry.swift in Sources */,
 				2D8C6A281D0DB859008C8FA4 /* CISettingsViewHeader.swift in Sources */,
@@ -471,6 +494,7 @@
 				2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */,
 				2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */,
 				2DFFF8761D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift in Sources */,
+				2D727A711D185B470050441F /* CIGlobalStatsChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
