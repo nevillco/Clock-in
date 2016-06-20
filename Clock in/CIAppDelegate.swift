@@ -14,6 +14,7 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    var shouldClearNotifications = false
     var shouldResetRealm = false
     var shouldResetNSUserDefaults = false
     var shouldGenerateTestData = false
@@ -28,6 +29,8 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
             generateTestData()
         }
         else if(shouldResetRealm) { purgeRealm() }
+        
+        if shouldClearNotifications { application.cancelAllLocalNotifications() }
         
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -104,17 +107,6 @@ class CIAppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        
-        let root = self.window!.rootViewController as! CIHomeViewController
-        let managers = root.itemManagers
-        let defaults = NSUserDefaults.standardUserDefaults()
-        for manager in managers {
-            if(manager.clockedIn) {
-                manager.clockOut()
-                defaults.setBool(true, forKey: .CIDefaultAlertForcedClockOut)
-            }
-        }
     }
 }
 

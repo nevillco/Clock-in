@@ -68,13 +68,13 @@ extension CIAdjustViewControllerTargets {
                 errorAlert("You haven't been clocked in that long yet!")
             }
             else {
-                manager.adjustTime -= interval
+                manager.adjust(-interval)
                 dismissViewControllerAnimated(true, completion: nil)
                 view.resetTimer()
             }
         }
         else {
-            manager.adjustTime += interval
+            manager.adjust(interval)
             dismissViewControllerAnimated(true, completion: nil)
             view.resetTimer()
         }

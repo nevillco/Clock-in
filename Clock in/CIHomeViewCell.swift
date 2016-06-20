@@ -222,7 +222,7 @@ extension CIHomeViewCellTimer {
     }
     
     func resetTimer() {
-        timer!.invalidate()
+        timer?.invalidate()
         timer = nil
     }
     

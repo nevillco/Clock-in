@@ -95,7 +95,7 @@ extension CIHomeViewControllerTargets {
         let cell = sender.superview as! CIHomeViewCell
         let manager = itemManagers[cell.tag]
         
-        if(manager.clockedIn) {
+        if(manager.item.clockedIn) {
             manager.clockOut()
             cell.resetTimer()
             presentAlertIfNecessary(true)
@@ -104,7 +104,7 @@ extension CIHomeViewControllerTargets {
             manager.clockIn()
             cell.startTimer(manager)
         }
-        cell.applyClockedStyle(manager.clockedIn)
+        cell.applyClockedStyle(manager.item.clockedIn)
     }
     
     func cancelButtonPressed(sender: UIButton) {
@@ -113,7 +113,7 @@ extension CIHomeViewControllerTargets {
         
         manager.cancelClockIn()
         cell.resetTimer()
-        cell.applyClockedStyle(manager.clockedIn)
+        cell.applyClockedStyle(manager.item.clockedIn)
     }
     
     func itemSettingsButtonPressed(sender:UIButton) {
@@ -183,6 +183,14 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.primaryColor = color
         cell.nameLabel.text = manager.item.name
         cell.tag = indexPath.row
+        
+        cell.applyClockedStyle(manager.item.clockedIn)
+        if(manager.item.clockedIn) {
+            cell.startTimer(manager)
+        }
+        else {
+            cell.resetTimer()
+        }
         
         cell.clockButton.addTarget(self, action: #selector(clockButtonPressed(_:)), forControlEvents: .TouchUpInside)
         cell.settingsButton.addTarget(self, action: #selector(itemSettingsButtonPressed(_:)), forControlEvents: .TouchUpInside)

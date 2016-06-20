@@ -15,6 +15,9 @@ class CIModelItem: Object {
     let entries = List<CIModelEntry>()
     let notificationIntervals = List<CIDoubleObject>()
     dynamic var colorIndex = 0
+    dynamic var clockedIn = false
+    dynamic var lastClockIn:NSDate? = nil
+    dynamic var adjustTime:Double = 0.0
     
     override static func indexedProperties() -> [String] {
         return ["name"]

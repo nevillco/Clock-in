@@ -11,52 +11,63 @@ import RealmSwift
 
 class CIModelItemManager {
     let item: CIModelItem
-    var clockedIn = false
-    var lastClockIn: NSDate? = nil
-    var adjustTime: NSTimeInterval = 0.0
+    let realm: Realm
     
     init(item: CIModelItem) {
         self.item = item
+        self.realm = try! Realm()
     }
     
     func clockIn() {
-        clockedIn = true
-        lastClockIn = NSDate()
+        try! realm.write {
+            item.clockedIn = true
+            item.lastClockIn = NSDate()
+        }
         scheduleNotifications()
     }
     
     func clockOut() {
-        let newEntries = generateEntries(NSDate().dateByAddingTimeInterval(adjustTime), firstRun: true)
+        let newEntries = generateEntries(NSDate().dateByAddingTimeInterval(item.adjustTime), firstRun: true)
         let realm = try! Realm()
         try! realm.write {
             for newEntry in newEntries {
                 item.entries.append(newEntry)
             }
+            item.lastClockIn = nil
+            item.clockedIn = false
+            item.adjustTime = 0
         }
-        
-        lastClockIn = nil
-        clockedIn = false
-        adjustTime = 0
         cancelNotifications()
     }
     
     func cancelClockIn() {
-        lastClockIn = nil
-        clockedIn = false
-        adjustTime = 0
+        try! realm.write {
+            item.lastClockIn = nil
+            item.clockedIn = false
+            item.adjustTime = 0
+        }
         cancelNotifications()
     }
 
     func currentClockTime() -> NSTimeInterval {
-        return NSDate().timeIntervalSinceDate(lastClockIn!) + adjustTime
+        return NSDate().timeIntervalSinceDate(item.lastClockIn!) + item.adjustTime
+    }
+    
+    func adjust(interval: NSTimeInterval) {
+        try! realm.write {
+            item.adjustTime += interval
+        }
+        cancelNotifications()
+        scheduleNotifications()
     }
     
     private func scheduleNotifications() {
         item.notificationIntervals.forEach({doubleObj in
+            let interval = doubleObj.value - currentClockTime()
             let notification = UILocalNotification()
             let bodyText = String(format: "You've been clocked in to %@ for %@.", item.name, NSDate.longStringForInterval(Int(doubleObj.value)))
             notification.alertBody = bodyText
-            notification.fireDate = NSDate().dateByAddingTimeInterval(doubleObj.value) // todo item due date (when notification will be fired)
+            notification.fireDate = NSDate().dateByAddingTimeInterval(interval)
             notification.category = item.name
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
         })
@@ -72,10 +83,10 @@ class CIModelItemManager {
     }
     
     private func generateEntries(targetDate:NSDate, firstRun:Bool) -> [CIModelEntry] {
-        if targetDate.sameDay(lastClockIn!) {
+        if targetDate.sameDay(item.lastClockIn!) {
             let newEntry = CIModelEntry()
-            newEntry.startDate = lastClockIn!
-            newEntry.time = targetDate.timeIntervalSinceDate(lastClockIn!)
+            newEntry.startDate = item.lastClockIn!
+            newEntry.time = targetDate.timeIntervalSinceDate(item.lastClockIn!)
             return [newEntry]
         }
         else {
