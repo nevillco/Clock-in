@@ -11,7 +11,6 @@ import Charts
 import RealmSwift
 
 class CIGlobalStatsPieChartDelegate: CIGlobalStatsChartDelegate {
-    let formatter = NSDateFormatter()
     func chartType() -> ChartViewBase.Type {
         return PieChartView.self
     }

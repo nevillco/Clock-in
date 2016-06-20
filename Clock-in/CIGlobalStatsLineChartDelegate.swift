@@ -78,10 +78,6 @@ class CIGlobalStatsLineChartDelegate: CIGlobalStatsChartDelegate {
     }
     
     func styleChart(chart: ChartViewBase) {
-        func chartTitle() -> String {
-            return "Clocked Time by Day".localized
-        }
-        
         let lineChart = chart as! LineChartView
         lineChart.descriptionText = ""
         lineChart.extraRightOffset = CIConstants.chartRightOffset

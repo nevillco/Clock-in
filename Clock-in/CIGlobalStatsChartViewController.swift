@@ -78,6 +78,7 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
                     view.selectedPointDataLabel.text = " "
                     view.selectedPointDataLabel.alpha = 1
                     view.selectedPointInfoLabel.alpha = 1
+                    view.selectionContainer.alpha = 1
                     view.chart.alpha = 1
                     
                     view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
@@ -86,9 +87,11 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
             }
             else {
                 dispatch_async(dispatch_get_main_queue()) {
+                    view.animateTitleMessage(self.delegate.chartTitle())
                     view.noDataLabel.alpha = 1
                     view.selectedPointDataLabel.alpha = 0
                     view.selectedPointInfoLabel.alpha = 0
+                    view.selectionContainer.alpha = 0
                     view.chart.alpha = 0
                 }
             }

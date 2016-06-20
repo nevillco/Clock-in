@@ -38,6 +38,7 @@
 		2D727A741D185CB80050441F /* CIGlobalStatsChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A731D185CB80050441F /* CIGlobalStatsChartDelegate.swift */; };
 		2D727A761D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A751D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift */; };
 		2D727A781D1877E70050441F /* GIClobalStatsPieChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A771D1877E70050441F /* GIClobalStatsPieChartDelegate.swift */; };
+		2D727A7A1D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A791D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift */; };
 		2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */; };
 		2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */; };
 		2D8C6A211D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */; };
@@ -100,6 +101,7 @@
 		2D727A731D185CB80050441F /* CIGlobalStatsChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsChartDelegate.swift; sourceTree = "<group>"; };
 		2D727A751D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsLineChartDelegate.swift; sourceTree = "<group>"; };
 		2D727A771D1877E70050441F /* GIClobalStatsPieChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIClobalStatsPieChartDelegate.swift; sourceTree = "<group>"; };
+		2D727A791D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsWeekdayChartDelegate.swift; sourceTree = "<group>"; };
 		2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelItemManager.swift; sourceTree = "<group>"; };
 		2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsViewController.swift; sourceTree = "<group>"; };
 		2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsView.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				2D727A731D185CB80050441F /* CIGlobalStatsChartDelegate.swift */,
 				2D727A751D185FD30050441F /* CIGlobalStatsLineChartDelegate.swift */,
 				2D727A771D1877E70050441F /* GIClobalStatsPieChartDelegate.swift */,
+				2D727A791D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift */,
 			);
 			name = "Global Chart Delegates";
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */,
 				2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */,
 				2DFFF8761D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift in Sources */,
+				2D727A7A1D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift in Sources */,
 				2D727A711D185B470050441F /* CIGlobalStatsChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
