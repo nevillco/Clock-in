@@ -148,7 +148,7 @@
 		2D3BC8E61D0894CF00EC0425 = {
 			isa = PBXGroup;
 			children = (
-				2D3BC8F11D0894CF00EC0425 /* Clock in */,
+				2D3BC8F11D0894CF00EC0425 /* Clock-in */,
 				2D3BC8F01D0894CF00EC0425 /* Products */,
 				33EC4504560C5603F6FB46BB /* Pods */,
 				F6F10D47EE7C46E6ABBCF4C1 /* Frameworks */,
@@ -164,7 +164,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2D3BC8F11D0894CF00EC0425 /* Clock in */ = {
+		2D3BC8F11D0894CF00EC0425 /* Clock-in */ = {
 			isa = PBXGroup;
 			children = (
 				2D3BC8FF1D08959300EC0425 /* App */,
@@ -176,7 +176,7 @@
 				2D3BC8F61D0894CF00EC0425 /* LaunchScreen.storyboard */,
 				2D3BC8F91D0894CF00EC0425 /* Info.plist */,
 			);
-			path = "Clock in";
+			path = "Clock-in";
 			sourceTree = "<group>";
 		};
 		2D3BC8FF1D08959300EC0425 /* App */ = {
@@ -339,7 +339,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2D3BC8EA1D0894CF00EC0425 /* Build configuration list for PBXProject "Clock in" */;
+			buildConfigurationList = 2D3BC8EA1D0894CF00EC0425 /* Build configuration list for PBXProject "Clock-in" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -577,7 +577,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "Clock in/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Clock-in/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "info.connorneville.Clock-in";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -590,7 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "Clock in/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Clock-in/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "info.connorneville.Clock-in";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -600,7 +600,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D3BC8EA1D0894CF00EC0425 /* Build configuration list for PBXProject "Clock in" */ = {
+		2D3BC8EA1D0894CF00EC0425 /* Build configuration list for PBXProject "Clock-in" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D3BC8FA1D0894CF00EC0425 /* Debug */,

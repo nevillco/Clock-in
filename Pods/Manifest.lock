@@ -17,7 +17,6 @@ DEPENDENCIES:
   - Charts
   - Charts/Realm
   - DZNEmptyDataSet
-  - Realm
   - RealmSwift
   - SnapKit
 
@@ -28,6 +27,6 @@ SPEC CHECKSUMS:
   RealmSwift: 8a45cc8f02dfac093b72a3b5a01d567e27e15891
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
 
-PODFILE CHECKSUM: cd951fcc265a7b89d0612c01e837e127400ea337
+PODFILE CHECKSUM: 562f87f18d5f02904625f52a26509cec0ed3e2a6
 
 COCOAPODS: 1.0.1

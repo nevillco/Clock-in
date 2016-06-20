@@ -17,7 +17,7 @@
                BlueprintIdentifier = "2D3BC8EE1D0894CF00EC0425"
                BuildableName = "Clock in.app"
                BlueprintName = "Clock in"
-               ReferencedContainer = "container:Clock in.xcodeproj">
+               ReferencedContainer = "container:Clock-in.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "2D3BC8EE1D0894CF00EC0425"
             BuildableName = "Clock in.app"
             BlueprintName = "Clock in"
-            ReferencedContainer = "container:Clock in.xcodeproj">
+            ReferencedContainer = "container:Clock-in.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "2D3BC8EE1D0894CF00EC0425"
             BuildableName = "Clock in.app"
             BlueprintName = "Clock in"
-            ReferencedContainer = "container:Clock in.xcodeproj">
+            ReferencedContainer = "container:Clock-in.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "2D3BC8EE1D0894CF00EC0425"
             BuildableName = "Clock in.app"
             BlueprintName = "Clock in"
-            ReferencedContainer = "container:Clock in.xcodeproj">
+            ReferencedContainer = "container:Clock-in.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
