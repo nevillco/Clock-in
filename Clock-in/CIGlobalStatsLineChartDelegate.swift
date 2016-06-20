@@ -80,6 +80,7 @@ class CIGlobalStatsLineChartDelegate: CIGlobalStatsChartDelegate {
     func styleChart(chart: ChartViewBase) {
         let lineChart = chart as! LineChartView
         lineChart.descriptionText = ""
+        lineChart.extraTopOffset = CIConstants.chartTopOffset
         lineChart.extraRightOffset = CIConstants.chartRightOffset
         lineChart.extraLeftOffset = CIConstants.chartLeftOffset
         
