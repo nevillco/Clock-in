@@ -69,6 +69,27 @@ class CIGlobalSettingsView: CIView {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let isLandscape = UIDevice.currentDevice().orientation.isLandscape
+        notificationsLabel.hidden = isLandscape
+        if isLandscape {
+            table.snp_remakeConstraints {(make)->Void in
+                make.top.equalTo(notificationsButton.snp_bottom).offset(CIConstants.verticalItemSpacing)
+                make.leading.equalTo(self.snp_leadingMargin)
+                make.trailing.equalTo(self.snp_trailingMargin)
+                make.bottom.equalTo(deleteContainer.snp_top).offset(-CIConstants.verticalItemSpacing)
+            }
+        }
+        else {
+            table.snp_remakeConstraints {(make)->Void in
+                make.top.equalTo(notificationsLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
+                make.leading.equalTo(self.snp_leadingMargin)
+                make.trailing.equalTo(self.snp_trailingMargin)
+                make.bottom.equalTo(deleteContainer.snp_top).offset(-CIConstants.verticalItemSpacing)
+            }
+        }
+        
         backButton.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.baseline.equalTo(titleLabel.snp_baseline)
@@ -89,13 +110,6 @@ class CIGlobalSettingsView: CIView {
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(notificationsButton.snp_bottom).offset(CIConstants.verticalItemSpacing)
-        }
-        
-        table.snp_makeConstraints {(make)->Void in
-            make.top.equalTo(notificationsLabel.snp_bottom).offset(2 * CIConstants.verticalItemSpacing)
-            make.leading.equalTo(self.snp_leadingMargin)
-            make.trailing.equalTo(self.snp_trailingMargin)
-            make.bottom.equalTo(deleteLabel.snp_top).offset(-CIConstants.verticalItemSpacing)
         }
         
         deleteContainer.snp_makeConstraints{(make)->Void in

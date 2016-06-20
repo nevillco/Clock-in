@@ -140,11 +140,11 @@ class CIHomeViewCell: CITableViewCell {
 
 typealias CIHomeViewCellStyling = CIHomeViewCell
 extension CIHomeViewCellStyling {
-    func applyClockedStyle(clockedIn: Bool) {
+    func applyClockedStyle(clockedIn: Bool, animated: Bool) {
         self.layoutIfNeeded()
         makeButtonConstraints(clockedIn)
         changeClockButton(clockedIn)
-        animateVisibleSubviews(clockedIn)
+        changeVisibleSubviews(clockedIn, animated: animated)
     }
     
     private func changeClockButton(clockedIn:Bool) {
@@ -189,28 +189,44 @@ extension CIHomeViewCellStyling {
         }
     }
     
-    private func animateVisibleSubviews(clockedIn:Bool) {
-        if(clockedIn) {
-            UIView.animateWithDuration(0.5, animations: {
-                self.layoutIfNeeded()
-                }, completion: nil)
-            UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
+    private func changeVisibleSubviews(clockedIn:Bool, animated:Bool) {
+        if(animated) {
+            if(clockedIn) {
+                UIView.animateWithDuration(0.5, animations: {
+                    self.layoutIfNeeded()
+                    }, completion: nil)
+                UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
+                    self.clockDurationLabel.alpha = 1
+                    self.adjustButton.alpha = 1
+                    self.cancelButton.alpha = 1
+                    }, completion: nil)
+                
+            }
+            else {
+                UIView.animateWithDuration(0.5, animations: {
+                    self.clockDurationLabel.alpha = 0
+                    self.adjustButton.alpha = 0
+                    self.cancelButton.alpha = 0
+                    }, completion: {_ in
+                        self.clockDurationLabel.text = "0s" })
+                UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
+                    self.layoutIfNeeded()
+                    }, completion: nil)
+            }
+        }
+        else {
+            if(clockedIn) {
                 self.clockDurationLabel.alpha = 1
                 self.adjustButton.alpha = 1
                 self.cancelButton.alpha = 1
-                }, completion: nil)
-            
-        }
-        else {
-            UIView.animateWithDuration(0.5, animations: {
+                self.layoutIfNeeded()
+            }
+            else {
                 self.clockDurationLabel.alpha = 0
                 self.adjustButton.alpha = 0
                 self.cancelButton.alpha = 0
-                }, completion: {_ in
-                    self.clockDurationLabel.text = "0s" })
-            UIView.animateWithDuration(0.25, delay: 0.6, options: .CurveEaseIn, animations: {
                 self.layoutIfNeeded()
-                }, completion: nil)
+            }
         }
     }
 }
@@ -227,6 +243,7 @@ extension CIHomeViewCellTimer {
     }
     
     func updateDurationLabel() {
+        if timer == nil { return }
         let manager = timer!.userInfo as! CIModelItemManager
         let interval = manager.currentClockTime()
         self.clockDurationLabel.text = NSDate.stringForInterval(Int(interval))

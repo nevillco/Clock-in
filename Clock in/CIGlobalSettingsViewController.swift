@@ -39,8 +39,6 @@ private extension CIGlobalSettingsViewController {
     }
     
     func addDelegates(view: CIGlobalSettingsView) {
-        view.table.emptyDataSetSource = self
-        view.table.emptyDataSetDelegate = self
         view.table.delegate = self
         view.table.dataSource = self
         view.table.registerClass(CISettingsViewCell.self, forCellReuseIdentifier: .CISettingsCellReuseIdentifier)
@@ -122,49 +120,6 @@ extension CIGlobalSettingsViewControllerTargets {
         alertController.addAction(cancelAction)
         alertController.addAction(confirmAction)
         presentViewController(alertController, animated: true, completion: nil)
-    }
-}
-
-extension CIGlobalSettingsViewController: DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let titleText = notificationsOn ? "nothing yet".localized : "turned off".localized
-        let textRange = NSRange(location: 0, length: titleText.characters.count)
-        let attributedText = NSMutableAttributedString(string: titleText.localized)
-        attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIEmptyDataSetTitleFont, range: textRange)
-        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: textRange)
-        return attributedText
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let delegate = UIApplication.sharedApplication().delegate as! CIAppDelegate
-        let bodyText:String
-        if(!delegate.notificationsEnabledInSettings()) {
-            bodyText = "Your device's settings do not give us permissions to send notifications.".localized
-        }
-        else if notificationsOn {
-            bodyText = "Click the \"add\" button above to add a notification time!".localized
-        }
-        else {
-            bodyText = "Tap the button at the top to turn on notifications.".localized
-        }
-        let textRange = NSRange(location: 0, length: bodyText.characters.count)
-        let attributedText = NSMutableAttributedString(string: bodyText.localized)
-        attributedText.addAttribute(NSFontAttributeName, value: UIFont.CIEmptyDataSetBodyFont, range: textRange)
-        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: textRange)
-        
-        if notificationsOn {
-            let coloredRange = (bodyText as NSString).rangeOfString("\"add item\"")
-            attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.CIBlue, range: coloredRange)
-        }
-        return attributedText
-    }
-    
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
-        return UIImage(named: "clockIcon50")?.imageWithRenderingMode(.AlwaysTemplate)
-    }
-    
-    func imageTintColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
-        return .whiteColor()
     }
 }
 

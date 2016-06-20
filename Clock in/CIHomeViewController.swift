@@ -104,7 +104,7 @@ extension CIHomeViewControllerTargets {
             manager.clockIn()
             cell.startTimer(manager)
         }
-        cell.applyClockedStyle(manager.item.clockedIn)
+        cell.applyClockedStyle(manager.item.clockedIn, animated: true)
     }
     
     func cancelButtonPressed(sender: UIButton) {
@@ -113,7 +113,7 @@ extension CIHomeViewControllerTargets {
         
         manager.cancelClockIn()
         cell.resetTimer()
-        cell.applyClockedStyle(manager.item.clockedIn)
+        cell.applyClockedStyle(manager.item.clockedIn, animated: true)
     }
     
     func itemSettingsButtonPressed(sender:UIButton) {
@@ -184,7 +184,7 @@ extension CIHomeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.nameLabel.text = manager.item.name
         cell.tag = indexPath.row
         
-        cell.applyClockedStyle(manager.item.clockedIn)
+        cell.applyClockedStyle(manager.item.clockedIn, animated: false)
         if(manager.item.clockedIn) {
             cell.startTimer(manager)
         }
