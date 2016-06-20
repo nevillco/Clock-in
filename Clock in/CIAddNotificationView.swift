@@ -21,7 +21,6 @@ class CIAddNotificationView: CIView {
         super.init()
         backgroundColor = .CIPurple
         setupSubviews()
-        constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,30 +56,30 @@ class CIAddNotificationView: CIView {
         addSubview(goButton)
     }
     
-    func constrainSubviews() {
-        backButton.snp_makeConstraints {(make)->Void in
+    override func layoutSubviews() {
+        backButton.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.baseline.equalTo(titleLabel.snp_baseline)
         }
         
-        titleLabel.snp_makeConstraints {(make)->Void in
+        titleLabel.snp_remakeConstraints {(make)->Void in
             make.trailing.equalTo(self.snp_trailingMargin)
-            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop)
+            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop())
         }
         
-        infoLabel.snp_makeConstraints {(make)->Void in
+        infoLabel.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(titleLabel.snp_bottom)
         }
         
-        picker.snp_makeConstraints {(make)->Void in
+        picker.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(infoLabel.snp_bottom)
         }
         
-        goButton.snp_makeConstraints {(make)->Void in
+        goButton.snp_remakeConstraints {(make)->Void in
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(picker.snp_bottom).offset(CIConstants.verticalItemSpacing)
         }

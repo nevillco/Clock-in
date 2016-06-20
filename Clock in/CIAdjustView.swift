@@ -26,7 +26,6 @@ class CIAdjustView: CIView {
         super.init()
         self.backgroundColor = backgroundColor
         setupSubviews()
-        constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -71,48 +70,48 @@ class CIAdjustView: CIView {
         addSubview(goButton)
     }
     
-    func constrainSubviews() {
-        backButton.snp_makeConstraints {(make)->Void in
+    override func layoutSubviews() {
+        backButton.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.baseline.equalTo(titleLabel.snp_baseline)
         }
         
-        titleLabel.snp_makeConstraints {(make)->Void in
+        titleLabel.snp_remakeConstraints {(make)->Void in
             make.trailing.equalTo(self.snp_trailingMargin)
-            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop)
+            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop())
         }
         
-        infoLabel.snp_makeConstraints {(make)->Void in
+        infoLabel.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(titleLabel.snp_bottom)
         }
         
-        timerLabel.snp_makeConstraints {(make)->Void in
+        timerLabel.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(infoLabel.snp_bottom)
         }
         
-        rewindButton.snp_makeConstraints{(make)->Void in
+        rewindButton.snp_remakeConstraints{(make)->Void in
             make.trailing.equalTo(self.snp_centerX).offset(-0.5 * CIConstants.horizontalItemSpacing)
             make.top.equalTo(timerLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)
         }
         
-        forwardButton.snp_makeConstraints{(make)->Void in
+        forwardButton.snp_remakeConstraints{(make)->Void in
             make.leading.equalTo(self.snp_centerX).offset(0.5 * CIConstants.horizontalItemSpacing)
             make.top.equalTo(timerLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)
         }
         
-        picker.snp_makeConstraints {(make)->Void in
+        picker.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(rewindButton.snp_bottom)
         }
         
-        goButton.snp_makeConstraints {(make)->Void in
+        goButton.snp_remakeConstraints {(make)->Void in
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(picker.snp_bottom).offset(CIConstants.verticalItemSpacing)
         }

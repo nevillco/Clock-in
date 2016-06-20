@@ -143,7 +143,7 @@ extension CIStatsPageViewStyle {
         titleLabel.snp_makeConstraints {(make)->Void in
             make.leading.greaterThanOrEqualTo(backButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
             make.trailing.equalTo(self.view.snp_trailingMargin)
-            make.topMargin.equalTo(self.view).offset(CIConstants.paddingFromTop)
+            make.topMargin.equalTo(self.view).offset(CIConstants.paddingFromTop())
         }
         self.view.layoutSubviews()
     }

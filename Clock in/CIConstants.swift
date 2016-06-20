@@ -9,7 +9,9 @@
 import UIKit
 
 class CIConstants {
-    static let paddingFromTop:CGFloat = 30
+    static func paddingFromTop() -> CGFloat {
+        return UIDevice.currentDevice().orientation.isLandscape ? 9 : 30
+    }
     static let horizontalItemSpacing:CGFloat = 8
     static let verticalItemSpacing:CGFloat = 7
     static let buttonWidth:CGFloat = 91

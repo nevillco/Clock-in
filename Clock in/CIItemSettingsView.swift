@@ -27,7 +27,6 @@ class CIItemSettingsView: CIView {
         super.init()
         self.backgroundColor = backgroundColor
         setupSubviews()
-        constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,52 +71,64 @@ class CIItemSettingsView: CIView {
         bottomContainer.addSubview(deleteButton)
     }
     
-    func constrainSubviews() {
-        backButton.snp_makeConstraints {(make)->Void in
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let isLandscape = UIDevice.currentDevice().orientation.isLandscape
+        notificationsLabel.hidden = isLandscape
+        if isLandscape {
+            table.snp_remakeConstraints {(make)->Void in
+                make.top.equalTo(titleLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
+                make.leading.equalTo(self.snp_leadingMargin)
+                make.trailing.equalTo(self.snp_trailingMargin)
+                make.bottom.equalTo(colorCollection.snp_top).offset(-CIConstants.verticalItemSpacing)
+            }
+        }
+        else {
+            table.snp_remakeConstraints {(make)->Void in
+                make.top.equalTo(notificationsLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
+                make.leading.equalTo(self.snp_leadingMargin)
+                make.trailing.equalTo(self.snp_trailingMargin)
+                make.bottom.equalTo(colorCollection.snp_top).offset(-CIConstants.verticalItemSpacing)
+            }
+        }
+        backButton.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.baseline.equalTo(titleLabel.snp_baseline)
         }
         
-        titleLabel.snp_makeConstraints {(make)->Void in
+        titleLabel.snp_remakeConstraints {(make)->Void in
             make.leading.greaterThanOrEqualTo(backButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
             make.trailing.equalTo(self.snp_trailingMargin)
-            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop)
+            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop())
         }
         
-        notificationsLabel.snp_makeConstraints {(make)->Void in
+        notificationsLabel.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(titleLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
         }
         
-        table.snp_makeConstraints {(make)->Void in
-            make.top.equalTo(notificationsLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
-            make.leading.equalTo(self.snp_leadingMargin)
-            make.trailing.equalTo(self.snp_trailingMargin)
-            make.bottom.equalTo(colorCollection.snp_top).offset(-CIConstants.verticalItemSpacing)
-        }
-        
-        colorCollection.snp_makeConstraints{(make)->Void in
+        colorCollection.snp_remakeConstraints{(make)->Void in
             make.height.equalTo(table.snp_height).dividedBy(2)
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.bottom.equalTo(bottomContainer.snp_top).offset(-CIConstants.verticalItemSpacing)
         }
         
-        bottomContainer.snp_makeConstraints{(make)->Void in
+        bottomContainer.snp_remakeConstraints{(make)->Void in
             make.top.equalTo(renameButton.snp_top).offset(-2 * CIConstants.verticalItemSpacing)
             make.leading.equalTo(self.snp_leading).offset(-2)
             make.trailing.equalTo(self.snp_trailing).offset(2)
             make.bottom.equalTo(self.snp_bottom).offset(2)
         }
         
-        renameButton.snp_makeConstraints{(make)->Void in
+        renameButton.snp_remakeConstraints{(make)->Void in
             make.trailing.equalTo(bottomContainer.snp_centerX).offset(-0.5 * CIConstants.verticalItemSpacing)
             make.bottom.equalTo(bottomContainer.snp_bottom).offset(-2 * CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)
         }
         
-        deleteButton.snp_makeConstraints{(make)->Void in
+        deleteButton.snp_remakeConstraints{(make)->Void in
             make.leading.equalTo(bottomContainer.snp_centerX).offset(0.5 * CIConstants.verticalItemSpacing)
             make.bottom.equalTo(bottomContainer.snp_bottom).offset(-2 * CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)

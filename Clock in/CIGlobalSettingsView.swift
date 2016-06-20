@@ -24,7 +24,6 @@ class CIGlobalSettingsView: CIView {
         super.init()
         backgroundColor = .CIGray
         setupSubviews()
-        constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -69,24 +68,24 @@ class CIGlobalSettingsView: CIView {
         deleteContainer.addSubview(deleteButton)
     }
     
-    func constrainSubviews() {
-        backButton.snp_makeConstraints {(make)->Void in
+    override func layoutSubviews() {
+        backButton.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.baseline.equalTo(titleLabel.snp_baseline)
         }
         
-        titleLabel.snp_makeConstraints {(make)->Void in
+        titleLabel.snp_remakeConstraints {(make)->Void in
             make.trailing.equalTo(self.snp_trailingMargin)
-            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop)
+            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop())
         }
         
-        notificationsButton.snp_makeConstraints{(make)->Void in
+        notificationsButton.snp_remakeConstraints{(make)->Void in
             make.centerX.equalTo(self)
             make.top.equalTo(titleLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidthWide)
         }
         
-        notificationsLabel.snp_makeConstraints {(make)->Void in
+        notificationsLabel.snp_remakeConstraints {(make)->Void in
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
             make.top.equalTo(notificationsButton.snp_bottom).offset(CIConstants.verticalItemSpacing)

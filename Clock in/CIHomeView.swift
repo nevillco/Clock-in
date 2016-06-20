@@ -24,7 +24,6 @@ class CIHomeView: CIView {
     override init() {
         super.init()
         setupSubviews()
-        constrainSubviews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,31 +50,32 @@ class CIHomeView: CIView {
         addSubview(table)
     }
     
-    func constrainSubviews() {
-        titleLabel.snp_makeConstraints { (make)->Void in
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel.snp_remakeConstraints { (make)->Void in
             make.centerX.equalTo(self)
-            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop)
+            make.topMargin.equalTo(self).offset(CIConstants.paddingFromTop())
         }
         
-        globalStatsButton.snp_makeConstraints { (make)->Void in
+        globalStatsButton.snp_remakeConstraints { (make)->Void in
             make.centerX.equalTo(self)
             make.top.equalTo(titleLabel.snp_bottom).offset(CIConstants.verticalItemSpacing)
             make.width.equalTo(CIConstants.buttonWidth)
         }
         
-        globalSettingsButton.snp_makeConstraints { (make)->Void in
+        globalSettingsButton.snp_remakeConstraints { (make)->Void in
             make.leading.equalTo(globalStatsButton.snp_trailing).offset(CIConstants.horizontalItemSpacing)
             make.top.equalTo(globalStatsButton.snp_top)
             make.width.equalTo(CIConstants.buttonWidth)
         }
         
-        addItemButton.snp_makeConstraints { (make)->Void in
+        addItemButton.snp_remakeConstraints { (make)->Void in
             make.trailing.equalTo(globalStatsButton.snp_leading).offset(-CIConstants.horizontalItemSpacing)
             make.top.equalTo(globalStatsButton.snp_top)
             make.width.equalTo(CIConstants.buttonWidth)
         }
         
-        table.snp_makeConstraints { (make)->Void in
+        table.snp_remakeConstraints { (make)->Void in
             make.top.equalTo(globalStatsButton.snp_bottom).offset(2 * CIConstants.verticalItemSpacing)
             make.leading.equalTo(self.snp_leadingMargin)
             make.trailing.equalTo(self.snp_trailingMargin)
