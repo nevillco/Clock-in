@@ -78,6 +78,7 @@ class CIGlobalStatsLineChartDelegate: CIGlobalStatsChartDelegate {
                 dataSet.highlightColor = UIColor.colorForItem(item).colorWithAlphaComponent(0.5)
                 dataSet.highlightLineWidth = 2.0
                 data.addDataSet(dataSet)
+                dataEntries = []
             }
         }
         (chart as! LineChartView).leftAxis.axisMaxValue = max(10.0, ceil(data.yMax))

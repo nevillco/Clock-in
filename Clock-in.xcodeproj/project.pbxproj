@@ -40,6 +40,7 @@
 		2D727A781D1877E70050441F /* GIClobalStatsPieChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A771D1877E70050441F /* GIClobalStatsPieChartDelegate.swift */; };
 		2D727A7A1D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A791D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift */; };
 		2D727A7C1D189B6F0050441F /* CIGlobalStatsBubbleChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D727A7B1D189B6F0050441F /* CIGlobalStatsBubbleChartDelegate.swift */; };
+		2D89C7F51D19B99A0030FDDA /* CIItemEntriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D89C7F41D19B99A0030FDDA /* CIItemEntriesTableViewController.swift */; };
 		2D8C6A1D1D0C6108008C8FA4 /* CIModelItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */; };
 		2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */; };
 		2D8C6A211D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */; };
@@ -104,6 +105,7 @@
 		2D727A771D1877E70050441F /* GIClobalStatsPieChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIClobalStatsPieChartDelegate.swift; sourceTree = "<group>"; };
 		2D727A791D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsWeekdayChartDelegate.swift; sourceTree = "<group>"; };
 		2D727A7B1D189B6F0050441F /* CIGlobalStatsBubbleChartDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalStatsBubbleChartDelegate.swift; sourceTree = "<group>"; };
+		2D89C7F41D19B99A0030FDDA /* CIItemEntriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemEntriesTableViewController.swift; sourceTree = "<group>"; };
 		2D8C6A1C1D0C6108008C8FA4 /* CIModelItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelItemManager.swift; sourceTree = "<group>"; };
 		2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsViewController.swift; sourceTree = "<group>"; };
 		2D8C6A201D0C7C5E008C8FA4 /* CIGlobalSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalSettingsView.swift; sourceTree = "<group>"; };
@@ -255,8 +257,7 @@
 		2D3BC9031D0895E600EC0425 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2DD9A4981D0F513300303C6C /* Charts */,
-				2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */,
+				2DD9A4981D0F513300303C6C /* Stats */,
 				2D3BC9061D08A12B00EC0425 /* CIHomeViewController.swift */,
 				2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */,
 				2D8C6A1E1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift */,
@@ -300,7 +301,7 @@
 			name = Tables;
 			sourceTree = "<group>";
 		};
-		2DD9A4981D0F513300303C6C /* Charts */ = {
+		2DD9A4981D0F513300303C6C /* Stats */ = {
 			isa = PBXGroup;
 			children = (
 				2DFFF86C1D0F122F00DE8FF5 /* CIStatsPageViewController.swift */,
@@ -308,8 +309,10 @@
 				2D727A6E1D185AED0050441F /* CIGlobalStatsChartViewController.swift */,
 				2D727A721D185CA40050441F /* Global Chart Delegates */,
 				2D2A0ADD1D133A5300563E9C /* Item Chart Delegates */,
+				2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */,
+				2D89C7F41D19B99A0030FDDA /* CIItemEntriesTableViewController.swift */,
 			);
-			name = Charts;
+			name = Stats;
 			sourceTree = "<group>";
 		};
 		33EC4504560C5603F6FB46BB /* Pods */ = {
@@ -504,6 +507,7 @@
 				2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */,
 				2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */,
 				2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */,
+				2D89C7F51D19B99A0030FDDA /* CIItemEntriesTableViewController.swift in Sources */,
 				2DFFF8761D0F3AE400DE8FF5 /* CIItemStatsChartDelegate.swift in Sources */,
 				2D727A7A1D1897970050441F /* CIGlobalStatsWeekdayChartDelegate.swift in Sources */,
 				2D727A711D185B470050441F /* CIGlobalStatsChartView.swift in Sources */,
