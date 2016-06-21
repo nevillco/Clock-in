@@ -19,16 +19,15 @@ class CIGlobalStatsPieChartDelegate: CIGlobalStatsChartDelegate {
         return selectedItems.map({ $0.name })
     }
     
-    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double {
+    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double? {
         return selectedItem.entries.map({ $0.time }).reduce(0, combine: +)
-        
     }
     
     func loadChartData(chart: ChartViewBase, selectedItems: [CIModelItem]) {
         let xVals = xValues(selectedItems)
         var dataEntries:[ChartDataEntry] = []
         for i in 0..<xVals.count {
-            let entry = ChartDataEntry(value: yValue(atXLabel: xVals[i], selectedItem: selectedItems[i]), xIndex: i)
+            let entry = ChartDataEntry(value: yValue(atXLabel: xVals[i], selectedItem: selectedItems[i])!, xIndex: i)
             dataEntries.append(entry)
         }
         let dataSet = PieChartDataSet(yVals: dataEntries, label: nil)

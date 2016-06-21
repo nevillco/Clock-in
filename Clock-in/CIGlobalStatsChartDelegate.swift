@@ -13,7 +13,7 @@ protocol CIGlobalStatsChartDelegate {
     func chartType() -> ChartViewBase.Type
     
     func xValues(selectedItems:[CIModelItem]) -> [String]
-    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double
+    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double?
     func loadChartData(chart: ChartViewBase, selectedItems:[CIModelItem])
     func setAxisLabels(chart: ChartViewBase)
     

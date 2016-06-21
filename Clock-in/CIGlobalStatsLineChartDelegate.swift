@@ -17,7 +17,7 @@ class CIGlobalStatsLineChartDelegate: CIGlobalStatsChartDelegate {
     }
     
     func xValues(selectedItems:[CIModelItem]) -> [String] {
-        let startDate:NSDate = selectedItems.map({ $0.createDate }).sort({ $0.compare($1) == .OrderedDescending })[0]
+        let startDate:NSDate = selectedItems.map({ $0.createDate }).sort({ $0.compare($1) == .OrderedAscending })[0]
         let endDates:[NSDate] = selectedItems.map({ $0.entries.sorted("startDate", ascending: false).first!.startDate })
         let maxEndDate = endDates.sort({ $0.compare($1) == .OrderedDescending })[0]
         formatter.dateFormat = "M/dd/yy"
@@ -30,7 +30,7 @@ class CIGlobalStatsLineChartDelegate: CIGlobalStatsChartDelegate {
         return xValues
     }
     
-    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double {
+    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double? {
         formatter.dateFormat = "M/dd/yy"
         var total = 0.0
         for entry in selectedItem.entries {
@@ -40,30 +40,45 @@ class CIGlobalStatsLineChartDelegate: CIGlobalStatsChartDelegate {
                 total += entry.time
             }
         }
-        return total
+        return (total > 0.0) ? total : nil
         
     }
     
     func loadChartData(chart: ChartViewBase, selectedItems: [CIModelItem]) {
         let xValues = self.xValues(selectedItems)
         let data = LineChartData(xVals: xValues)
+        var dataEntries:[ChartDataEntry] = []
         for item in selectedItems {
-            var dataEntries:[ChartDataEntry] = []
             for i in 0..<xValues.count {
-                let value = yValue(atXLabel: xValues[i], selectedItem: item)
-                dataEntries.append(ChartDataEntry(value: value, xIndex: i))
+                if let value = yValue(atXLabel: xValues[i], selectedItem: item) {
+                    dataEntries.append(ChartDataEntry(value: value, xIndex: i))
+                }
+                else {
+                    let dataSet = LineChartDataSet(yVals: dataEntries, label: "")
+                    dataSet.circleColors = [UIColor.colorForItem(item)]
+                    dataSet.circleRadius = 3.0
+                    dataSet.lineWidth = 1.5
+                    dataSet.colors = [UIColor.colorForItem(item)]
+                    dataSet.drawValuesEnabled = false
+                    dataSet.highlightEnabled = true
+                    dataSet.highlightColor = UIColor.colorForItem(item).colorWithAlphaComponent(0.5)
+                    dataSet.highlightLineWidth = 2.0
+                    data.addDataSet(dataSet)
+                    dataEntries = []
+                }
             }
-            
-            let dataSet = LineChartDataSet(yVals: dataEntries, label: "")
-            dataSet.circleColors = [UIColor.colorForItem(item)]
-            dataSet.circleRadius = 3.0
-            dataSet.lineWidth = 1.5
-            dataSet.colors = [UIColor.colorForItem(item)]
-            dataSet.drawValuesEnabled = false
-            dataSet.highlightEnabled = true
-            dataSet.highlightColor = UIColor.colorForItem(item).colorWithAlphaComponent(0.5)
-            dataSet.highlightLineWidth = 2.0
-            data.addDataSet(dataSet)
+            if dataEntries.count > 0 {
+                let dataSet = LineChartDataSet(yVals: dataEntries, label: "")
+                dataSet.circleColors = [UIColor.colorForItem(item)]
+                dataSet.circleRadius = 3.0
+                dataSet.lineWidth = 1.5
+                dataSet.colors = [UIColor.colorForItem(item)]
+                dataSet.drawValuesEnabled = false
+                dataSet.highlightEnabled = true
+                dataSet.highlightColor = UIColor.colorForItem(item).colorWithAlphaComponent(0.5)
+                dataSet.highlightLineWidth = 2.0
+                data.addDataSet(dataSet)
+            }
         }
         (chart as! LineChartView).leftAxis.axisMaxValue = max(10.0, ceil(data.yMax))
         

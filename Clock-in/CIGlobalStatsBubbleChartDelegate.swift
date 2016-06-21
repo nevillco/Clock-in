@@ -30,7 +30,7 @@ class CIGlobalStatsBubbleChartDelegate: CIGlobalStatsChartDelegate {
         return xValues
     }
     
-    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double {
+    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double? {
         return 0
     }
     

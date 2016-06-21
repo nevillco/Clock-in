@@ -100,20 +100,23 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         let view = self.view as! CIGlobalStatsChartView
-        let itemCount = selectedItems().count
-        let selectedItem:CIModelItem
-        if chartView.data!.dataSetCount == itemCount {
-            selectedItem = selectedItems()[dataSetIndex]
-        }
-        else {
-            selectedItem = selectedItems()[entry.xIndex]
-        }
+        let items = selectedItems()
+        let selectedColor:UIColor = chartView.data!.dataSets[dataSetIndex].colors[0]
+        let selectedColorIndex = UIColor.CIColorPalette.indexOf(selectedColor.colorWithAlphaComponent(1.0))!
+        let selectedItem = items.filter({ $0.colorIndex == selectedColorIndex })[0]
         let xValue = delegate.xValues(selectedItems())[entry.xIndex]
-        let yValue = delegate.yValue(atXLabel: xValue, selectedItem: selectedItem)
+        let yValue = delegate.yValue(atXLabel: xValue, selectedItem: selectedItem) ?? 0
         let (formattedX, formatterY) = delegate.formatSelectedValues(xValue, yValue: yValue, selectedItem: selectedItem)
         view.selectedPointInfoLabel.text = formattedX
         view.selectedPointDataLabel.text = formatterY
         view.selectionContainer.backgroundColor = UIColor.colorForItem(selectedItem)
+    }
+    
+    func chartValueNothingSelected(chartView: ChartViewBase) {
+        let view = self.view as! CIGlobalStatsChartView
+        view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
+        view.selectedPointDataLabel.text = " "
+        view.selectionContainer.backgroundColor = .CIBlack
     }
 }
 

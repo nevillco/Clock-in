@@ -20,7 +20,7 @@ class CIGlobalStatsWeekdayChartDelegate: CIGlobalStatsChartDelegate {
         return formatter.weekdaySymbols
     }
     
-    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double {
+    func yValue(atXLabel xLabel:String, selectedItem:CIModelItem) -> Double? {
         let index = formatter.weekdaySymbols.indexOf(xLabel)!
         let component = NSCalendarUnit.Weekday
         let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
@@ -43,14 +43,14 @@ class CIGlobalStatsWeekdayChartDelegate: CIGlobalStatsChartDelegate {
             var dataEntries:[BarChartDataEntry] = []
             for i in 0..<xValues.count {
                 let value = yValue(atXLabel: xValues[i], selectedItem: item)
-                dataEntries.append(BarChartDataEntry(value: value, xIndex: i))
+                dataEntries.append(BarChartDataEntry(value: value!, xIndex: i))
             }
             
             let dataSet = BarChartDataSet(yVals: dataEntries, label: "")
-            dataSet.colors = [UIColor.colorForItem(item)]
+            dataSet.colors = [UIColor.colorForItem(item).colorWithAlphaComponent(0.6)]
             dataSet.drawValuesEnabled = false
             dataSet.highlightEnabled = true
-            dataSet.highlightColor = UIColor.colorForItem(item).colorWithAlphaComponent(0.5)
+            dataSet.highlightColor = UIColor.colorForItem(item)
             dataSet.highlightLineWidth = 2.0
             data.addDataSet(dataSet)
         }
