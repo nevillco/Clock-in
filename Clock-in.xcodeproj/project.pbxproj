@@ -52,6 +52,7 @@
 		2DA2F0701D0E28480064D196 /* CIItemSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2F06F1D0E28480064D196 /* CIItemSettingsView.swift */; };
 		2DA2F0721D0E285C0064D196 /* CIItemSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2F0711D0E285B0064D196 /* CIItemSettingsViewController.swift */; };
 		2DA2F0741D0E33E10064D196 /* CIModelItemCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2F0731D0E33E10064D196 /* CIModelItemCreator.swift */; };
+		2DAA9C551D1ACD85003F4A49 /* CIGlobalEntriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAA9C541D1ACD85003F4A49 /* CIGlobalEntriesTableViewController.swift */; };
 		2DB752B51D09B20C00D55196 /* CIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B41D09B20C00D55196 /* CIErrors.swift */; };
 		2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */; };
 		2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */; };
@@ -117,6 +118,7 @@
 		2DA2F06F1D0E28480064D196 /* CIItemSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemSettingsView.swift; sourceTree = "<group>"; };
 		2DA2F0711D0E285B0064D196 /* CIItemSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIItemSettingsViewController.swift; sourceTree = "<group>"; };
 		2DA2F0731D0E33E10064D196 /* CIModelItemCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIModelItemCreator.swift; sourceTree = "<group>"; };
+		2DAA9C541D1ACD85003F4A49 /* CIGlobalEntriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIGlobalEntriesTableViewController.swift; sourceTree = "<group>"; };
 		2DB752B41D09B20C00D55196 /* CIErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIErrors.swift; sourceTree = "<group>"; };
 		2DB752B61D09BCBE00D55196 /* CIAddItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAddItemView.swift; sourceTree = "<group>"; };
 		2DB752B91D09BCEA00D55196 /* CIAddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIAddItemViewController.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				2D2A0ADD1D133A5300563E9C /* Item Chart Delegates */,
 				2D2A0ADF1D133B0800563E9C /* CIItemStatsTableViewController.swift */,
 				2D89C7F41D19B99A0030FDDA /* CIItemEntriesTableViewController.swift */,
+				2DAA9C541D1ACD85003F4A49 /* CIGlobalEntriesTableViewController.swift */,
 			);
 			name = Stats;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				2D3BC91C1D08BA4A00EC0425 /* CIFonts.swift in Sources */,
 				2D8C6A251D0DB218008C8FA4 /* CIDate.swift in Sources */,
 				2DB752B71D09BCBE00D55196 /* CIAddItemView.swift in Sources */,
+				2DAA9C551D1ACD85003F4A49 /* CIGlobalEntriesTableViewController.swift in Sources */,
 				2DB752BA1D09BCEA00D55196 /* CIAddItemViewController.swift in Sources */,
 				2D8C6A1F1D0C7C16008C8FA4 /* CIGlobalSettingsViewController.swift in Sources */,
 				2D89C7F51D19B99A0030FDDA /* CIItemEntriesTableViewController.swift in Sources */,
