@@ -31,7 +31,7 @@ class CIGlobalStatsPieChartDelegate: CIGlobalStatsChartDelegate {
             dataEntries.append(entry)
         }
         let dataSet = PieChartDataSet(yVals: dataEntries, label: nil)
-        dataSet.valueFont = UIFont.CIDefaultBodyFont
+        dataSet.valueFont = UIFont.CIDefaultBodyFont()
         dataSet.colors = selectedItems.map({ UIColor.colorForItem($0) })
         
         let data = PieChartData(xVals: xVals, dataSet: dataSet)

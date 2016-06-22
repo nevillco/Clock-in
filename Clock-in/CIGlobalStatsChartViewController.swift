@@ -29,6 +29,16 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
         addTargets(view)
         addDelegates(view)
         self.view = view
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        let view = self.view as! CIGlobalStatsChartView
+        view.chart.alpha = 0
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         loadData()
     }
     
@@ -62,7 +72,7 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
     
     func loadData() {
         let view = self.view as! CIGlobalStatsChartView
-        view.animateTitleMessage("Loading...".localized)
+        view.titleLabel.text = "Loading...".localized
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             let items = self.selectedItems()
@@ -70,8 +80,9 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
                 self.delegate.loadChartData(view.chart, selectedItems:items)
                 self.delegate.setAxisLabels(view.chart)
                 dispatch_async(dispatch_get_main_queue()) {
+                    view.chart.alpha = 1
+                    view.chart.animate(yAxisDuration: 0.5)
                     view.animateTitleMessage(self.delegate.chartTitle())
-                    view.chart.notifyDataSetChanged()
                     
                     view.noDataLabel.alpha = 0
                     view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
@@ -79,10 +90,8 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
                     view.selectedPointDataLabel.alpha = 1
                     view.selectedPointInfoLabel.alpha = 1
                     view.selectionContainer.alpha = 1
-                    view.chart.alpha = 1
                     
                     view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
-                    view.chart.animate(yAxisDuration: 0.5)
                 }
             }
             else {

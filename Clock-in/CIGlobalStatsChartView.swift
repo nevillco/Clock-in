@@ -43,6 +43,7 @@ class CIGlobalStatsChartView: CIView {
     }
     
     func setupSubviews() {
+        titleLabel.text = "Loading..."
         titleLabel.font = .CIChartTitleFont
         titleLabel.textColor = .blackColor()
         titleLabel.textAlignment = .Center
@@ -61,9 +62,10 @@ class CIGlobalStatsChartView: CIView {
         
         chart.noDataText = ""
         chart.noDataTextDescription = ""
+        chart.alpha = 0
         addSubview(chart)
         
-        noDataLabel.font = UIFont.CIDefaultBodyFont
+        noDataLabel.font = UIFont.CIDefaultBodyFont()
         noDataLabel.textColor = .blackColor()
         noDataLabel.textAlignment = .Center
         noDataLabel.numberOfLines = 0
@@ -74,17 +76,17 @@ class CIGlobalStatsChartView: CIView {
         addSubview(noDataLabel)
         
         selectionContainer.backgroundColor = .blackColor()
-        selectionContainer.layer.cornerRadius = CIConstants.cornerRadius
+        selectionContainer.layer.cornerRadius = CIConstants.cornerRadius()
         addSubview(selectionContainer)
         
-        selectedPointInfoLabel.font = UIFont.CIStatsInfoLabelFont
+        selectedPointInfoLabel.font = UIFont.CIStatsInfoLabelFont()
         selectedPointInfoLabel.textColor = .whiteColor()
         selectedPointInfoLabel.numberOfLines = 1
         selectedPointInfoLabel.textAlignment = .Left
         selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
         addSubview(selectedPointInfoLabel)
         
-        selectedPointDataLabel.font = UIFont.CIStatsDataLabelFont
+        selectedPointDataLabel.font = UIFont.CIStatsDataLabelFont()
         selectedPointDataLabel.textColor = .whiteColor()
         selectedPointDataLabel.numberOfLines = 1
         selectedPointDataLabel.textAlignment = .Center
@@ -103,7 +105,7 @@ class CIGlobalStatsChartView: CIView {
         for i in startIndex..<rowEnd {
             buttons[i].snp_makeConstraints{(make)->Void in
                 make.top.equalTo(aboveRef.snp_bottom).offset(CIConstants.verticalItemSpacing)
-                make.width.equalTo(CIConstants.buttonWidth)
+                make.width.equalTo(CIConstants.buttonWidth())
             }
         }
         

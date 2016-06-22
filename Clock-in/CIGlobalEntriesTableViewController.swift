@@ -80,7 +80,7 @@ extension CIGlobalEntriesTableViewController: UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CIConstants.statsCellRowHeight
+        return CIConstants.statsCellRowHeight()
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CIConstants.statsCellHeaderHeight
