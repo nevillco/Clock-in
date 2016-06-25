@@ -138,7 +138,7 @@ class CIItemStatsChartView: CIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let isLandscape = UIDevice.currentDevice().orientation.isLandscape
+        let isLandscape = UIApplication.sharedApplication().statusBarOrientation.isLandscape
         let controls = [titleLabel, selectedPointDataLabel, selectedPointInfoLabel]
         for control in controls {
             control.hidden = isLandscape

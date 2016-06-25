@@ -123,6 +123,12 @@ extension CIHomeViewControllerTargets {
     func itemStatsButtonPressed(sender:UIButton) {
         let cell = sender.superview!.superview as! CIHomeViewCell
         let item = itemManagers[cell.tag].item
+        
+        if item.entries.count == 0 {
+            errorAlert("Clock in (and back out) at least once so you have some data to view stats.".localized)
+            return
+        }
+        
         let delegateTypes:[CIItemStatsChartDelegate] = [CIItemStatsLineChartDelegate(itemName: item.name),
                                                         CIItemStatsFilteredBarChartDelegate(itemName: item.name),
                                                         CIItemStatsClockInsByHourChartDelegate(itemName: item.name),

@@ -110,7 +110,14 @@ class CIGlobalStatsChartViewController: CIViewController, ChartViewDelegate {
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         let view = self.view as! CIGlobalStatsChartView
         let items = selectedItems()
-        let selectedColor:UIColor = chartView.data!.dataSets[dataSetIndex].colors[0]
+        let dataSet = chartView.data!.dataSets[dataSetIndex]
+        let selectedColor:UIColor
+        if dataSet.colors.count == 1 {
+            selectedColor = dataSet.colors[0]
+        }
+        else {
+            selectedColor = dataSet.colors[dataSet.entryIndex(entry: entry)]
+        }
         let selectedColorIndex = UIColor.CIColorPalette.indexOf(selectedColor.colorWithAlphaComponent(1.0))!
         let selectedItem = items.filter({ $0.colorIndex == selectedColorIndex })[0]
         let xValue = delegate.xValues(selectedItems())[entry.xIndex]

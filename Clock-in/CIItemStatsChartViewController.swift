@@ -55,34 +55,22 @@ class CIItemStatsChartViewController: CIViewController, ChartViewDelegate {
     
     func loadData(index:Int) {
         let view = self.view as! CIItemStatsChartView
-        if item.entries.count > 0 {
-            view.titleLabel.text = "Loading...".localized
-            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                self.delegate.loadChartData(view.chart, selectedButtonIndex:index)
-                self.delegate.setAxisLabels(view.chart)
-                dispatch_async(dispatch_get_main_queue()) {
-                    view.chart.alpha = 1
-                    view.chart.animate(yAxisDuration: 0.5)
-                    view.animateTitleMessage(self.delegate.chartTitle(index))
-                    
-                    view.noDataLabel.alpha = 0
-                    view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
-                    view.selectedPointDataLabel.text = " "
-                    view.selectedPointDataLabel.alpha = 1
-                    view.selectedPointInfoLabel.alpha = 1
-                    
-                    view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
-                }
+        view.titleLabel.text = "Loading...".localized
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.delegate.loadChartData(view.chart, selectedButtonIndex:index)
+            self.delegate.setAxisLabels(view.chart)
+            dispatch_async(dispatch_get_main_queue()) {
+                view.chart.alpha = 1
+                view.chart.animate(yAxisDuration: 0.5)
+                view.animateTitleMessage(self.delegate.chartTitle(index))
+                
+                view.selectedPointInfoLabel.text = "TAP A DATA POINT FOR MORE".localized
+                view.selectedPointDataLabel.text = " "
+                
+                view.chart.highlightValue(xIndex: -1, dataSetIndex: 0)
             }
         }
-        else {
-            view.noDataLabel.alpha = 1
-            view.selectedPointDataLabel.alpha = 0
-            view.selectedPointInfoLabel.alpha = 0
-            view.chart.alpha = 0
-        }
-
     }
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
