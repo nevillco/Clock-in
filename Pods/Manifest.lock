@@ -11,7 +11,7 @@ PODS:
   - Realm/Headers (0.103.2)
   - RealmSwift (0.103.2):
     - Realm (= 0.103.2)
-  - SnapKit (0.21.0)
+  - SnapKit (0.21.1)
 
 DEPENDENCIES:
   - Charts
@@ -25,8 +25,8 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Realm: 448f0416079fe5b0ed947e7d86f3c4e1c75826cb
   RealmSwift: 8a45cc8f02dfac093b72a3b5a01d567e27e15891
-  SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
+  SnapKit: bbad04cb016c7cead63965f16b00c09318d271ee
 
-PODFILE CHECKSUM: 562f87f18d5f02904625f52a26509cec0ed3e2a6
+PODFILE CHECKSUM: eb9279b6b8042d1175d596f497dcf50b09414f27
 
 COCOAPODS: 1.0.1
