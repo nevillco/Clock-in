@@ -56,7 +56,15 @@ class CIModelItemManager {
         return NSDate().timeIntervalSinceDate(item.lastClockIn!) + item.adjustTime
     }
     
-    func adjust(interval: NSTimeInterval) {
+    func fastForward(interval: NSTimeInterval) {
+        try! realm.write {
+            item.lastClockIn = item.lastClockIn?.dateByAddingTimeInterval(-interval)
+        }
+        cancelNotifications()
+        scheduleNotifications()
+    }
+    
+    func rewind(interval: NSTimeInterval) {
         try! realm.write {
             item.adjustTime += interval
         }

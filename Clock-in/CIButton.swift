@@ -74,6 +74,7 @@ class CIButton: UIButton {
     }
     
     func startFlicker() {
+        stopFlicker()
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.7, target: self, selector: #selector(flicker(_:)), userInfo: nil, repeats: true)
     }
     
