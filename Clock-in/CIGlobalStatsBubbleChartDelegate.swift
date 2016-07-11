@@ -17,7 +17,7 @@ class CIGlobalStatsBubbleChartDelegate: CIGlobalStatsChartDelegate {
     }
     
     func xValues(selectedItems:[CIModelItem]) -> [String] {
-        let startDate:NSDate = selectedItems.map({ $0.createDate }).sort({ $0.compare($1) == .OrderedDescending })[0]
+        let startDate:NSDate = selectedItems.map({ $0.createDate }).sort({ $0.compare($1) == .OrderedAscending })[0]
         let endDates:[NSDate] = selectedItems.map({ $0.entries.sorted("startDate", ascending: false).first!.startDate })
         let maxEndDate = endDates.sort({ $0.compare($1) == .OrderedDescending })[0]
         formatter.dateFormat = "M/dd/yy"
