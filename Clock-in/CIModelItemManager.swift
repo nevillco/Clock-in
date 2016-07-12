@@ -66,7 +66,7 @@ class CIModelItemManager {
     
     func rewind(interval: NSTimeInterval) {
         try! realm.write {
-            item.adjustTime += interval
+            item.adjustTime -= interval
         }
         cancelNotifications()
         scheduleNotifications()
